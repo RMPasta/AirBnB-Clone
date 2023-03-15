@@ -51,8 +51,8 @@ Returns the information about the current user that is logged in.
 
 * Require Authentication: true
 * Request
-  * Method: ?
-  * URL: ?
+  * Method: get
+  * URL: '/users/:userId'
   * Body: none
 
 * Successful Response when there is a logged in user
@@ -92,8 +92,8 @@ information.
 
 * Require Authentication: false
 * Request
-  * Method: ?
-  * URL: ?
+  * Method:
+  * URL: '/user/login'
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -161,8 +161,8 @@ user's information.
 
 * Require Authentication: false
 * Request
-  * Method: ?
-  * URL: ?
+  * Method: POST
+  * URL: /user/new
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -255,8 +255,8 @@ Returns all the spots.
 
 * Require Authentication: false
 * Request
-  * Method: ?
-  * URL: ?
+  * Method: GET
+  * URL: /spots
   * Body: none
 
 * Successful Response
