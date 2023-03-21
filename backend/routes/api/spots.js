@@ -11,37 +11,25 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
 
-// const validateLogin = [
-//     check('credential')
-//       .exists({ checkFalsy: true })
-//       .notEmpty()
-//       .withMessage('Please provide a valid email or username.'),
-//     check('password')
-//       .exists({ checkFalsy: true })
-//       .withMessage('Please provide a password.'),
-//     handleValidationErrors
-//   ];
-
-//   router.post('/', validateLogin, async (req, res, next) => {
-//       const { credential, password } = req.body;
-
-//       const spot = await Spot.create({
-
-//       });
-
-//       const newSpot = {
-//         id: user.id,
-//         firstName: user.firstName,
-//         lastName: user.lastName,
-//         email: user.email,
-//         username: user.username,
-//       };
-
-//       return res.json({
-//         user: safeUser
-//       });
-//     }
-//   );
+  router.post('/', handleValidationErrors, async (req, res, next) => {
+      const { address, city, state, country, lat, lng, name, description, price } = req.body;
+      const { user } = req;
+      const spot = await Spot.create({
+        address,
+        ownerId: user.id,
+        city,
+        state,
+        country,
+        lat,
+        lng,
+        name,
+        description,
+        price
+      });
+      res.status(201)
+      return res.json(spot);
+    }
+  );
 
 //   router.delete('/', (_req, res) => {
 //       res.clearCookie('token');
@@ -77,11 +65,22 @@ const router = express.Router();
             let avg = sum / ratings.length;
                 spot.avgRating = avg;
 
-            spot.SpotImages.forEach(image => {
-                if (image) {
-                    spot.previewImage = image.url;
+            //get preview image and set it
+            // spot.SpotImages.forEach(image => {
+            //     if (image) {
+            //         spot.previewImage = image.url;
+            //     } else {
+            //         spot.previewImage = null;
+            //     }
+            // })
+            if (spot.SpotImages) {
+                let previewImage = spot.SpotImages[0];
+                if (previewImage) {
+                    spot.previewImage = previewImage.url;
+                }else {
+                    spot.previewImage = null;
                 }
-            })
+            }
             delete spot.SpotImages;
             delete spot.Reviews;
         });
