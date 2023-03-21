@@ -11,55 +11,25 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
 
-// const validateLogin = [
-//     check('credential')
-//       .exists({ checkFalsy: true })
-//       .notEmpty()
-//       .withMessage('Please provide a valid email or username.'),
-//     check('password')
-//       .exists({ checkFalsy: true })
-//       .withMessage('Please provide a password.'),
-//     handleValidationErrors
-//   ];
-
-//   router.post(
-//     '/',
-//     validateLogin,
-//     async (req, res, next) => {
-//       const { credential, password } = req.body;
-
-//       const user = await User.unscoped().findOne({
-//         where: {
-//           [Op.or]: {
-//             username: credential,
-//             email: credential
-//           }
-//         }
-//       });
-
-//       if (!user || !bcrypt.compareSync(password, user.hashedPassword.toString())) {
-//         const err = new Error('Invalid credentials');
-//         err.status = 401;
-//         err.title = 'Login failed';
-//         err.errors = { credential: 'The provided credentials were invalid.' };
-//         return next(err);
-//       }
-
-//       const safeUser = {
-//         id: user.id,
-//         firstName: user.firstName,
-//         lastName: user.lastName,
-//         email: user.email,
-//         username: user.username,
-//       };
-
-//       await setTokenCookie(res, safeUser);
-
-//       return res.json({
-//         user: safeUser
-//       });
-//     }
-//   );
+  router.post('/', handleValidationErrors, async (req, res, next) => {
+      const { address, city, state, country, lat, lng, name, description, price } = req.body;
+      const { user } = req;
+      const spot = await Spot.create({
+        address,
+        ownerId: user.id,
+        city,
+        state,
+        country,
+        lat,
+        lng,
+        name,
+        description,
+        price
+      });
+      res.status(201)
+      return res.json(spot);
+    }
+  );
 
 //   router.delete('/', (_req, res) => {
 //       res.clearCookie('token');
@@ -95,11 +65,22 @@ const router = express.Router();
             let avg = sum / ratings.length;
                 spot.avgRating = avg;
 
-            spot.SpotImages.forEach(image => {
-                if (image) {
-                    spot.previewImage = image.url;
+            //get preview image and set it
+            // spot.SpotImages.forEach(image => {
+            //     if (image) {
+            //         spot.previewImage = image.url;
+            //     } else {
+            //         spot.previewImage = null;
+            //     }
+            // })
+            if (spot.SpotImages) {
+                let previewImage = spot.SpotImages[0];
+                if (previewImage) {
+                    spot.previewImage = previewImage.url;
+                }else {
+                    spot.previewImage = null;
                 }
-            })
+            }
             delete spot.SpotImages;
             delete spot.Reviews;
         });
@@ -107,5 +88,10 @@ const router = express.Router();
     }
   );
 
+  router.get('/current', async (req, res) => {
+    const currentUserId = req.user.id;
+    let spot = await Spot.findOne({where: {ownerId: currentUserId}});
+    res.json(spot)
+  })
 
   module.exports = router;
