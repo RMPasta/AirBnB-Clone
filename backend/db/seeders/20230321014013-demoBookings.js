@@ -9,21 +9,21 @@ module.exports = {
     return queryInterface.bulkInsert(options, [
       {
         spotId: 1,
-        userId: 1,
+        userId: 2,
         startDate: new Date(),
-        endDate: new Date(),
+        endDate: new Date('August 19, 2023 24:00:00'),
       },
       {
         spotId: 2,
-        userId: 2,
+        userId: 5,
         startDate: new Date(),
-        endDate: new Date(),
+        endDate: new Date('August 27, 2023 24:00:00'),
       },
       {
         spotId: 3,
-        userId: 3,
+        userId: 4,
         startDate: new Date(),
-        endDate: new Date(),
+        endDate: new Date('August 1, 2023 24:00:00'),
       },
     ], {})
   },
@@ -32,7 +32,7 @@ module.exports = {
     options.tableName = 'Bookings';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      spotId: { [Op.in]: [1] }
+      spotId: { [Op.in]: [1, 2, 3] }
     }, {});
   }
 };
