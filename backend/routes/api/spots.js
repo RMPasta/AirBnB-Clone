@@ -90,10 +90,10 @@ const router = express.Router();
   router.get('/current', async (req, res) => {
     const currentUserId = req.user.id;
     let spot = await Spot.findAll({where: {ownerId: currentUserId}});
-    res.json(spot)
+    res.json({ Spots: spot })
   });
 
-  router.get('/:spotId', async (req, res) => {
+  router.get('/:spotId', async (req, res, next) => {
     const spotId = req.params.spotId;
     // const { id, firstName, lastName } = req.user;
     let spot = await Spot.findByPk(spotId, {
@@ -124,7 +124,7 @@ const router = express.Router();
         return acc + curr;
     }, 0)
     let avg = sum / ratings.length;
-        currSpot.avgRating = avg;
+        currSpot.avgStarRating = avg;
     //set owner
     // currSpot.Owner = {
     //     id,
@@ -141,8 +141,10 @@ const router = express.Router();
     delete currSpot.Reviews;
     res.json(currSpot)
     } else {
-        res.status(404)
-        throw new Error('Spot Couldn\'t be found')
+        let err = {};
+        err.message = 'Spot Couldn\'t be found'
+        err.status = 404;
+        next(err)
     }
   });
 
