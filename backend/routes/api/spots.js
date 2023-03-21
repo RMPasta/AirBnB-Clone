@@ -1,5 +1,6 @@
 // backend/routes/api/spots.js
 const express = require('express');
+const { requireAuth } = require('../../utils/auth');
 const { Op } = require('sequelize');
 const bcrypt = require('bcryptjs');
 
@@ -11,7 +12,7 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
 
-  router.post('/', handleValidationErrors, async (req, res, next) => {
+  router.post('/', [handleValidationErrors, requireAuth], async (req, res, next) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
     const { user } = req;
     try {
@@ -42,7 +43,7 @@ const router = express.Router();
 //     }
 //   );
 
-    //get all spots
+  //get all spots
   router.get('/', async (req, res) => {
       const spots = await Spot.findAll({
         include: [
@@ -86,13 +87,14 @@ const router = express.Router();
     }
   );
 
-    //get all of current users spots
-  router.get('/current', async (req, res) => {
+  //get all of current users spots
+  router.get('/current', requireAuth, async (req, res) => {
     const currentUserId = req.user.id;
     let spot = await Spot.findAll({where: {ownerId: currentUserId}});
     res.json({ Spots: spot })
   });
 
+  //get spot by id
   router.get('/:spotId', async (req, res, next) => {
     const spotId = req.params.spotId;
     // const { id, firstName, lastName } = req.user;
@@ -125,12 +127,7 @@ const router = express.Router();
     }, 0)
     let avg = sum / ratings.length;
         currSpot.avgStarRating = avg;
-    //set owner
-    // currSpot.Owner = {
-    //     id,
-    //     firstName,
-    //     lastName
-    // }
+
     let owner = await User.findByPk(currSpot.ownerId)
     currSpot.Owner = {
         id: owner.id,
@@ -147,5 +144,33 @@ const router = express.Router();
         next(err)
     }
   });
+  //add new spot image
+  router.post('/:spotId/images', requireAuth, async (req, res, next) => {
+    let { user } = req;
+    let { url, preview } = req.body;
+    let id = req.params.spotId;
+
+    const spot = await Spot.findByPk(id);
+
+
+    if (user.id === spot.ownerId) {
+        const  image = await SpotImage.create({
+            spotId: id,
+            url,
+            preview,
+        });
+        res.json({
+            id: image.id,
+            url: image.url,
+            preview: image.preview
+        })
+    } else {
+        let err = {};
+        err.message = "Forbidden";
+        err.status = 403;
+        next(err)
+    }
+
+  })
 
   module.exports = router;
