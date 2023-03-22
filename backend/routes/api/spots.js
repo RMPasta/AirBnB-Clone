@@ -30,8 +30,22 @@ const router = express.Router();
           });
           res.status(201)
           return res.json(spot);
-    } catch (err) {
+    } catch (e) {
         res.status(400)
+        //should be message
+        let err = {};
+        err.message = "Bad Request"
+        err.errors = {
+            address: "Street address is required",
+            city: "City is required",
+            state: "State is required",
+            country: "Country is required",
+            lat: "Latitude is not valid",
+            lng: "Longitude is not valid",
+            name: "Name must be less than 50 characters",
+            description: "Description is required",
+            price: "Price per day is required"
+        }
         return res.json(err)
     }
     }
@@ -139,9 +153,9 @@ const router = express.Router();
     res.json(currSpot)
     } else {
         let err = {};
-        err.message = 'Spot Couldn\'t be found'
-        err.status = 404;
-        next(err)
+        err.message = 'Spot couldn\'t be found'
+        res.status(404)
+        return res.json(err)
     }
   });
   //add new spot image
@@ -151,6 +165,13 @@ const router = express.Router();
     let id = req.params.spotId;
 
     const spot = await Spot.findByPk(id);
+
+    if (!spot) {
+        let err = {};
+        err.message = "Spot couldn\'t be found";
+        res.status(404);
+        return res.json(err);
+    }
 
 
     if (user.id === spot.ownerId) {
