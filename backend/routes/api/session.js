@@ -24,7 +24,15 @@ const validateLogin = [
 
   router.post('/', validateLogin, async (req, res, next) => {
       const { credential, password } = req.body;
-
+      if (!credential || !password) {
+        let err = {};
+        err.errors = {
+          credential: "Email or username is required",
+          password: "Password is required"
+        }
+        res.status(400);
+        return res.json(err)
+      }
       const user = await User.unscoped().findOne({
         where: {
           [Op.or]: {
