@@ -32,7 +32,6 @@ const router = express.Router();
           return res.json(spot);
     } catch (e) {
         res.status(400)
-        //should be message
         let err = {};
         err.message = "Bad Request"
         err.errors = {
@@ -190,8 +189,58 @@ const router = express.Router();
         err.message = "Forbidden";
         err.status = 403;
         next(err)
+    };
+  });
+
+  //edit a spot
+  router.put('/:spotId', async (req, res) => {
+    const { address, city, state, country, lat, lng, name, description, price } = req.body;
+    if (!address || !city || !state || !country || isNaN(lat) || isNaN(lng) || !name || !description || !price) {
+        res.status(400)
+        let err = {};
+        err.message = "Bad Request"
+        err.errors = {
+            address: "Street address is required",
+            city: "City is required",
+            state: "State is required",
+            country: "Country is required",
+            lat: "Latitude is not valid",
+            lng: "Longitude is not valid",
+            name: "Name must be less than 50 characters",
+            description: "Description is required",
+            price: "Price per day is required"
+        }
+        return res.json(err)
+    }
+    const { user } = req;
+    let id = req.params.spotId;
+
+
+
+    const spot = await Spot.findByPk(id);
+
+    if (!spot) {
+        let err = {};
+        err.message = "Spot couldn\'t be found";
+        res.status(404);
+        return res.json(err);
     }
 
+    if (user.id === spot.ownerId) {
+        await spot.update({
+            address,
+            ownerId: user.id,
+            city,
+            state,
+            country,
+            lat,
+            lng,
+            name,
+            description,
+            price
+        });
+        res.json(spot)
+    }
   })
 
   module.exports = router;
