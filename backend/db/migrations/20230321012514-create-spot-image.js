@@ -19,7 +19,8 @@ module.exports = {
         references: {
           model: 'Spots',
           ket: 'spotId',
-          onDelete: 'CASCADE'
+          onDelete: 'CASCADE',
+          onUpdate: 'CASCADE'
         }
       },
       url: {
