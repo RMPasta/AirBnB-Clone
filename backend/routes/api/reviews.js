@@ -41,6 +41,50 @@ router.get('/current', requireAuth, async (req, res, next) => {
     res.json({ Reviews: reviewList })
 });
 
+router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
+    let { user } = req;
+    let { url } = req.body;
+    let id = req.params.reviewId;
 
+    const review = await Review.findByPk(id);
+
+    if (!review) {
+        let err = {};
+        err.message = "Review couldn\'t be found";
+        res.status(404);
+        return res.json(err);
+    }
+
+    let reviewImages = await ReviewImage.findAll({
+        where: { reviewId: id }
+    })
+    let imageArr = [];
+    reviewImages.forEach(image => {
+        imageArr.push(image.toJSON());
+    })
+
+    if (imageArr.length >= 10) {
+        let err = {};
+        err.message = "Maximum number of images for this resource was reached";
+        res.status(403);
+        return res.json(err);
+    }
+
+    if (user.id === review.userId) {
+        const  image = await ReviewImage.create({
+            reviewId: id,
+            url,
+        });
+        res.json({
+            id: image.id,
+            url: image.url,
+        })
+    } else {
+        let err = {};
+        err.message = "Forbidden";
+        err.status = 403;
+        next(err)
+    };
+})
 
 module.exports = router;
