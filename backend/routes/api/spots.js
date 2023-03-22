@@ -235,6 +235,7 @@ const router = express.Router();
     };
   });
 
+  //delete a spot
   router.delete('/:spotId', requireAuth, async (req, res, next) => {
 
     const spot = await Spot.findByPk(req.params.spotId);
@@ -258,6 +259,22 @@ const router = express.Router();
         err.status = 403;
         next(err)
     };
-  })
+  });
+
+  //get reviews by spot id
+  router.get('/:spotId/reviews', async (req, res, next) => {
+    const spot = await Spot.findByPk(req.params.spotId);
+
+    if (!spot) {
+        let err = {};
+        err.message = "Spot couldn\'t be found";
+        res.status(404);
+        return res.json(err);
+    }
+
+    const reviews = await spot.getReviews()
+    res.status(200)
+    res.json(reviews)
+  });
 
   module.exports = router;
