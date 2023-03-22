@@ -277,4 +277,47 @@ const router = express.Router();
     res.json(reviews)
   });
 
+    //create review for spot
+    router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
+        const spot = await Spot.findByPk(req.params.spotId);
+        const { review, stars } = req.body;
+        const { user } = req;
+
+        const existingReviews = await Review.findOne({where: {userId: user.id, spotId: parseInt(req.params.spotId)}})
+
+        if (existingReviews) {
+            res.status(403)
+            let err = {};
+            err.message = "User already has a review for this spot"
+            return res.json(err)
+        }
+
+        if (!review || !stars || isNaN(stars) || stars < 1 || stars > 5) {
+            res.status(400)
+            let err = {};
+            err.message = "Bad Request"
+            err.errors = {
+                review: "Review text is required",
+                stars: "Stars must be an integer from 1 to 5",
+            }
+            return res.json(err)
+        }
+
+        if (!spot) {
+            let err = {};
+            err.message = "Spot couldn\'t be found";
+            res.status(404);
+            return res.json(err);
+        }
+
+        const currReview = await Review.create({
+            userId: user.id,
+            spotId: parseInt(req.params.spotId),
+            review,
+            stars
+        })
+        res.status(200)
+        res.json(currReview)
+      });
+
   module.exports = router;
