@@ -287,15 +287,6 @@ const router = express.Router();
             ]
         });
 
-    // let reviewList = [];
-    // reviews.forEach(review => {
-    //     reviewList.push(review.toJSON());
-    // })
-
-    // reviews.forEach(async review => {
-
-    // })
-
 
     res.status(200)
     res.json(reviews)
