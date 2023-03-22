@@ -85,6 +85,47 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
         err.status = 403;
         next(err)
     };
-})
+});
+
+//   edit a review
+router.put('/:reviewId', requireAuth, async (req, res, next) => {
+    let { review, stars } = req.body;
+    stars = parseInt(stars);
+    console.log(review, stars)
+    if (!review || isNaN(stars) || stars < 1 || stars > 5) {
+        res.status(400)
+        let err = {};
+        err.message = "Bad Request"
+        err.errors = {
+            review: "Review text is required",
+            stars: "Stars must be an integer from 1 to 5",
+        }
+        return res.json(err)
+    }
+    const { user } = req;
+    let id = req.params.reviewId;
+
+    const currReview = await Review.findByPk(id);
+
+    if (!currReview) {
+        let err = {};
+        err.message = "Review couldn\'t be found";
+        res.status(404);
+        return res.json(err);
+    }
+
+    if (user.id === currReview.userId) {
+        await currReview.update({
+            review: review,
+            stars,
+        });
+        res.json(currReview)
+    } else {
+        let err = {};
+        err.message = "Forbidden";
+        err.status = 403;
+        next(err)
+    };
+  });
 
 module.exports = router;
