@@ -193,7 +193,7 @@ const router = express.Router();
   });
 
   //edit a spot
-  router.put('/:spotId', async (req, res) => {
+  router.put('/:spotId', requireAuth, async (req, res, next) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
     if (!address || !city || !state || !country || isNaN(lat) || isNaN(lng) || !name || !description || !price) {
         res.status(400)
@@ -240,7 +240,12 @@ const router = express.Router();
             price
         });
         res.json(spot)
-    }
+    } else {
+        let err = {};
+        err.message = "Forbidden";
+        err.status = 403;
+        next(err)
+    };
   })
 
   module.exports = router;
