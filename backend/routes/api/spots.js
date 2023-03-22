@@ -1,13 +1,7 @@
 // backend/routes/api/spots.js
 const express = require('express');
 const { requireAuth } = require('../../utils/auth');
-const { Op } = require('sequelize');
-const bcrypt = require('bcryptjs');
-
-const { setTokenCookie, restoreUser } = require('../../utils/auth');
-const { Spot, SpotImage, Review, User } = require('../../db/models');
-
-const { check } = require('express-validator');
+const { Spot, SpotImage, User, Review } = require('../../db/models');
 const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
@@ -50,11 +44,6 @@ const router = express.Router();
     }
   );
 
-//   router.delete('/', (_req, res) => {
-//       res.clearCookie('token');
-//       return res.json({ message: 'success' });
-//     }
-//   );
 
   //get all spots
   router.get('/', async (req, res) => {
@@ -238,6 +227,31 @@ const router = express.Router();
             price
         });
         res.json(spot)
+    } else {
+        let err = {};
+        err.message = "Forbidden";
+        err.status = 403;
+        next(err)
+    };
+  });
+
+  router.delete('/:spotId', requireAuth, async (req, res, next) => {
+
+    const spot = await Spot.findByPk(req.params.spotId);
+
+    if (!spot) {
+        let err = {};
+        err.message = "Spot couldn\'t be found";
+        res.status(404);
+        return res.json(err);
+    }
+
+    const { user } = req;
+    if (user.id === spot.ownerId) {
+        await spot.destroy();
+        res.json({
+            message: "Successfully deleted"
+        });
     } else {
         let err = {};
         err.message = "Forbidden";
