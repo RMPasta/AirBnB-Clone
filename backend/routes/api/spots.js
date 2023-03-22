@@ -1,7 +1,7 @@
 // backend/routes/api/spots.js
 const express = require('express');
 const { requireAuth } = require('../../utils/auth');
-const { Spot, SpotImage, User, Review } = require('../../db/models');
+const { Spot, SpotImage, User, Review, ReviewImage } = require('../../db/models');
 const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
@@ -263,16 +263,40 @@ const router = express.Router();
 
   //get reviews by spot id
   router.get('/:spotId/reviews', async (req, res, next) => {
-    const spot = await Spot.findByPk(req.params.spotId);
+      const spot = await Spot.findByPk(req.params.spotId);
 
-    if (!spot) {
-        let err = {};
-        err.message = "Spot couldn\'t be found";
-        res.status(404);
-        return res.json(err);
-    }
+      if (!spot) {
+          let err = {};
+          err.message = "Spot couldn\'t be found";
+          res.status(404);
+          return res.json(err);
+        }
 
-    const reviews = await spot.getReviews()
+        const reviews = await Review.findAll({
+            where: {spotId: req.params.spotId},
+            include: [
+                {
+                    model: User,
+                    attributes: ['id', 'firstName', 'lastName']
+                },
+                {
+                    model: ReviewImage,
+                    attributes: ['id', 'url']
+                }
+
+            ]
+        });
+
+    // let reviewList = [];
+    // reviews.forEach(review => {
+    //     reviewList.push(review.toJSON());
+    // })
+
+    // reviews.forEach(async review => {
+
+    // })
+
+
     res.status(200)
     res.json(reviews)
   });
