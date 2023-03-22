@@ -1,7 +1,7 @@
 // backend/routes/api/spots.js
 const express = require('express');
 const { requireAuth } = require('../../utils/auth');
-const { Spot, SpotImage, User, Review, ReviewImage } = require('../../db/models');
+const { Spot, SpotImage, User, Review, ReviewImage, Booking } = require('../../db/models');
 const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
@@ -291,6 +291,41 @@ const router = express.Router();
     res.status(200)
     res.json(reviews)
   });
+
+  //get bookings by spot id
+  router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
+    const spot = await Spot.findByPk(req.params.spotId);
+
+    if (!spot) {
+        let err = {};
+        err.message = "Spot couldn\'t be found";
+        res.status(404);
+        return res.json(err);
+      }
+
+      const { user } = req;
+      if (user.id === spot.ownerId) {
+        const bookings = await Booking.findAll({
+            where: {spotId: req.params.spotId},
+            include: [
+                {
+                    model: User,
+                    attributes: ['id', 'firstName', 'lastName']
+                }
+            ]
+        });
+        res.status(200)
+        res.json(bookings)
+      } else {
+        const bookings = await Booking.findAll({
+            where: {spotId: req.params.spotId},
+            attributes: ["spotId", "startDate", "endDate"]
+        });
+        res.status(200)
+        res.json({Bookings: bookings})
+      };
+
+});
 
     //create review for spot
     router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
