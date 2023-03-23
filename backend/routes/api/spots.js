@@ -71,7 +71,6 @@ const router = express.Router();
             let sum = ratings.reduce((acc, curr) => {
                 return acc + curr;
             }, 0)
-            console.log(sum)
             let avg = sum / ratings.length;
                 spot.avgRating = parseFloat(avg.toFixed(1));
 
