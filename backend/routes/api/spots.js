@@ -128,7 +128,7 @@ const router = express.Router();
         return acc + curr;
     }, 0)
     let avg = sum / ratings.length;
-        currSpot.avgStarRating = avg;
+    currSpot.avgStarRating = parseFloat(avg.toFixed(1));
 
     let owner = await User.findByPk(currSpot.ownerId)
     currSpot.Owner = {
