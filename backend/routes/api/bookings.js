@@ -34,38 +34,84 @@ router.get('/current', requireAuth, async (req, res, next) => {
 });
 
 //   edit a booking
-router.put('/:reviewId', requireAuth, async (req, res, next) => {
-    let { review, stars } = req.body;
-    stars = parseInt(stars);
-    console.log(review, stars)
-    if (!review || isNaN(stars) || stars < 1 || stars > 5) {
-        res.status(400)
-        let err = {};
-        err.message = "Bad Request"
-        err.errors = {
-            review: "Review text is required",
-            stars: "Stars must be an integer from 1 to 5",
-        }
-        return res.json(err)
-    }
+router.put('/:bookingId', requireAuth, async (req, res, next) => {
+    let { startDate, endDate } = req.body;
     const { user } = req;
-    let id = req.params.reviewId;
+    let id = req.params.bookingId;
 
-    const currbooking = await booking.findByPk(id);
+    const currBooking = await Booking.findByPk(id);
 
-    if (!currbooking) {
+    if (!currBooking) {
         let err = {};
-        err.message = "booking couldn\'t be found";
+        err.message = "Booking couldn\'t be found";
         res.status(404);
         return res.json(err);
     }
 
-    if (user.id === currbooking.userId) {
-        await currbooking.update({
-            booking: booking,
-            stars,
+    if (endDate <= startDate) {
+        res.status(400)
+        let err = {};
+        err.message = "Bad Request"
+        err.errors = {
+            endDate: "endDate cannot come before startDate",
+        }
+        return res.json(err)
+    }
+
+
+    //make sure the new booking doesnt conflict with current bookings on the spot
+    const existingBookings = await Booking.findAll({where: {spotId: currBooking.spotId}})
+
+    let bookingsList = [];
+    existingBookings.forEach(booking => {
+        bookingsList.push(booking.toJSON())
+    })
+
+    for (let i = 0; i < bookingsList.length; i++) {
+        //for every booking on this spot, check the dates for conflicts with new booking
+        let booking = bookingsList[i];
+        //exclude this booking id from search
+        if (booking.id == id) break;
+
+        bookingStartDate = booking.startDate.toJSON().split('T')[0];
+        bookingEndDate = booking.endDate.toJSON().split('T')[0];
+
+            if ((startDate >= bookingStartDate && startDate <= bookingEndDate) || (endDate >= bookingStartDate && endDate <= bookingEndDate)) {
+            res.status(403)
+            let err = {};
+            err.message = "Sorry, this spot is already booked for the specified dates"
+            err.errors = {
+                startDate: "Start date conflicts with an existing booking",
+                endDate: "End date conflicts with an existing booking",
+            }
+            return res.json(err)
+        }
+    }
+
+    //this block will check if dates are in the past
+    //since my current seed data is all in the future, this will always trigger
+    //commenting until i update seed data or code
+
+    // let currentDate = new Date();
+    // currentDate = currentDate.toJSON().split('T')[0];
+    // console.log(currentDate);
+    // let bookingEndDate = currBooking.endDate.toJSON().split('T')[0]
+    // if (bookingEndDate < currentDate) {
+    //     res.status(400)
+    //     let err = {};
+    //     err.message = "Past bookings can\'t be modified"
+    //     return res.json(err)
+    // }
+
+    // if user owns the booking, update it, else forbidden
+    if (user.id === currBooking.userId) {
+        await currBooking.update({
+            userId: user.id,
+            spotId: parseInt(currBooking.spotId),
+            startDate,
+            endDate
         });
-        res.json(currbooking)
+        res.json(currBooking)
     } else {
         let err = {};
         err.message = "Forbidden";
