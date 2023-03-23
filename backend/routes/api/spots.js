@@ -371,4 +371,68 @@ const router = express.Router();
         res.json(currReview)
       });
 
+          //create booking for spot
+    router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
+        const spot = await Spot.findByPk(req.params.spotId);
+        const { startDate, endDate } = req.body;
+        const { user } = req;
+
+        if (user.id === spot.ownerId) {
+            let err = {};
+            err.message = "Forbidden";
+            err.status = 403;
+            next(err)
+          }
+
+        const existingBookings = await Booking.findAll({where: {spotId: parseInt(req.params.spotId)}})
+
+        let bookingsList = [];
+        existingBookings.forEach(booking => {
+            bookingsList.push(booking.toJSON())
+        })
+
+        bookingsList.forEach(booking => {
+            console.log(booking.endDate)
+
+            // i need to update seed files to get better dates and this logic needs to be worked on to check for conflicting data
+
+            // if (booking.endDate < startDate || endDate < booking.startDate) {
+            //     res.status(403)
+            //     let err = {};
+            //     err.message = "Sorry, this spot is already booked for the specified dates"
+            //     err.errors = {
+            //         startDate: "Start date conflicts with an existing booking",
+            //         endDate: "End date conflicts with an existing booking",
+            //     }
+            //     return res.json(err)
+            // }
+        })
+
+        if (endDate <= startDate) {
+            res.status(400)
+            let err = {};
+            err.message = "Bad Request"
+            err.errors = {
+                endDate: "endDate cannot be on or before startDate",
+            }
+            return res.json(err)
+        }
+
+        if (!spot) {
+            let err = {};
+            err.message = "Spot couldn\'t be found";
+            res.status(404);
+            return res.json(err);
+        }
+
+        const currBooking = await Booking.create({
+            userId: user.id,
+            spotId: parseInt(req.params.spotId),
+            startDate,
+            endDate
+        })
+        res.status(200)
+        res.json(currBooking)
+      });
+
   module.exports = router;
