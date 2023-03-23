@@ -35,6 +35,16 @@ module.exports = {
         url: "music house",
         preview: true,
       },
+      {
+        spotId: 5,
+        url: "cool band",
+        preview: false,
+      },
+      {
+        spotId: 5,
+        url: "music stuff",
+        preview: false,
+      },
     ], {})
   },
 
