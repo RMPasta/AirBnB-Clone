@@ -11,7 +11,7 @@ module.exports = {
     options.tableName = 'Spots';
     return queryInterface.bulkInsert(options, [
       {
-        ownerId: 4,
+        ownerId: 1,
         address: "123 Disney Lane",
         city: "San Francisco",
         state: "California",
@@ -23,7 +23,7 @@ module.exports = {
         price: 1000,
       },
       {
-        ownerId: 1,
+        ownerId: 2,
         address: "1234 Orlando Drive",
         city: "Orlando",
         state: "Florida",
@@ -35,7 +35,7 @@ module.exports = {
         price: 2000,
       },
       {
-        ownerId: 5,
+        ownerId: 3,
         address: "12345 Walt Road",
         city: "Hamilton",
         state: "New Jersey",
@@ -47,7 +47,7 @@ module.exports = {
         price: 3000,
       },
       {
-        ownerId: 3,
+        ownerId: 4,
         address: "123456 Bumbis Way",
         city: "Wee",
         state: "Alaska",
@@ -59,7 +59,7 @@ module.exports = {
         price: 4000,
       },
       {
-        ownerId: 2,
+        ownerId: 5,
         address: "1234567 Road Ave",
         city: "Huntington",
         state: "Maryland",
@@ -69,6 +69,18 @@ module.exports = {
         name: "A House",
         description: "Music happens here",
         price: 6000,
+      },
+      {
+        ownerId: 5,
+        address: "12347 RoadS AveS",
+        city: "pLACE",
+        state: "SpOT",
+        country: "United States of America",
+        lat: 555,
+        lng: 552,
+        name: "Space",
+        description: "the sauce",
+        price: 60001,
       },
     ], {})
   },

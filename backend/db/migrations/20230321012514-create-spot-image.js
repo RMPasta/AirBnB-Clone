@@ -16,11 +16,18 @@ module.exports = {
       },
       spotId: {
         type: Sequelize.INTEGER,
+<<<<<<< HEAD
         references: {
           model: 'Spots',
 
           onDelete: 'CASCADE'
         }
+=======
+        // references: {
+        //   model: 'Spots',
+        //   onDelete: 'CASCADE'
+        // }
+>>>>>>> dev
       },
       url: {
         type: Sequelize.STRING

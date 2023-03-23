@@ -10,20 +10,62 @@ module.exports = {
       {
         spotId: 1,
         userId: 2,
-        startDate: new Date(),
-        endDate: new Date('August 19, 2023 24:00:00'),
+        startDate: new Date("2021-11-02"),
+        endDate: new Date("2021-11-18"),
+      },
+      {
+        spotId: 1,
+        userId: 3,
+        startDate: new Date("2021-12-02"),
+        endDate: new Date("2021-12-18"),
       },
       {
         spotId: 2,
         userId: 5,
-        startDate: new Date(),
-        endDate: new Date('August 27, 2023 24:00:00'),
+        startDate: new Date("2021-11-02"),
+        endDate: new Date("2021-11-18"),
+      },
+      {
+        spotId: 2,
+        userId: 4,
+        startDate: new Date("2021-11-22"),
+        endDate: new Date("2021-11-25"),
       },
       {
         spotId: 3,
         userId: 4,
-        startDate: new Date(),
-        endDate: new Date('August 1, 2023 24:00:00'),
+        startDate: new Date("2021-11-02"),
+        endDate: new Date("2021-11-18"),
+      },
+      {
+        spotId: 3,
+        userId: 4,
+        startDate: new Date("2021-11-22"),
+        endDate: new Date("2021-11-25"),
+      },
+      {
+        spotId: 4,
+        userId: 1,
+        startDate: new Date("2021-12-02"),
+        endDate: new Date("2021-12-18"),
+      },
+      {
+        spotId: 5,
+        userId: 4,
+        startDate: new Date("2021-11-22"),
+        endDate: new Date("2021-11-25"),
+      },
+      {
+        spotId: 5,
+        userId: 2,
+        startDate: new Date("2021-11-27"),
+        endDate: new Date("2021-11-28"),
+      },
+      {
+        spotId: 5,
+        userId: 1,
+        startDate: new Date("2021-12-04"),
+        endDate: new Date("2021-12-08"),
       },
     ], {})
   },
@@ -32,7 +74,7 @@ module.exports = {
     options.tableName = 'Bookings';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      spotId: { [Op.in]: [1, 2, 3] }
+      spotId: { [Op.in]: [1, 2, 3, 4, 5] }
     }, {});
   }
 };

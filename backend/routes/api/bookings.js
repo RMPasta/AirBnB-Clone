@@ -30,7 +30,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
         delete booking.Spot.createdAt;
         delete booking.Spot.updatedAt;
     }
-    res.json({ bookings: bookingList })
+    res.json({ Bookings: bookingList })
 });
 
 //   edit a booking
