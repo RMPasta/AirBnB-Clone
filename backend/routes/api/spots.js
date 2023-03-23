@@ -374,7 +374,7 @@ const router = express.Router();
           //create booking for spot
     router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
         const spot = await Spot.findByPk(req.params.spotId);
-        const { startDate, endDate } = req.body;
+        let { startDate, endDate } = req.body;
         const { user } = req;
 
         if (user.id === spot.ownerId) {
@@ -383,7 +383,7 @@ const router = express.Router();
             err.status = 403;
             next(err)
           }
-
+          //find this spots bookings
         const existingBookings = await Booking.findAll({where: {spotId: parseInt(req.params.spotId)}})
 
         let bookingsList = [];
@@ -391,22 +391,23 @@ const router = express.Router();
             bookingsList.push(booking.toJSON())
         })
 
-        bookingsList.forEach(booking => {
-            console.log(booking.endDate)
+        for (let i = 0; i < bookingsList.length; i++) {
+            //for every booking on this spot, check the dates for conflicts with new booking
+            let booking = bookingsList[i];
+            bookingStartDate = booking.startDate.toJSON().split('T')[0];
+            bookingEndDate = booking.endDate.toJSON().split('T')[0];
 
-            // i need to update seed files to get better dates and this logic needs to be worked on to check for conflicting data
-
-            // if (booking.endDate < startDate || endDate < booking.startDate) {
-            //     res.status(403)
-            //     let err = {};
-            //     err.message = "Sorry, this spot is already booked for the specified dates"
-            //     err.errors = {
-            //         startDate: "Start date conflicts with an existing booking",
-            //         endDate: "End date conflicts with an existing booking",
-            //     }
-            //     return res.json(err)
-            // }
-        })
+                if ((startDate >= bookingStartDate && startDate <= bookingEndDate) || (endDate >= bookingStartDate && endDate <= bookingEndDate)) {
+                res.status(403)
+                let err = {};
+                err.message = "Sorry, this spot is already booked for the specified dates"
+                err.errors = {
+                    startDate: "Start date conflicts with an existing booking",
+                    endDate: "End date conflicts with an existing booking",
+                }
+                return res.json(err)
+            }
+        }
 
         if (endDate <= startDate) {
             res.status(400)
