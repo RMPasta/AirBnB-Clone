@@ -34,7 +34,9 @@ router.get('/current', requireAuth, async (req, res, next) => {
             where: {spotId: review.spotId},
             attributes: ['url']
         });
-        review.Spot.previewImage = spotImage.url;
+        if (spotImage) {
+            review.Spot.previewImage = spotImage.url;
+        }
         delete review.Spot.createdAt;
         delete review.Spot.updatedAt;
     }
@@ -58,6 +60,7 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
     let reviewImages = await ReviewImage.findAll({
         where: { reviewId: id }
     })
+
     let imageArr = [];
     reviewImages.forEach(image => {
         imageArr.push(image.toJSON());

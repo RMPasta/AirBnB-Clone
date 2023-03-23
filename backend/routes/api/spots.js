@@ -63,16 +63,17 @@ const router = express.Router();
             spotsList.push(spot.toJSON());
         });
         //getting avg rating
+        let ratings = [];
         spotsList.forEach(spot => {
-            let ratings = [];
             spot.Reviews.forEach(review => {
                 ratings.push(review.stars)
             })
             let sum = ratings.reduce((acc, curr) => {
                 return acc + curr;
             }, 0)
+            console.log(sum)
             let avg = sum / ratings.length;
-                spot.avgRating = avg;
+                spot.avgRating = parseFloat(avg.toFixed(1));
 
             if (spot.SpotImages) {
                 let previewImage = spot.SpotImages[0];
