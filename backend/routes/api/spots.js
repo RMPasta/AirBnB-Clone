@@ -104,7 +104,7 @@ const router = express.Router();
     //search queries
     let where = {}
     //VALIDATE MIN AND MAX LAT AND LNG
-    if (isNaN(minLat) || isNaN(maxLat) || isNaN(minLng) || isNaN(maxLng)) {
+    if (isNaN(minLat) && minLat || isNaN(maxLat) && maxLat || isNaN(minLng) && minLng || isNaN(maxLng) && maxLng) {
         let err = {};
         err.status = 400;
         err.message = "Bad Request";
