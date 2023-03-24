@@ -3,45 +3,74 @@ const express = require('express');
 const { requireAuth } = require('../../utils/auth');
 const { Op } = require('sequelize');
 const { Spot, SpotImage, User, Review, ReviewImage, Booking } = require('../../db/models');
+const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
 
-  router.post('/', [handleValidationErrors, requireAuth], async (req, res, next) => {
+const validateSpot = [
+    check('address')
+      .exists({ checkFalsy: true })
+      .withMessage("Street address is required"),
+    check('city')
+      .exists({ checkFalsy: true })
+      .withMessage("City is required"),
+    check('state')
+      .exists({ checkFalsy: true })
+      .withMessage("State is required"),
+    check('country')
+      .exists({ checkFalsy: true })
+      .withMessage("Country is required"),
+    check('lat')
+      .exists({ checkFalsy: true })
+      .isFloat({ checkFalsy: true })
+      .withMessage("Latitude is not valid"),
+    check('lng')
+      .exists({ checkFalsy: true })
+      .isFloat({ checkFalsy: true })
+      .withMessage("Longitude is not valid"),
+    check('name')
+      .exists({ checkFalsy: true })
+      .isLength({ max: 50 })
+      .withMessage("Name must be less than 50 characters"),
+    check('description')
+      .exists({ checkFalsy: true })
+      .withMessage("Description is required"),
+    check('price')
+      .exists({ checkFalsy: true })
+      .withMessage("Price per day is required"),
+    handleValidationErrors
+  ];
+
+  const validateReview = [
+    check('review')
+      .exists({ checkFalsy: true })
+      .withMessage("Review text is required"),
+    check('stars')
+      .exists({ checkFalsy: true })
+      .isNumeric({ checkFalsy: true })
+      .custom((value, { req }) => value >= 1 && value <= 5)
+      .withMessage("Stars must be an integer from 1 to 5"),
+    handleValidationErrors
+  ];
+
+  router.post('/', [validateSpot, requireAuth], async (req, res, next) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
     const { user } = req;
-    try {
-        const spot = await Spot.create({
-            address,
-            ownerId: user.id,
-            city,
-            state,
-            country,
-            lat,
-            lng,
-            name,
-            description,
-            price
-          });
-          res.status(201)
-          return res.json(spot);
-    } catch (e) {
-        res.status(400)
-        let err = {};
-        err.message = "Bad Request"
-        err.errors = {
-            address: "Street address is required",
-            city: "City is required",
-            state: "State is required",
-            country: "Country is required",
-            lat: "Latitude is not valid",
-            lng: "Longitude is not valid",
-            name: "Name must be less than 50 characters",
-            description: "Description is required",
-            price: "Price per day is required"
-        }
-        return res.json(err)
-    }
+    const spot = await Spot.create({
+        address,
+        ownerId: user.id,
+        city,
+        state,
+        country,
+        lat,
+        lng,
+        name,
+        description,
+        price
+        });
+        res.status(201)
+        return res.json(spot);
     }
   );
 
@@ -299,25 +328,8 @@ const router = express.Router();
   });
 
 //   edit a spot
-  router.put('/:spotId', requireAuth, async (req, res, next) => {
+  router.put('/:spotId', [validateSpot, requireAuth], async (req, res, next) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
-    if (!address || !city || !state || !country || isNaN(lat) || isNaN(lng) || !name || !description || !price) {
-        res.status(400)
-        let err = {};
-        err.message = "Bad Request"
-        err.errors = {
-            address: "Street address is required",
-            city: "City is required",
-            state: "State is required",
-            country: "Country is required",
-            lat: "Latitude is not valid",
-            lng: "Longitude is not valid",
-            name: "Name must be less than 50 characters",
-            description: "Description is required",
-            price: "Price per day is required"
-        }
-        return res.json(err)
-    }
     const { user } = req;
     let id = req.params.spotId;
 
@@ -445,7 +457,7 @@ const router = express.Router();
 });
 
     //create review for spot
-    router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
+    router.post('/:spotId/reviews', [validateReview, requireAuth], async (req, res, next) => {
         const spot = await Spot.findByPk(req.params.spotId);
         const { review, stars } = req.body;
         const { user } = req;
@@ -513,14 +525,24 @@ const router = express.Router();
             bookingStartDate = booking.startDate.toJSON().split('T')[0];
             bookingEndDate = booking.endDate.toJSON().split('T')[0];
 
-                if ((startDate >= bookingStartDate && startDate <= bookingEndDate) || (endDate >= bookingStartDate && endDate <= bookingEndDate)) {
+            let err = {};
+            if (startDate >= bookingStartDate && startDate <= bookingEndDate) {
                 res.status(403)
-                let err = {};
                 err.message = "Sorry, this spot is already booked for the specified dates"
-                err.errors = {
-                    startDate: "Start date conflicts with an existing booking",
-                    endDate: "End date conflicts with an existing booking",
+                err.errors = {}
+                err.errors.startDate = "Start date conflicts with an existing booking"
+                if (endDate >= bookingStartDate && endDate <= bookingEndDate) {
+                    res.status(403)
+                    err.message = "Sorry, this spot is already booked for the specified dates"
+                    err.errors.endDate = "End date conflicts with an existing booking"
                 }
+                return res.json(err)
+            }
+            if (endDate >= bookingStartDate && endDate <= bookingEndDate) {
+                res.status(403)
+                err.message = "Sorry, this spot is already booked for the specified dates"
+                err.errors = {}
+                err.errors.endDate = "End date conflicts with an existing booking"
                 return res.json(err)
             }
         }

@@ -2,9 +2,21 @@ const express = require('express');
 const { requireAuth } = require('../../utils/auth');
 const { Review, User, Spot, ReviewImage, SpotImage } = require('../../db/models');
 const { handleValidationErrors } = require('../../utils/validation');
+const { check } = require('express-validator');
 
 const router = express.Router();
 
+const validateReview = [
+    check('review')
+      .exists({ checkFalsy: true })
+      .withMessage("Review text is required"),
+    check('stars')
+      .exists({ checkFalsy: true })
+      .isNumeric({ checkFalsy: true })
+      .custom((value, { req }) => value >= 1 && value <= 5)
+      .withMessage("Stars must be an integer from 1 to 5"),
+    handleValidationErrors
+  ];
 
 router.get('/current', requireAuth, async (req, res, next) => {
     const currentUserId = req.user.id;
@@ -91,7 +103,7 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
 });
 
 //   edit a review
-router.put('/:reviewId', requireAuth, async (req, res, next) => {
+router.put('/:reviewId', [validateReview, requireAuth], async (req, res, next) => {
     let { review, stars } = req.body;
     stars = parseInt(stars);
     console.log(review, stars)

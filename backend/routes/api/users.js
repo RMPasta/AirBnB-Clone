@@ -26,23 +26,20 @@ const validateSignup = [
       .exists({ checkFalsy: true })
       .isLength({ min: 6 })
       .withMessage('Password must be 6 characters or more.'),
+    check('firstName')
+      .exists({ checkFalsy: true })
+      .isLength({ min: 1 })
+      .withMessage('First Name is required'),
+    check('lastName')
+      .exists({ checkFalsy: true })
+      .isLength({ min: 1 })
+      .withMessage('Last Name is required'),
     handleValidationErrors
   ];
 
-  router.post('/', [validateSignup, handleValidationErrors], async (req, res) => {
+  router.post('/', validateSignup, async (req, res) => {
       const { email, password, username, firstName, lastName } = req.body;
-      if (!email || !firstName || !username || !lastName ) {
-      let err = {}
-      err.message = "Bad Request"
-      err.errors = {
-        email: "Invalid email",
-        username: "Username is required",
-        firstName: "First Name is required",
-        lastName: "Last Name is required",
-      }
-      res.status(400)
-      return res.json(err)
-      }
+
       const emailCheck = await User.findOne({where: {email: email}})
       if (emailCheck) {
         let err = {};
