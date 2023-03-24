@@ -26,7 +26,9 @@ router.get('/current', requireAuth, async (req, res, next) => {
             where: {spotId: booking.spotId},
             attributes: ['url']
         });
-        booking.Spot.previewImage = spotImage.url;
+        if (spotImage) {
+            booking.Spot.previewImage = spotImage.url;
+        }
         delete booking.Spot.createdAt;
         delete booking.Spot.updatedAt;
     }

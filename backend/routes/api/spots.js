@@ -497,21 +497,27 @@ const validateSpot = [
         })
         res.status(200)
         res.json(currReview)
-      });
+    });
 
-          //create booking for spot
+    //create booking for spot
     router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
         const spot = await Spot.findByPk(req.params.spotId);
         let { startDate, endDate } = req.body;
         const { user } = req;
 
+        if (!spot) {
+            let err = {};
+            err.message = "Spot couldn\'t be found";
+            res.status(404);
+            return res.json(err);
+        }
         if (user.id === spot.ownerId) {
             let err = {};
             err.message = "Forbidden";
             err.status = 403;
             next(err)
-          }
-          //find this spots bookings
+        }
+        //find this spots bookings
         const existingBookings = await Booking.findAll({where: {spotId: parseInt(req.params.spotId)}})
 
         let bookingsList = [];
@@ -557,12 +563,6 @@ const validateSpot = [
             return res.json(err)
         }
 
-        if (!spot) {
-            let err = {};
-            err.message = "Spot couldn\'t be found";
-            res.status(404);
-            return res.json(err);
-        }
 
         const currBooking = await Booking.create({
             userId: user.id,
