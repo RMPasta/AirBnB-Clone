@@ -58,6 +58,19 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
         return res.json(err)
     }
 
+    //this block will check if dates are in the past
+    //since my current seed data is all in the future, this will always trigger
+    //commenting until i update seed data or code
+
+    let currentDate = new Date();
+    currentDate = currentDate.toJSON().split('T')[0];
+    let bookingEndDate = currBooking.endDate.toJSON().split('T')[0]
+    if (bookingEndDate < currentDate) {
+        res.status(400)
+        let err = {};
+        err.message = "Past bookings can\'t be modified"
+        return res.json(err)
+    }
 
     //make sure the new booking doesnt conflict with current bookings on the spot
     const existingBookings = await Booking.findAll({where: {spotId: currBooking.spotId}})
@@ -67,40 +80,38 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
         bookingsList.push(booking.toJSON())
     })
 
+
     for (let i = 0; i < bookingsList.length; i++) {
         //for every booking on this spot, check the dates for conflicts with new booking
         let booking = bookingsList[i];
         //exclude this booking id from search
         if (booking.id == id) break;
 
-        bookingStartDate = booking.startDate.toJSON().split('T')[0];
-        bookingEndDate = booking.endDate.toJSON().split('T')[0];
+        let bookingStartDate = booking.startDate.toJSON().split('T')[0];
+        let bookingEndDate = booking.endDate.toJSON().split('T')[0];
 
-            if ((startDate >= bookingStartDate && startDate <= bookingEndDate) || (endDate >= bookingStartDate && endDate <= bookingEndDate)) {
+        let err = {};
+        if (startDate >= bookingStartDate && startDate <= bookingEndDate) {
             res.status(403)
-            let err = {};
             err.message = "Sorry, this spot is already booked for the specified dates"
-            err.errors = {
-                startDate: "Start date conflicts with an existing booking",
-                endDate: "End date conflicts with an existing booking",
+            err.errors = {}
+            err.errors.startDate = "Start date conflicts with an existing booking"
+            if (endDate >= bookingStartDate && endDate <= bookingEndDate) {
+                res.status(403)
+                err.message = "Sorry, this spot is already booked for the specified dates"
+                err.errors.endDate = "End date conflicts with an existing booking"
             }
+            return res.json(err)
+        }
+        if (endDate >= bookingStartDate && endDate <= bookingEndDate) {
+            res.status(403)
+            err.message = "Sorry, this spot is already booked for the specified dates"
+            err.errors = {}
+            err.errors.endDate = "End date conflicts with an existing booking"
             return res.json(err)
         }
     }
 
-    //this block will check if dates are in the past
-    //since my current seed data is all in the future, this will always trigger
-    //commenting until i update seed data or code
-
-    // let currentDate = new Date();
-    // currentDate = currentDate.toJSON().split('T')[0];
-    // let bookingEndDate = currBooking.endDate.toJSON().split('T')[0]
-    // if (bookingEndDate < currentDate) {
-    //     res.status(400)
-    //     let err = {};
-    //     err.message = "Past bookings can\'t be modified"
-    //     return res.json(err)
-    // }
 
     // if user owns the booking, update it, else forbidden
     if (user.id === currBooking.userId) {
