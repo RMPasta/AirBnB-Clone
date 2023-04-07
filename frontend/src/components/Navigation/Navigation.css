@@ -31,3 +31,7 @@ li {
 .logout-button {
     margin: 0;
 }
+
+.hidden {
+    display: none;
+}
