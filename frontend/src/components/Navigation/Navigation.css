@@ -1,0 +1,30 @@
+.nav-ul {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 200px;
+    padding: 20px;
+    border: 3px solid black;
+}
+
+.profile-dropdown {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 0;
+    /* border: 3px solid black; */
+}
+
+li {
+    list-style: none;
+}
+
+.logout-button {
+    margin: 0;
+}
+
+.hidden {
+    display: none;
+}
