@@ -106,7 +106,6 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
 router.put('/:reviewId', [validateReview, requireAuth], async (req, res, next) => {
     let { review, stars } = req.body;
     stars = parseInt(stars);
-    console.log(review, stars)
     if (!review || isNaN(stars) || stars < 1 || stars > 5) {
         res.status(400)
         let err = {};
