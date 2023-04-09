@@ -10,11 +10,11 @@ module.exports = {
     return queryInterface.bulkInsert(options, [
       {
         reviewId: 1,
-        url: "building",
+        url: "house1.png",
       },
       {
         reviewId: 2,
-        url: "ocean",
+        url: "https://a0.muscache.com/im/pictures/miso/Hosting-41852129/original/4b0889f7-907b-4a81-9548-515542c62a3e.jpeg?im_w=1200",
       },
       {
         reviewId: 3,
