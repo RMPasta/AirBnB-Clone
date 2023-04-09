@@ -11,39 +11,88 @@ module.exports = {
     options.tableName = 'Users';
     return queryInterface.bulkInsert(options, [
       {
-        email: 'demo@user.io',
-        username: 'Demo-lition',
-        firstName: 'Greg',
-        lastName: 'Pringles',
+        email: 'mscott@user.io',
+        username: 'mscott',
+        firstName: 'Michael',
+        lastName: 'Scott',
         hashedPassword: bcrypt.hashSync('password')
       },
       {
-        email: 'user1@user.io',
-        username: 'FakeUser1',
-        firstName: 'Jeff',
-        lastName: 'Bez',
-        hashedPassword: bcrypt.hashSync('password2')
+        email: 'jhalpert@user.io',
+        username: 'jhalpert',
+        firstName: 'Jim',
+        lastName: 'Halpert',
+        hashedPassword: bcrypt.hashSync('password')
       },
       {
-        email: 'user2@user.io',
-        username: 'FakeUser2',
-        firstName: 'Boo',
-        lastName: 'Radley',
-        hashedPassword: bcrypt.hashSync('password3')
+        email: 'pbeesly@user.io',
+        username: 'pbeesly',
+        firstName: 'Pam',
+        lastName: 'Beesly',
+        hashedPassword: bcrypt.hashSync('password')
       },
       {
-        email: 'user3@user.io',
-        username: 'FakeUser3',
-        firstName: 'Green',
-        lastName: 'Ranger',
-        hashedPassword: bcrypt.hashSync('password4')
+        email: 'dshrute@user.io',
+        username: 'dshrute',
+        firstName: 'Dwight',
+        lastName: 'Shrute',
+        hashedPassword: bcrypt.hashSync('password')
       },
       {
-        email: 'user4@user.io',
-        username: 'FakeUser4',
-        firstName: 'Hey',
-        lastName: 'Arnold',
-        hashedPassword: bcrypt.hashSync('password5')
+        email: 'shudson@user.io',
+        username: 'shudson',
+        firstName: 'Stanley',
+        lastName: 'Hudson',
+        hashedPassword: bcrypt.hashSync('password')
+      },
+      {
+        email: 'abernard@user.io',
+        username: 'abernard',
+        firstName: 'Andy',
+        lastName: 'Bernard',
+        hashedPassword: bcrypt.hashSync('password')
+      },
+      {
+        email: 'plapin-vance@user.io',
+        username: 'plapin-vance',
+        firstName: 'Phyllis',
+        lastName: 'Lapin-Vance',
+        hashedPassword: bcrypt.hashSync('password')
+      },
+      {
+        email: 'kmalone@user.io',
+        username: 'kmalone',
+        firstName: 'Kevin',
+        lastName: 'Malone',
+        hashedPassword: bcrypt.hashSync('password')
+      },
+      {
+        email: 'amartin@user.io',
+        username: 'amartin',
+        firstName: 'Angela',
+        lastName: 'Martin',
+        hashedPassword: bcrypt.hashSync('password')
+      },
+      {
+        email: 'omartinez@user.io',
+        username: 'omartinez',
+        firstName: 'Oscar',
+        lastName: 'Martinez',
+        hashedPassword: bcrypt.hashSync('password')
+      },
+      {
+        email: 'cbratton@user.io',
+        username: 'cbratton',
+        firstName: 'Creed',
+        lastName: 'Bratton',
+        hashedPassword: bcrypt.hashSync('password')
+      },
+      {
+        email: 'dphilbin@user.io',
+        username: 'dphilbin',
+        firstName: 'Darryl',
+        lastName: 'Philbin',
+        hashedPassword: bcrypt.hashSync('password')
       },
     ], {});
   },
@@ -52,7 +101,7 @@ module.exports = {
     options.tableName = 'Users';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      username: { [Op.in]: ['Demo-lition', 'FakeUser1', 'FakeUser2', 'FakeUser3', 'FakeUser4',] }
+      username: { [Op.in]: ['mscott', 'jhalpert', 'pbeesly', 'dshrute', 'shudson', 'abernard', 'plapin-vance', 'kmalone', 'amartin', 'omartinez', 'cbratton', 'dphilbin'] }
     }, {});
   }
 };

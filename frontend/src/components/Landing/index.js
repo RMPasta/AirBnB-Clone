@@ -16,6 +16,9 @@ export default function Landing() {
          <li key={spot.id}>
             <img src={spot.previewImage} alt={spot.description} className="previewImage" />
             <h1>{spot.name}</h1>
+            <h2>{spot.id}</h2>
+            <h3>{spot.description}</h3>
+            <p>{spot.price}</p>
          </li>
         ))}
     </div>
