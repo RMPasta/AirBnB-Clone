@@ -9,12 +9,12 @@ form {
     display: flex;
     flex-direction: column;
     width: 340px;
+    padding: 40px;
 }
 
 label {
     display: flex;
     flex-direction: column;
-    padding: 5px;
 }
 
 p {
@@ -31,6 +31,7 @@ button {
     height: 30px;
     align-self: center;
     margin: 1px;
+    border-radius: 8px;
 }
 
 button:hover {
