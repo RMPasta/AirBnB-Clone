@@ -28,8 +28,23 @@ const LoginFormModal = () => {
     );
   };
 
+  const demoSubmit = () => {
+    const user = {credential: "DemoUser", password: "password"}
+    return dispatch(sessionActions.login(user))
+    .then(closeModal)
+    .catch(
+      async (res) => {
+        const data = await res.json();
+        if (data && data.errors) {
+            setErrors(data.errors);
+            setPassword('')
+        }
+      }
+    );
+  };
+
   return (
-    <div className="page">
+    <div className="form-page">
       <h1>Log In</h1>
       <form onSubmit={handleSubmit}>
         <label>
@@ -55,6 +70,7 @@ const LoginFormModal = () => {
         </div>
         <button type="submit">Log In</button>
       </form>
+        <button className="demo-login" onClick={() => demoSubmit()}>Demo User</button>
     </div>
   );
 }

@@ -15,20 +15,13 @@
 
 .profile-dropdown {
     display: flex;
-    position: relative;
-    top: 80px;
-    right: 0px;
     align-items: center;
     flex-direction: column;
     padding: 0;
-    border: 1px solid grey;
     background-color: white;
 }
 
 .profile-button {
-    position: fixed;
-    top: 40px;
-    right: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -41,6 +34,7 @@
 
 .drop-down-space {
     height: 100px;
+    width: 98px;
 }
 
 li {
@@ -48,7 +42,10 @@ li {
 }
 
 .logout-button {
+    border: 1px solid lightgrey;
     margin: 0;
+    border-radius: 20px;
+    width: 80px;
 }
 
 .hidden {

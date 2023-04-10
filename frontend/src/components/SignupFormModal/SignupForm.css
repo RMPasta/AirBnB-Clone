@@ -1,5 +1,28 @@
+.form-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    padding: 10px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    padding: 40px 80px;
+    /* border: 1px solid red; */
+}
+
 .error-container {
     height: 14px;
+}
+
+.error-container p {
+    height: 14px;
+    color: red;
+    margin-bottom: 10px;
 }
 
 p {
