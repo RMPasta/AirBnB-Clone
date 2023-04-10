@@ -2,6 +2,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-gap: 40px;
+    padding-top: 60px;
 }
 
 p {
@@ -10,9 +11,10 @@ p {
 
 .spot-card {
     margin: 0 auto;
-    padding: 10px;
+    padding: 14px;
     border-radius: 20px;
-    box-shadow: 2px 2px 2px 2px grey;
+    box-shadow: 2px 2px 8px 3px grey;
+    cursor: pointer;
 }
 
 .previewImage {

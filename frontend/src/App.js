@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import Navigation from "./components/Navigation";
+import SpotDetails from "./components/SpotDetails";
 import * as sessionActions from "./store/session";
 import Landing from "./components/Landing";
 
@@ -15,11 +16,13 @@ const App = () => {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
-      <Landing />
       {isLoaded && (
         <Switch>
           <Route exact path="/">
-            <div>home</div>
+            <Landing />
+          </Route>
+          <Route path="/spots/:spotId">
+            <SpotDetails />
           </Route>
         </Switch>
       )}

@@ -10,8 +10,16 @@ export const Carrot = () => {
 
 export const UserIcon = () => {
     return (
-      <div style={{ color: "blue", fontSize: "22px" }}>
+      <div style={{ color: "black", fontSize: "22px" }}>
         <i className="fas fa-user-circle"></i>
+      </div>
+    );
+  };
+
+export const BarsIcon = () => {
+    return (
+      <div style={{ color: "black", fontSize: "22px" }}>
+        <i className="fas fa-bars"></i>
       </div>
     );
   };

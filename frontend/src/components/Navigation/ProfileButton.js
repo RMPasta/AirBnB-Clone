@@ -5,6 +5,7 @@ import OpenModalButton from '../OpenModalButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import { UserIcon } from "../FontAwesome";
+import { BarsIcon } from "../FontAwesome";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -41,8 +42,9 @@ function ProfileButton({ user }) {
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
   return (
-    <>
+    <div className="drop-down-space">
       <button className="profile-button" onClick={openMenu}>
+        <BarsIcon />
         <UserIcon />
       </button>
       <ul className={ulClassName} ref={ulRef}>
@@ -74,7 +76,7 @@ function ProfileButton({ user }) {
           </>
         )}
       </ul>
-    </>
+    </div>
   );
 }
 
