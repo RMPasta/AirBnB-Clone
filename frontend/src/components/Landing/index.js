@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { getSpots } from '../../store/spots';
+import { getSpotsThunk } from '../../store/spots';
 import './Landing.css';
 
 export default function Landing() {
@@ -15,13 +15,14 @@ export default function Landing() {
     }
 
     useEffect(() => {
-        dispatch(getSpots())
+        dispatch(getSpotsThunk())
       }, [dispatch])
   return (
     <div className="page">
           {spots && spots.map((spot) => (
          <li key={spot.id} className="spot-card" onClick={() => handleClick(spot)}>
-            <img src={spot.previewImage} alt={spot.description} className="previewImage" />
+          <div className='tool-tip'>{spot.name}</div>
+            <img src={spot.previewImage} alt={spot.description} className="previewImageLanding" />
             <div className="name-rating-container">
               <p>{spot.city}, {spot.state}</p>
               <div className="rating">

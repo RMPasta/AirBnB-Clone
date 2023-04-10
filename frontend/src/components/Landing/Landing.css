@@ -9,7 +9,24 @@ p {
     color: black;
 }
 
+.tool-tip {
+    display: none;
+    position: absolute;
+    background-color: white;
+    width: 200px;
+    /* margin: 0 auto; */
+}
+
+.spot-card:hover .tool-tip {
+    display: flex;
+    align-self: center;
+}
+
 .spot-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: space-between;
     margin: 0 auto;
     padding: 14px;
     border-radius: 20px;
@@ -17,7 +34,7 @@ p {
     cursor: pointer;
 }
 
-.previewImage {
+.previewImageLanding {
     width: 280px;
     height: 240px;
     border-radius: 10px;
@@ -46,6 +63,7 @@ p {
 
 .price {
     display: flex;
+    font-size: 18px;
 }
 
 @media screen and (max-width: 1300px) {
