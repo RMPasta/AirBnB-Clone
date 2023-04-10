@@ -34,7 +34,7 @@ export default function SpotDetails() {
           </div>
           <div className='stat-block'>
             <div className="top-stats">
-              {spot && <p className='price'>${spot.price} night</p>}
+              {spot && <p className='detail-price'>${spot.price} night</p>}
                 <div className='rating'>
                 <p>{spot.numReviews} reviews</p>
                   <p className="avgRating">{spot.avgStarRating}</p>
