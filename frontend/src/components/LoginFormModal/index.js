@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import * as sessionActions from "../../store/session";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import { useModal } from "../../context/Modal";
 import "./LoginForm.css";
@@ -8,7 +8,6 @@ import "./LoginForm.css";
 const LoginFormModal = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const sessionUser = useSelector((state) => state.session.user);
   const [disabled, setDisabled] = useState(true);
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
