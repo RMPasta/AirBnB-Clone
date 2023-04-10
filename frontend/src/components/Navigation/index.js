@@ -9,11 +9,11 @@ function Navigation({ isLoaded }){
 
   return (
     <ul className="nav-ul">
-      <li>
+      <li className="home-logo">
         <NavLink exact to="/">Home</NavLink>
       </li>
       {isLoaded && (
-        <li>
+        <li className="dropdown-container">
           <ProfileButton user={sessionUser} />
         </li>
       )}

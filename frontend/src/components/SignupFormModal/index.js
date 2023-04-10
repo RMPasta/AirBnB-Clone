@@ -46,7 +46,7 @@ function SignupFormModal() {
   };
 
   return (
-    <div className="page">
+    <div className="form-page">
       <h1>Sign Up</h1>
       <form onSubmit={handleSubmit}>
         <label>
