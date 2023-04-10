@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from 'react-router-dom';
 import { useModal } from "../../context/Modal";
 import "./LoginForm.css";
 
 const LoginFormModal = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
+  const [disabled, setDisabled] = useState(true);
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
@@ -15,7 +18,7 @@ const LoginFormModal = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors({});
-    return dispatch(sessionActions.login({ credential, password }))
+    dispatch(sessionActions.login({ credential, password }))
     .then(closeModal)
     .catch(
       async (res) => {
@@ -25,24 +28,31 @@ const LoginFormModal = () => {
             setPassword('')
         }
       }
-    );
-  };
+      );
+      history.push('/')
+    };
 
-  const demoSubmit = () => {
-    const user = {credential: "DemoUser", password: "password"}
-    return dispatch(sessionActions.login(user))
-    .then(closeModal)
-    .catch(
-      async (res) => {
-        const data = await res.json();
-        if (data && data.errors) {
+    const demoSubmit = () => {
+      const user = {credential: "DemoUser", password: "password"}
+      dispatch(sessionActions.login(user))
+      .then(closeModal)
+      .catch(
+        async (res) => {
+          const data = await res.json();
+          if (data && data.errors) {
             setErrors(data.errors);
             setPassword('')
+          }
         }
-      }
-    );
-  };
+        );
+        history.push('/')
+      };
 
+  useEffect(() => {
+    if (credential.length >= 4 && password.length >= 6) {
+      setDisabled(false)
+    }
+  }, [credential, password])
   return (
     <div className="form-page">
       <h1>Log In</h1>
@@ -68,7 +78,7 @@ const LoginFormModal = () => {
         <div className="error-container">
         {errors.credential && <p>{errors.credential}</p>}
         </div>
-        <button type="submit">Log In</button>
+        <button type="submit" disabled={disabled}>Log In</button>
       </form>
         <button className="demo-login" onClick={() => demoSubmit()}>Demo User</button>
     </div>

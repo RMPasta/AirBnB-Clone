@@ -18,7 +18,8 @@ export default function SpotDetails() {
   }, [dispatch])
   console.log(reviews)
 
-  return (<div className='spot-details-page'>
+  return (
+    <div className='spot-details-page'>
         { spot && <h1>{spot.name}</h1> }
         { spot && <div>{spot.city}, {spot.state}, {spot.country}</div> }
         {spot && <img src={spot.previewImage} alt={spot.name} /> }
@@ -46,7 +47,7 @@ export default function SpotDetails() {
             </div>
           </div>
         </div>
-          <div className='spot-reviews'>
+        <div className='spot-reviews'>
           <div className='rating-reviews-section'>
                 <p>{spot.numReviews} reviews</p>
                   <div className='rating'>
