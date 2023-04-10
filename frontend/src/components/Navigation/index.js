@@ -12,11 +12,14 @@ function Navigation({ isLoaded }){
       <li className="home-logo">
         <NavLink exact to="/">Home</NavLink>
       </li>
-      {isLoaded && (
-        <li className="dropdown-container">
-          <ProfileButton user={sessionUser} />
-        </li>
-      )}
+      <div className='nav-right'>
+        {sessionUser && <div>Create a New Spot</div>}
+        {isLoaded && (
+          <li className="dropdown-container">
+            <ProfileButton user={sessionUser} />
+          </li>
+        )}
+      </div>
     </ul>
   );
 }

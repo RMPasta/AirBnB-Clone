@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { getSpotsThunk } from '../../store/spots';
+import { nanoid } from 'nanoid';
 import './Landing.css';
 
 export default function Landing() {
@@ -20,7 +21,7 @@ export default function Landing() {
   return (
     <div className="page">
           {spots && spots.map((spot) => (
-         <li key={spot.id} className="spot-card" onClick={() => handleClick(spot)}>
+         <li key={nanoid(5)} className="spot-card" onClick={() => handleClick(spot)}>
           <div className='tool-tip'>{spot.name}</div>
             <img src={spot.previewImage} alt={spot.description} className="previewImageLanding" />
             <div className="name-rating-container">

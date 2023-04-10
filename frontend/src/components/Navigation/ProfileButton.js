@@ -6,6 +6,7 @@ import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import { UserIcon } from "../FontAwesome";
 import { BarsIcon } from "../FontAwesome";
+import './Navigation.css'
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -50,23 +51,23 @@ function ProfileButton({ user }) {
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <li>{user.username}</li>
-            <li>{user.firstName} {user.lastName}</li>
-            <li>{user.email}</li>
+            <li>Hello, {user.firstName}</li>
+            <li className="email">{user.email}</li>
+            <li className="manage-spots">Manage Spots</li>
             <li>
               <button className="logout-button" onClick={logout}>Log Out</button>
             </li>
           </>
         ) : (
           <>
-            <li>
+            <li className="dropdown-button">
               <OpenModalButton
                 buttonText="Log In"
                 onButtonClick={closeMenu}
                 modalComponent={<LoginFormModal />}
               />
             </li>
-            <li>
+            <li className="dropdown-button">
               <OpenModalButton
                 buttonText="Sign Up"
                 onButtonClick={closeMenu}
