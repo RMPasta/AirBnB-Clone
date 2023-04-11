@@ -6,6 +6,8 @@ import SpotDetails from "./components/SpotDetails";
 import * as sessionActions from "./store/session";
 import Landing from "./components/Landing";
 import CreateSpot from "./components/CreateSpot";
+import ManageSpots from "./components/ManageSpots";
+import UpdateSpot from "./components/UpdateSpot";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -24,6 +26,12 @@ const App = () => {
           </Route>
           <Route exact path="/spots/new">
             <CreateSpot />
+          </Route>
+          <Route exact path="/spots/current">
+            <ManageSpots />
+          </Route>
+          <Route exact path="/spots/:id/edit">
+            <UpdateSpot />
           </Route>
           <Route path="/spots/:spotId">
             <SpotDetails />

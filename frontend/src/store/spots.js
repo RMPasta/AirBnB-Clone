@@ -3,7 +3,7 @@ import { csrfFetch } from "./csrf";
 export const LOAD_SPOTS = 'spots/LOAD_SPOTS';
 export const LOAD_SPOT = 'spots/LOAD_SPOT';
 export const RECEIVE_SPOT = 'spots/RECEIVE_SPOT';
-// export const UPDATE_SPOT = 'spots/UPDATE_SPOT';
+export const UPDATE_SPOT = 'spots/UPDATE_SPOT';
 // export const REMOVE_SPOT = 'spots/REMOVE_SPOT';
 
 export const loadSpots = (spots) => ({
@@ -21,10 +21,10 @@ export const loadSpot = (spot) => ({
     spot,
   });
 
-//   export const editSpot = (spot) => ({
-//     type: UPDATE_SPOT,
-//     spot,
-//   });
+  export const editSpot = (spot) => ({
+    type: UPDATE_SPOT,
+    spot,
+  });
 
 //   export const removeSpot = (spotId) => ({
 //     type: REMOVE_SPOT,
@@ -52,7 +52,7 @@ export const loadSpot = (spot) => ({
     }
   }
 
-  export const createSpotThunk = (spot, url) => async dispatch => {
+  export const createSpotThunk = (spot) => async dispatch => {
     const response = await csrfFetch(`/api/spots`, {
       method: "POST",
       headers: {"Content-Type": "application/json"},
@@ -61,16 +61,24 @@ export const loadSpot = (spot) => ({
 
     if (response.ok) {
       const spot = await response.json();
-      spot.preview = url;
       dispatch(receiveSpot(spot))
       return spot;
     }
   }
 
-  // const initialState = {
-  //   spots: {},
-  //   spot: {},
-  // };
+  export const updateSpotThunk = (spot) => async dispatch => {
+    const response = await csrfFetch(`/api/spots`, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(spot)
+    });
+
+    if (response.ok) {
+      const spot = await response.json();
+      dispatch(receiveSpot(spot))
+      return spot;
+    }
+  }
 
   const spotsReducer = (state = {}, action) => {
     switch (action.type) {
@@ -88,8 +96,8 @@ export const loadSpot = (spot) => ({
         const newState = { ...state.spots, [action.spot.id]: action.spot };
         return newState;
       }
-    //   case UPDATE_SPOT:
-    //     return { ...state, [action.spot.id]: action.spot };
+      case UPDATE_SPOT:
+        return { ...state, [action.spot.id]: action.spot };
     //   case REMOVE_SPOT:
     //     const newState = { ...state };
     //     delete newState[action.spotId];

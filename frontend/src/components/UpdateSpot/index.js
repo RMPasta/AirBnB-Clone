@@ -1,34 +1,51 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useHistory } from 'react-router-dom';
-import { createSpotThunk } from "../../store/spots";
-import { getSpotsThunk } from '../../store/spots';
+import { Redirect, useHistory, useParams } from 'react-router-dom';
+import { getOneSpotThunk } from '../../store/spots';
+import { updateSpotThunk } from '../../store/spots';
 import { createSpotImageThunk } from '../../store/spotImage';
-import "./CreateSpot.css";
 
-function CreateSpot() {
+function UpdateSpot() {
   const dispatch = useDispatch();
+  const { id } = useParams();
   const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
-  const spotsObj = useSelector((state) => state.spots);
-  const spots = Object.values(spotsObj);
-  const [country, setCountry] = useState("USA");
-  const [address, setAddress] = useState("1 cool street");
-  const [city, setCity] = useState("hamilton");
-  const [state, setState] = useState("nj");
-  const [lat, setLat] = useState(111);
-  const [lng, setLng] = useState(111);
-  const [description, setDescription] = useState("sfdg asdfg asd gasdg a gdasghahadfhadfhaaf asdf ASDFASF ASF");
-  const [name, setName] = useState("great cool new place");
-  const [price, setPrice] = useState(111);
-  const [preview, setPreview] = useState("https://a0.muscache.com/im/pictures/9b1dac05-b810-46ea-8d35-f57072af1fe1.jpg?im_w=1200");
+  const spot = useSelector((state) => state.spots);
+
+  const [country, setCountry] = useState('');
+  const [address, setAddress] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+  const [lat, setLat] = useState(0);
+  const [lng, setLng] = useState(0);
+  const [description, setDescription] = useState('');
+  const [name, setName] = useState('');
+  const [price, setPrice] = useState(0);
+  const [preview, setPreview] = useState('');
   const [errors, setErrors] = useState({});
 
-  useEffect(() => {
-    dispatch(getSpotsThunk())
-  }, [dispatch])
+//   useEffect(() => {
+//     console.log(spot)
+//       if (spot) {
+//         setCountry(spot.country)
+//         setAddress(spot.address)
+//         setCity(spot.city)
+//         setState(spot.state)
+//         setLat(spot.lat)
+//         setLng(spot.lng)
+//         setDescription(spot.description)
+//         setName(spot.name)
+//         setPrice(spot.price)
+//         setPreview(spot.preview)
+//       }
+//   }, [sessionUser])
 
-  if (!sessionUser) return <Redirect to='/' />
+  useEffect(() => {
+      dispatch(getOneSpotThunk(id))
+    }, [dispatch, id])
+
+    if (!sessionUser) return <Redirect to='/' />
+    // if (!spot) return <Redirect to='/' />
 
     const handleSubmit = (e) => {
       e.preventDefault();
@@ -41,7 +58,7 @@ function CreateSpot() {
       if (!preview) setErrors({...errors, preview: 'Preview Image is required'})
 
       if (Object.values(errors).length > 0) return errors;
-      dispatch(createSpotThunk({
+      dispatch(updateSpotThunk({
         country,
         address,
         city,
@@ -53,7 +70,7 @@ function CreateSpot() {
         price
       }))
       .then(
-        dispatch(createSpotImageThunk(spots[spots.length - 1].id + 1, preview, true))
+        dispatch(createSpotImageThunk(id, preview, true))
         )
         .catch(async (res) => {
           const data = await res.json();
@@ -62,14 +79,14 @@ function CreateSpot() {
           }
         });
         setTimeout(() => {
-          history.push(`/spots/${spots[spots.length - 1].id + 1}`)
+          history.push(`/spots/${id}`)
         }, [10])
     };
 
     return (
       <div className="create-spot-page">
       <div className="headers">
-        <h1>Create a New Spot</h1>
+        <h1>Update a New Spot</h1>
         <h2>Where's your place located?</h2>
         <p>Guests will only get your exact address once they've booked a reservation.</p>
       </div>
@@ -208,10 +225,10 @@ function CreateSpot() {
         <div className="error-container">
         {errors.preview && <p>{errors.preview}</p>}
         </div>
-        <button type="submit">Create Spot</button>
+        <button type="submit">Update Spot</button>
       </form>
     </div>
   );
 }
 
-export default CreateSpot;
+export default UpdateSpot;

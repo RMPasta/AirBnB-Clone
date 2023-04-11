@@ -17,10 +17,18 @@ p {
     /* margin: 0 auto; */
 }
 
-.spot-card:hover .tool-tip {
+.clickable {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: space-between;
+}
+
+.clickable:hover .tool-tip {
     display: flex;
     align-self: center;
 }
+
 
 .spot-card {
     display: flex;
