@@ -34,7 +34,6 @@ export default function Landing() {
             <div className="price">
             <p>${spot && spot.price} night</p>
             </div>
-            {/* <h4>{spot.id}</h4> */}
          </li>
         ))}
     </div>

@@ -52,7 +52,7 @@ export const loadSpot = (spot) => ({
     }
   }
 
-  export const createSpotThunk = (spot) => async dispatch => {
+  export const createSpotThunk = (spot, url) => async dispatch => {
     const response = await csrfFetch(`/api/spots`, {
       method: "POST",
       headers: {"Content-Type": "application/json"},
@@ -61,6 +61,7 @@ export const loadSpot = (spot) => ({
 
     if (response.ok) {
       const spot = await response.json();
+      spot.preview = url;
       dispatch(receiveSpot(spot))
       return spot;
     }
@@ -74,7 +75,7 @@ export const loadSpot = (spot) => ({
   const spotsReducer = (state = {}, action) => {
     switch (action.type) {
       case LOAD_SPOTS: {
-        const newState = {...state};
+        const newState = {};
         action.spots.forEach((spot) => {
           newState[spot.id] = spot;
         });

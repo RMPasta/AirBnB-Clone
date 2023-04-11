@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from 'react-router-dom';
 import { createSpotThunk } from "../../store/spots";
 import { getSpotsThunk } from '../../store/spots';
+import { createSpotImageThunk } from '../../store/spotImage';
 import "./CreateSpot.css";
 
 function CreateSpot() {
@@ -11,16 +12,16 @@ function CreateSpot() {
   const sessionUser = useSelector((state) => state.session.user);
   const spotsObj = useSelector((state) => state.spots);
   const spots = Object.values(spotsObj);
-  const [country, setCountry] = useState("dfsg");
-  const [address, setAddress] = useState("sdfg");
-  const [city, setCity] = useState("sdfg");
-  const [state, setState] = useState("sdfg");
+  const [country, setCountry] = useState("USA");
+  const [address, setAddress] = useState("1 cool street");
+  const [city, setCity] = useState("hamilton");
+  const [state, setState] = useState("nj");
   const [lat, setLat] = useState(111);
   const [lng, setLng] = useState(111);
   const [description, setDescription] = useState("sfdg asdfg asd gasdg a gdasghahadfhadfhaaf asdf ASDFASF ASF");
-  const [name, setName] = useState("sdfg");
+  const [name, setName] = useState("great cool new place");
   const [price, setPrice] = useState(111);
-  const [preview, setPreview] = useState("sdfg");
+  const [preview, setPreview] = useState("https://a0.muscache.com/im/pictures/9b1dac05-b810-46ea-8d35-f57072af1fe1.jpg?im_w=1200");
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
@@ -34,17 +35,17 @@ function CreateSpot() {
     //   if (!city) setErrors({...errors, city: 'City is required'})
     //   if (!state) setErrors({...errors, state: 'State is required'})
     // }
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setErrors({});
-    if (!lat) setErrors({...errors, lat: 'Latitude is required'})
-    if (!lng) setErrors({...errors, lng: 'Longitude is required'})
-    if (description.length < 30) setErrors({...errors, description: 'Description needs a minimum of 30 characters'})
-    if (!name) setErrors({...errors, name: 'Name is required'})
-    if (!price) setErrors({...errors, price: 'Price is required'})
-    if (!preview) setErrors({...errors, preview: 'Preview Image is required'})
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      setErrors({});
+      if (!lat) setErrors({...errors, lat: 'Latitude is required'})
+      if (!lng) setErrors({...errors, lng: 'Longitude is required'})
+      if (description.length < 30) setErrors({...errors, description: 'Description needs a minimum of 30 characters'})
+      if (!name) setErrors({...errors, name: 'Name is required'})
+      if (!price) setErrors({...errors, price: 'Price is required'})
+      if (!preview) setErrors({...errors, preview: 'Preview Image is required'})
 
-    if (Object.values(errors).length > 0) return errors;
+      if (Object.values(errors).length > 0) return errors;
       dispatch(createSpotThunk({
         country,
         address,
@@ -55,15 +56,19 @@ function CreateSpot() {
         description,
         name,
         price
-      }))
-      .catch(async (res) => {
-        const data = await res.json();
-        if (data && data.errors) {
-          setErrors(data.errors);
-        }
-      });
-      console.log(spots[spots.length - 1])
-      history.push(`/spots/${spots[spots.length - 1].id}`)
+      }, preview))
+      .then(
+        dispatch(createSpotImageThunk(spots[spots.length - 1].id + 1, preview, true))
+        )
+        .catch(async (res) => {
+          const data = await res.json();
+          if (data && data.errors) {
+            setErrors(data.errors);
+          }
+        });
+        setTimeout(() => {
+          history.push(`/spots/${spots[spots.length - 1].id + 1}`)
+        }, [10])
     };
 
     return (
