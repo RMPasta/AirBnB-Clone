@@ -36,8 +36,8 @@ export default function SpotDetails() {
             <div className="top-stats">
               {spot && <p className='detail-price'>${spot.price} night</p>}
                 <div className='rating'>
-                <p>{spot.numReviews} {spot.numReviews > 1 ? "reviews" : "review"}</p> -
-                  <p className="avgRating">{spot.avgStarRating}</p>
+                {spot.avgStarRating && <p> - {spot.numReviews} {spot.numReviews > 1 ? "reviews" : "review"}</p> }
+                  <p className="avgRating">{spot.avgStarRating ? spot.avgStarRating : "New"}</p>
                   <i className="fas fa-star"></i>
                 </div>
             </div>
@@ -48,9 +48,9 @@ export default function SpotDetails() {
         </div>
         <div className='spot-reviews'>
           <div className='rating-reviews-section'>
-                <p>{spot.numReviews} {spot.numReviews > 1 ? "reviews" : "review"}</p> -
+                {spot.avgStarRating && <p>{spot.numReviews} {spot.numReviews > 1 ? "reviews" : "review"}</p>}
                   <div className='rating'>
-                    <p className="avgRating">{spot.avgStarRating}</p>
+                    <p className="avgRating">{spot.avgStarRating ? spot.avgStarRating : "New"}</p>
                     <i className="fas fa-star"></i>
                   </div>
                 </div>

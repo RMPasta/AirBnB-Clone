@@ -60,8 +60,12 @@ function CreateSpot() {
   };
 
   return (
-    <div className="form-page">
-      <h1>Create Spot</h1>
+    <div className="create-spot-page">
+      <div className="headers">
+        <h1>Create a New Spot</h1>
+        <h2>Where's your place located?</h2>
+        <p>Guests will only get your exact address once they've booked a reservation.</p>
+      </div>
       <form onSubmit={handleSubmit}>
         <label>
           Country
@@ -87,57 +91,69 @@ function CreateSpot() {
         <div className="error-container">
         {errors.address && <p>{errors.address}</p>}
         </div>
-        <label>
-          City
-          <input
-            type="text"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            required
-          />
-        </label>
-        <div className="error-container">
-        {errors.city && <p>{errors.city}</p>}
+        <div className="form-two-across">
+          <label>
+            City
+            <input
+              type="text"
+              value={city}
+              className="city"
+              onChange={(e) => setCity(e.target.value)}
+              required
+            />
+          </label>
+          <div className="error-container">
+          {errors.city && <p>{errors.city}</p>}
+          </div>
+          <label>
+            State
+            <input
+              type="text"
+              value={state}
+              className="state"
+              onChange={(e) => setState(e.target.value)}
+              required
+            />
+          </label>
+          <div className="error-container">
+          {errors.state && <p>{errors.state}</p>}
+          </div>
         </div>
-        <label>
-          State
-          <input
-            type="text"
-            value={state}
-            onChange={(e) => setState(e.target.value)}
-            required
-          />
-        </label>
-        <div className="error-container">
-        {errors.state && <p>{errors.state}</p>}
+        <div className="form-two-across">
+          <label>
+            Latitude
+            <input
+              type="text"
+              value={lat}
+              className="lat"
+              onChange={(e) => setLat(e.target.value)}
+              required
+            />
+          </label>
+          <div className="error-container">
+          {errors.lat && <p>{errors.lat}</p>}
+          </div>
+          <label>
+            Longitude
+            <input
+              type="text"
+              value={lng}
+              className="lng"
+              onChange={(e) => setLng(e.target.value)}
+              required
+            />
+          </label>
+          <div className="error-container">
+          {errors.lng && <p>{errors.lng}</p>}
+          </div>
         </div>
-        <label>
-          Latitude
-          <input
-            type="text"
-            value={lat}
-            onChange={(e) => setLat(e.target.value)}
-            required
-          />
-        </label>
-        <div className="error-container">
-        {errors.lat && <p>{errors.lat}</p>}
-        </div>
-        <label>
-          Longitude
-          <input
-            type="text"
-            value={lng}
-            onChange={(e) => setLng(e.target.value)}
-            required
-          />
-        </label>
-        <div className="error-container">
-        {errors.lng && <p>{errors.lng}</p>}
+        <div className="description">
+          <h2 className=".h2">Describe your place to guests</h2>
+          <p>Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about your neighborhood.</p>
         </div>
         <label>
           Description
-          <input
+          <textarea
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
