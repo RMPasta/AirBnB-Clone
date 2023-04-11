@@ -53,27 +53,10 @@ export const loadSpot = (spot) => ({
   }
 
   export const createSpotThunk = (spot) => async dispatch => {
-    // const { country, address, city, state, description, name, price, preview, lat, lng, img1, img2, img3, img4 } = spot;
     const response = await csrfFetch(`/api/spots`, {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(spot)
-      // body: {
-      //   country,
-      //   address,
-      //   city,
-      //   state,
-      //   lat,
-      //   lng,
-      //   description,
-      //   name,
-      //   price,
-      //   preview,
-      //   img1,
-      //   img2,
-      //   img3,
-      //   img4
-      // }
     });
 
     if (response.ok) {
@@ -83,10 +66,15 @@ export const loadSpot = (spot) => ({
     }
   }
 
+  // const initialState = {
+  //   spots: {},
+  //   spot: {},
+  // };
+
   const spotsReducer = (state = {}, action) => {
     switch (action.type) {
       case LOAD_SPOTS: {
-        const newState = {};
+        const newState = {...state};
         action.spots.forEach((spot) => {
           newState[spot.id] = spot;
         });
@@ -95,8 +83,10 @@ export const loadSpot = (spot) => ({
       case LOAD_SPOT: {
         return action.spot;
       }
-      case RECEIVE_SPOT:
-        return { ...state, [action.spot.id]: action.spot };
+      case RECEIVE_SPOT: {
+        const newState = { ...state.spots, [action.spot.id]: action.spot };
+        return newState;
+      }
     //   case UPDATE_SPOT:
     //     return { ...state, [action.spot.id]: action.spot };
     //   case REMOVE_SPOT:
