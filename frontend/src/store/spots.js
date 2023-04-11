@@ -2,7 +2,7 @@ import { csrfFetch } from "./csrf";
 
 export const LOAD_SPOTS = 'spots/LOAD_SPOTS';
 export const LOAD_SPOT = 'spots/LOAD_SPOT';
-// export const RECEIVE_SPOT = 'spots/RECEIVE_SPOT';
+export const RECEIVE_SPOT = 'spots/RECEIVE_SPOT';
 // export const UPDATE_SPOT = 'spots/UPDATE_SPOT';
 // export const REMOVE_SPOT = 'spots/REMOVE_SPOT';
 
@@ -16,10 +16,10 @@ export const loadSpot = (spot) => ({
     spot,
   });
 
-//   export const receiveSpot = (spot) => ({
-//     type: RECEIVE_SPOT,
-//     spot,
-//   });
+  export const receiveSpot = (spot) => ({
+    type: RECEIVE_SPOT,
+    spot,
+  });
 
 //   export const editSpot = (spot) => ({
 //     type: UPDATE_SPOT,
@@ -52,6 +52,37 @@ export const loadSpot = (spot) => ({
     }
   }
 
+  export const createSpotThunk = (spot) => async dispatch => {
+    // const { country, address, city, state, description, name, price, preview, lat, lng, img1, img2, img3, img4 } = spot;
+    const response = await csrfFetch(`/api/spots`, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(spot)
+      // body: {
+      //   country,
+      //   address,
+      //   city,
+      //   state,
+      //   lat,
+      //   lng,
+      //   description,
+      //   name,
+      //   price,
+      //   preview,
+      //   img1,
+      //   img2,
+      //   img3,
+      //   img4
+      // }
+    });
+
+    if (response.ok) {
+      const spot = await response.json();
+      dispatch(receiveSpot(spot))
+      return spot;
+    }
+  }
+
   const spotsReducer = (state = {}, action) => {
     switch (action.type) {
       case LOAD_SPOTS: {
@@ -64,8 +95,8 @@ export const loadSpot = (spot) => ({
       case LOAD_SPOT: {
         return action.spot;
       }
-    //   case RECEIVE_SPOT:
-    //     return { ...state, [action.spot.id]: action.spot };
+      case RECEIVE_SPOT:
+        return { ...state, [action.spot.id]: action.spot };
     //   case UPDATE_SPOT:
     //     return { ...state, [action.spot.id]: action.spot };
     //   case REMOVE_SPOT:

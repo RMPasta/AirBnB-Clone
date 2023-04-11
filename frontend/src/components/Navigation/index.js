@@ -13,7 +13,7 @@ function Navigation({ isLoaded }){
         <NavLink exact to="/">Home</NavLink>
       </li>
       <div className='nav-right'>
-        {sessionUser && <div>Create a New Spot</div>}
+        {sessionUser && <NavLink to="/spots/new">Create a New Spot</NavLink>}
         {isLoaded && (
           <li className="dropdown-container">
             <ProfileButton user={sessionUser} />

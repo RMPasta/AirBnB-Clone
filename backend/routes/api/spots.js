@@ -55,7 +55,8 @@ const validateSpot = [
   ];
 
   router.post('/', [validateSpot, requireAuth], async (req, res, next) => {
-    const { address, city, state, country, lat, lng, name, description, price } = req.body;
+      const { address, city, state, country, lat, lng, name, description, price } = req.body;
+      console.log('hi')
     const { user } = req;
     const spot = await Spot.create({
         address,
@@ -205,8 +206,8 @@ const validateSpot = [
             spotsList.push(spot.toJSON());
         });
         //getting avg rating
-        let ratings = [];
         spotsList.forEach(spot => {
+            let ratings = [];
             spot.Reviews.forEach(review => {
                 ratings.push(review.stars)
             })
