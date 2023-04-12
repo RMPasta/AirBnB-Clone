@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, Redirect } from 'react-router-dom';
-import { deleteSpotThunk } from "../../store/spots";
+import { deleteSpotThunk, getSpotsThunk } from "../../store/spots";
 import { useModal } from "../../context/Modal";
 
 const DeleteSpotModal = ({ spot }) => {
@@ -11,6 +11,14 @@ const DeleteSpotModal = ({ spot }) => {
   const [deleted, setDeleted] = useState(false)
   const deleteSpot = (spot) => {
     dispatch(deleteSpotThunk(spot))
+    .then(closeModal())
+    .then(
+      setTimeout(() => {
+        setDeleted(true)
+      }, [1000])
+
+    )
+
     // history.push('/')
     // history.push('/spots/current')
   }

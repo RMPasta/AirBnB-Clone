@@ -89,7 +89,7 @@ export const loadSpot = (spot) => ({
 
     if (response.ok) {
       const spot = await response.json();
-      dispatch(removeSpot(spot))
+      dispatch(removeSpot(spot.id))
       return spot;
     }
   }

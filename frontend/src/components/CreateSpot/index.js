@@ -53,6 +53,9 @@ function CreateSpot() {
         price
       }))
       .then(
+        dispatch(getSpotsThunk())
+      )
+      .then(
         dispatch(createSpotImageThunk(spots[spots.length - 1].id + 1, preview, true))
         )
         .catch(async (res) => {

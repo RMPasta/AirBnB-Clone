@@ -27,11 +27,12 @@ export default function ManageSpots() {
     }, [dispatch])
 
     const ownedSpots = spots.filter(spot => spot.ownerId === sessionUser.id);
+    console.log(ownedSpots)
 
   return (
       <div className="manage-page">
         <h1>Manage Your Spots</h1>
-        <NavLink to="/spots/new"><button>Create a New Spot</button></NavLink>
+        { !ownedSpots.length && <NavLink to="/spots/new"><button>Create a New Spot</button></NavLink> }
         <div className='page'>
           {ownedSpots && ownedSpots.map((spot) => (
          <li key={nanoid(5)} className="spot-card">
