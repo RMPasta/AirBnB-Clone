@@ -1,38 +1,47 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { addReviewThunk } from "../../store/reviews";
 import { useModal } from "../../context/Modal";
 import RatingInput from "../RatingInput";
+import './AddReviewModal.css';
 
 const AddReviewModal = ({ spot }) => {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
   const [review, setReview] = useState();
-  const [rating, setRating] = useState(1);
-  const [disabled, setDisabled] = useState(false);
-  const [activeRating, setActiveRating] = useState(1);
-    console.log(review)
-  const handleSubmit = (e) => {
+  const [rating, setRating] = useState(0);
+  const [errors, setErrors] = useState({});
+  const [disabled, setDisabled] = useState(true);
+
+  useEffect(() => {
+    if (review && review.length > 10 && rating > 0) setDisabled(false)
+  }, [review, rating])
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(addReviewThunk(review))
-    .then(closeModal())
+    const addReviewRes = await dispatch(addReviewThunk(review, rating, spot.id))
+    .catch(async (res) => {
+      const data = await res.json();
+    })
+    if (addReviewRes.message) setErrors(addReviewRes);
+    if (!addReviewRes.message) closeModal();
   }
-
   const onChange = (number) => setRating(parseInt(number))
-
   return (
     <div className="form-page">
       <h1>How was your stay?</h1>
       <form onSubmit={handleSubmit}>
-        <textarea type="text" />
+      <div className="error-container">
+        { errors && <p>{errors.message}</p> }
+      </div>
+        <textarea type="text" onChange={(e) => setReview(e.target.value)}/>
         <div className="new-rating-stars">
             <RatingInput
-            disabled={false}
             rating={rating}
             onChange={onChange}  />
             <p>Stars</p>
         </div>
-        <button className="review-submit">Submit Your Review</button>
+        <button disabled={disabled} className="review-submit">Submit Your Review</button>
       </form>
     </div>
   );

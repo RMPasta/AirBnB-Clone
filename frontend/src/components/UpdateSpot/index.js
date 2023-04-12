@@ -7,7 +7,7 @@ import { createSpotImageThunk } from '../../store/spotImage';
 
 function UpdateSpot({ spot }) {
   const dispatch = useDispatch();
-  const { id } = useParams();
+  const { spotId } = useParams();
   const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
   const [country, setCountry] = useState(spot?.country);
@@ -45,9 +45,9 @@ function UpdateSpot({ spot }) {
         description,
         name,
         price
-      }, id))
+      }, spotId))
       .then(
-        dispatch(createSpotImageThunk(id, preview, false))
+        dispatch(createSpotImageThunk(spotId, preview, false))
         )
         .catch(async (res) => {
           const data = await res.json();
@@ -55,7 +55,7 @@ function UpdateSpot({ spot }) {
             setErrors(data.errors);
           }
         });
-          history.push(`/spots/${id}`)
+          history.push(`/spots/${spotId}`)
     };
 
     return (

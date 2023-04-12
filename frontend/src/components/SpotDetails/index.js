@@ -1,30 +1,16 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { getOneSpotThunk } from '../../store/spots';
-import { getReviewsThunk } from '../../store/reviews';
-import { addReviewThunk } from '../../store/reviews';
+import { useSelector } from 'react-redux';
 import OpenModalButton from '../OpenModalButton';
 import { nanoid } from 'nanoid';
 import './SpotDetails.css';
 import AddReviewModal from '../AddReviewModal';
 
 export default function SpotDetails() {
-  const { spotId } = useParams();
-  const dispatch = useDispatch();
   const spot = useSelector(state=>state.spots.spot);
   const reviews = useSelector(state=>Object.values(state.reviews));
-
-  useEffect(() => {
-    dispatch(getOneSpotThunk(spotId))
-    dispatch(getReviewsThunk(spotId))
-  }, [dispatch, spotId])
-
+  const sessionUser = useSelector(state=>state.session.user);
   if (!spot) return <div>...Loading</div>
-
-  const addReviewClick = () => {
-
-  }
+  if (!reviews) return <div>...Loading</div>
 
   return (
     <div className='spot-details-page'>
@@ -63,13 +49,13 @@ export default function SpotDetails() {
                     <i className="fas fa-star"></i>
                   </div>
                 </div>
-
                 <OpenModalButton
                 buttonText="Add Review"
                 modalComponent={<AddReviewModal spot={spot} />} />
+                {reviews.length < 1 && <p>Be the first to post a review!</p>}
             {reviews && reviews.map(review => {
               return <li key={nanoid(5)}  className='review'>
-                <div className='review-name'>{review.User.firstName}</div>
+                <div className='review-name'>{review.User ? review.User.firstName : sessionUser.firstName}</div>
                 <div className='review-date'>{review.createdAt.split('T')[0].slice(0, 7).split('-')[1] + ' ' + review.createdAt.split('T')[0].slice(0, 7).split('-')[0]}</div>
                 <div>{review.review}</div>
               </li>

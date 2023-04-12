@@ -44,12 +44,10 @@ export const loadSpots = (spots) => ({
 
 
   export const getOneSpotThunk = (spotId) => async dispatch => {
-    console.log("ONE SPOT RUNNING")
     const response = await csrfFetch(`/api/spots/${spotId}`);
 
     if (response.ok) {
       const spot = await response.json();
-      console.log("THIS IS SPOT", spot)
       dispatch(loadSpot(spot))
       return spot;
     }
@@ -69,8 +67,8 @@ export const loadSpots = (spots) => ({
     }
   }
 
-  export const updateSpotThunk = (spot, id) => async dispatch => {
-    const response = await csrfFetch(`/api/spots/${id}`, {
+  export const updateSpotThunk = (spot, spotId) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
       method: "PUT",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(spot)

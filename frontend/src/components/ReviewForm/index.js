@@ -23,7 +23,7 @@ const ReviewForm = ({ review, closeForm }) => {
 
   return (
     <form onSubmit={handleSubmit} >
-      <PawsRatingInput
+      <RatingInput
         disabled={false}
         onChange={onChange}
         rating={rating}

@@ -4,8 +4,7 @@ import UpdateSpot from '../UpdateSpot';
 import { useParams } from 'react-router-dom';
 import { getOneSpotThunk } from '../../store/spots';
 
-export default function EditSpotWrapper() {
-  console.log("WRAPPER RUNNING")
+export default function UpdateSpotWrapper() {
 const dispatch = useDispatch();
 const { id } = useParams();
 const spotData = useSelector(state=>state.spots.spot);
@@ -13,7 +12,6 @@ useEffect(() => {
     dispatch(getOneSpotThunk(id))
     }, [dispatch, id]);
 
-// console.log(spotData)
 if (!spotData?.name) return null;
 
   return (

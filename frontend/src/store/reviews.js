@@ -23,17 +23,21 @@ export const receiveReview = (review) => ({
     }
   }
 
-  export const addReviewThunk = (review, spotId) => async dispatch => {
-    const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(review)
-    });
+  export const addReviewThunk = (review, rating, spotId) => async dispatch => {
+    try {
+      const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({review, stars: parseInt(rating)})
+      });
 
-    if (response.ok) {
-      const review = await response.json();
-      dispatch(receiveReview(review))
-      return review;
+      if (response.ok) {
+        const review = await response.json();
+        dispatch(receiveReview(review))
+        return review;
+      }
+    } catch (err) {
+      return err.json()
     }
   }
 
@@ -47,14 +51,11 @@ export const receiveReview = (review) => ({
         return newState;
       }
       case RECEIVE_REVIEW: {
+        const newState = {...state}
+        newState[action.review.id] = action.review;
+        // newState[action.review.id].User.firstName = action.review;
         return { ...state, [action.review.id]: action.review };
       }
-    //   case UPDATE_SPOT:
-    //     return { ...state, [action.spot.id]: action.spot };
-    //   case REMOVE_SPOT:
-    //     const newState = { ...state };
-    //     delete newState[action.spotId];
-    //     return newState;
       default:
         return state;
     }

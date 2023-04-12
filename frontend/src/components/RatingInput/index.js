@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import './RatingInput.css'
 
 const RatingInput = ({ rating, disabled, onChange }) => {
-  const [activeRating, setActiveRating] = useState(0);
-    // console.log(activeRating)
+  const [activeRating, setActiveRating] = useState(rating);
+
   useEffect(() => {
     setActiveRating(rating);
   }, [rating]);

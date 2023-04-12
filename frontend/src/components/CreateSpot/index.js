@@ -89,7 +89,7 @@ function CreateSpot() {
           />
         </label>
         <div className="error-container">
-        {errors.country && <p>{errors.country}</p>}
+          {errors.country && <p>{errors.country}</p>}
         </div>
         <label>
           Address
