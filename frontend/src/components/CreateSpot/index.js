@@ -10,6 +10,18 @@ function CreateSpot() {
   const dispatch = useDispatch();
   const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
+  // const [country, setCountry] = useState("");
+  // const [address, setAddress] = useState("");
+  // const [city, setCity] = useState("");
+  // const [state, setState] = useState("");
+  // const [lat, setLat] = useState(0);
+  // const [lng, setLng] = useState(0);
+  // const [description, setDescription] = useState("");
+  // const [name, setName] = useState("");
+  // const [price, setPrice] = useState(0);
+  // const [preview, setPreview] = useState("");
+  const [errors, setErrors] = useState({});
+
   const [country, setCountry] = useState("USA");
   const [address, setAddress] = useState("1 cool street");
   const [city, setCity] = useState("hamilton");
@@ -20,7 +32,6 @@ function CreateSpot() {
   const [name, setName] = useState("great cool new place");
   const [price, setPrice] = useState(111);
   const [preview, setPreview] = useState("https://a0.muscache.com/im/pictures/9b1dac05-b810-46ea-8d35-f57072af1fe1.jpg?im_w=1200");
-  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     dispatch(getSpotsThunk())
@@ -51,19 +62,14 @@ function CreateSpot() {
         price
       }))
       .catch(async (res) => {
-        console.log('hi!')
         const data = await res.json();
-        console.log(data)
         if (data && data.errors) {
           setErrors(data.errors);
         }
       });
-      console.log(newSpot)
-        dispatch(getSpotsThunk())
-        dispatch(createSpotImageThunk(newSpot.id, preview, true))
-        setTimeout(() => {
-          history.push(`/spots/${newSpot.id}`)
-        }, [10])
+        await dispatch(getSpotsThunk())
+        await dispatch(createSpotImageThunk(newSpot.id, preview, true))
+        history.push(`/spots/${newSpot.id}`)
     };
 
     return (

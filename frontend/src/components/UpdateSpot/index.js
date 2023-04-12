@@ -63,9 +63,7 @@ function UpdateSpot() {
             setErrors(data.errors);
           }
         });
-        setTimeout(() => {
           history.push(`/spots/${id}`)
-        }, [100])
     };
 
     return (
