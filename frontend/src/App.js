@@ -7,7 +7,7 @@ import * as sessionActions from "./store/session";
 import Landing from "./components/Landing";
 import CreateSpot from "./components/CreateSpot";
 import ManageSpots from "./components/ManageSpots";
-import UpdateSpot from "./components/UpdateSpot";
+import EditSpotWrapper from "./components/EditSpotWrapper";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -31,7 +31,7 @@ const App = () => {
             <ManageSpots />
           </Route>
           <Route exact path="/spots/:id/edit">
-            <UpdateSpot />
+            <EditSpotWrapper />
           </Route>
           <Route path="/spots/:spotId">
             <SpotDetails />

@@ -1,18 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory, useParams } from 'react-router-dom';
-import { getOneSpotThunk } from '../../store/oneSpot';
+import { getOneSpotThunk } from '../../store/spots';
 import { updateSpotThunk } from '../../store/spots';
 import { createSpotImageThunk } from '../../store/spotImage';
-import { getSpotsThunk } from '../../store/spots';
 
-function UpdateSpot() {
+function UpdateSpot({ spot }) {
   const dispatch = useDispatch();
   const { id } = useParams();
   const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
-  const spot = useSelector((state) => state.spot);
-
   const [country, setCountry] = useState(spot?.country);
   const [address, setAddress] = useState(spot?.address);
   const [city, setCity] = useState(spot?.city);
@@ -24,11 +21,6 @@ function UpdateSpot() {
   const [price, setPrice] = useState(spot?.price);
   const [preview, setPreview] = useState(spot?.SpotImages[0].url);
   const [errors, setErrors] = useState({});
-
-  useEffect(() => {
-    dispatch(getOneSpotThunk(id))
-    dispatch(getSpotsThunk())
-  }, [dispatch, id]);
 
     if (!sessionUser) return <Redirect to='/' />
 

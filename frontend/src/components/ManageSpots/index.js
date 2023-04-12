@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink, useHistory, Redirect } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import OpenModalButton from '../OpenModalButton';
 import { getSpotsThunk } from '../../store/spots';
 import { nanoid } from 'nanoid';
