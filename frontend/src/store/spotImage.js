@@ -29,7 +29,8 @@ export const createSpotImageThunk = (spotId, url, previewBool) => async dispatch
 const spotsImageReducer = (state = {}, action) => {
     switch (action.type) {
       case RECEIVE_SPOT_IMAGE: {
-        const newState = {...state};
+        const newState = {};
+        newState[action.spotImage.id] = action.spotImage;
         return newState;
       }
       default:

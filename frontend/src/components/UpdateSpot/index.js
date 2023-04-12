@@ -1,51 +1,36 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory, useParams } from 'react-router-dom';
-import { getOneSpotThunk } from '../../store/spots';
+import { getOneSpotThunk } from '../../store/oneSpot';
 import { updateSpotThunk } from '../../store/spots';
 import { createSpotImageThunk } from '../../store/spotImage';
+import { getSpotsThunk } from '../../store/spots';
 
 function UpdateSpot() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
-  const spot = useSelector((state) => state.spots);
+  const spot = useSelector((state) => state.spot);
 
-  const [country, setCountry] = useState('');
-  const [address, setAddress] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
-  const [lat, setLat] = useState(0);
-  const [lng, setLng] = useState(0);
-  const [description, setDescription] = useState('');
-  const [name, setName] = useState('');
-  const [price, setPrice] = useState(0);
-  const [preview, setPreview] = useState('');
+  const [country, setCountry] = useState(spot?.country);
+  const [address, setAddress] = useState(spot?.address);
+  const [city, setCity] = useState(spot?.city);
+  const [state, setState] = useState(spot?.state);
+  const [lat, setLat] = useState(spot?.lat);
+  const [lng, setLng] = useState(spot?.lng);
+  const [description, setDescription] = useState(spot?.description);
+  const [name, setName] = useState(spot?.name);
+  const [price, setPrice] = useState(spot?.price);
+  const [preview, setPreview] = useState(spot?.SpotImages[0].url);
   const [errors, setErrors] = useState({});
 
-//   useEffect(() => {
-//     console.log(spot)
-//       if (spot) {
-//         setCountry(spot.country)
-//         setAddress(spot.address)
-//         setCity(spot.city)
-//         setState(spot.state)
-//         setLat(spot.lat)
-//         setLng(spot.lng)
-//         setDescription(spot.description)
-//         setName(spot.name)
-//         setPrice(spot.price)
-//         setPreview(spot.preview)
-//       }
-//   }, [sessionUser])
-
   useEffect(() => {
-      dispatch(getOneSpotThunk(id))
-    }, [dispatch, id])
+    dispatch(getOneSpotThunk(id))
+    dispatch(getSpotsThunk())
+  }, [dispatch, id]);
 
     if (!sessionUser) return <Redirect to='/' />
-    // if (!spot) return <Redirect to='/' />
 
     const handleSubmit = (e) => {
       e.preventDefault();
@@ -68,9 +53,9 @@ function UpdateSpot() {
         description,
         name,
         price
-      }))
+      }, id))
       .then(
-        dispatch(createSpotImageThunk(id, preview, true))
+        dispatch(createSpotImageThunk(id, preview, false))
         )
         .catch(async (res) => {
           const data = await res.json();
@@ -80,7 +65,7 @@ function UpdateSpot() {
         });
         setTimeout(() => {
           history.push(`/spots/${id}`)
-        }, [10])
+        }, [100])
     };
 
     return (

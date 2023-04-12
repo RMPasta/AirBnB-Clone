@@ -10,15 +10,13 @@ function CreateSpot() {
   const dispatch = useDispatch();
   const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
-  const spotsObj = useSelector((state) => state.spots);
-  const spots = Object.values(spotsObj);
   const [country, setCountry] = useState("USA");
   const [address, setAddress] = useState("1 cool street");
   const [city, setCity] = useState("hamilton");
   const [state, setState] = useState("nj");
   const [lat, setLat] = useState(111);
   const [lng, setLng] = useState(111);
-  const [description, setDescription] = useState("sfdg asdfg asd gasdg a gdasghahadfhadfhaaf asdf ASDFASF ASF");
+  const [description, setDescription] = useState("Really cool place right by all the good things. You're going to love this spot.");
   const [name, setName] = useState("great cool new place");
   const [price, setPrice] = useState(111);
   const [preview, setPreview] = useState("https://a0.muscache.com/im/pictures/9b1dac05-b810-46ea-8d35-f57072af1fe1.jpg?im_w=1200");
@@ -30,7 +28,7 @@ function CreateSpot() {
 
   if (!sessionUser) return <Redirect to='/' />
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
       e.preventDefault();
       setErrors({});
       if (!lat) setErrors({...errors, lat: 'Latitude is required'})
@@ -41,7 +39,7 @@ function CreateSpot() {
       if (!preview) setErrors({...errors, preview: 'Preview Image is required'})
 
       if (Object.values(errors).length > 0) return errors;
-      dispatch(createSpotThunk({
+      const newSpot = await dispatch(createSpotThunk({
         country,
         address,
         city,
@@ -52,22 +50,19 @@ function CreateSpot() {
         name,
         price
       }))
-      .then(
+      .catch(async (res) => {
+        console.log('hi!')
+        const data = await res.json();
+        console.log(data)
+        if (data && data.errors) {
+          setErrors(data.errors);
+        }
+      });
+      console.log(newSpot)
         dispatch(getSpotsThunk())
-      )
-      .then(
-        dispatch(createSpotImageThunk(spots[spots.length - 1].id + 1, preview, true))
-        )
-        .catch(async (res) => {
-          console.log('hi!')
-          const data = await res.json();
-          console.log(data)
-          if (data && data.errors) {
-            setErrors(data.errors);
-          }
-        });
+        dispatch(createSpotImageThunk(newSpot.id, preview, true))
         setTimeout(() => {
-          history.push(`/spots/${spots[spots.length - 1].id + 1}`)
+          history.push(`/spots/${newSpot.id}`)
         }, [10])
     };
 

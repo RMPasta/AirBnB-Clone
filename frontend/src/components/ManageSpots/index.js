@@ -27,7 +27,7 @@ export default function ManageSpots() {
     }, [dispatch])
 
     const ownedSpots = spots.filter(spot => spot.ownerId === sessionUser.id);
-    console.log(ownedSpots)
+
 
   return (
       <div className="manage-page">

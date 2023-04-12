@@ -1,7 +1,6 @@
 import { csrfFetch } from "./csrf";
 
 export const LOAD_SPOTS = 'spots/LOAD_SPOTS';
-export const LOAD_SPOT = 'spots/LOAD_SPOT';
 export const RECEIVE_SPOT = 'spots/RECEIVE_SPOT';
 export const UPDATE_SPOT = 'spots/UPDATE_SPOT';
 export const REMOVE_SPOT = 'spots/REMOVE_SPOT';
@@ -9,11 +8,6 @@ export const REMOVE_SPOT = 'spots/REMOVE_SPOT';
 export const loadSpots = (spots) => ({
     type: LOAD_SPOTS,
     spots,
-  });
-
-export const loadSpot = (spot) => ({
-    type: LOAD_SPOT,
-    spot,
   });
 
   export const receiveSpot = (spot) => ({
@@ -42,16 +36,6 @@ export const loadSpot = (spot) => ({
     }
   }
 
-  export const getOneSpotThunk = (spotId) => async dispatch => {
-    const response = await csrfFetch(`/api/spots/${spotId}`);
-
-    if (response.ok) {
-      const spot = await response.json();
-      dispatch(loadSpot(spot))
-      return spot;
-    }
-  }
-
   export const createSpotThunk = (spot) => async dispatch => {
     const response = await csrfFetch(`/api/spots`, {
       method: "POST",
@@ -66,9 +50,9 @@ export const loadSpot = (spot) => ({
     }
   }
 
-  export const updateSpotThunk = (spot) => async dispatch => {
-    const response = await csrfFetch(`/api/spots`, {
-      method: "POST",
+  export const updateSpotThunk = (spot, id) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${id}`, {
+      method: "PUT",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(spot)
     });
@@ -102,9 +86,6 @@ export const loadSpot = (spot) => ({
           newState[spot.id] = spot;
         });
         return newState;
-      }
-      case LOAD_SPOT: {
-        return action.spot;
       }
       case RECEIVE_SPOT: {
         const newState = { ...state.spots, [action.spot.id]: action.spot };

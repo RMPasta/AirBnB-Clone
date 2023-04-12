@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getOneSpotThunk } from '../../store/spots';
+import { getOneSpotThunk } from '../../store/oneSpot';
 import { getReviewsThunk } from '../../store/reviews';
 import { nanoid } from 'nanoid';
 import './SpotDetails.css';
@@ -9,13 +9,15 @@ import './SpotDetails.css';
 export default function SpotDetails() {
   const { spotId } = useParams();
   const dispatch = useDispatch();
-  const spot = useSelector(state=>state.spots);
+  const spot = useSelector(state=>state.spot);
   const reviews = useSelector(state=>Object.values(state.reviews));
 
   useEffect(() => {
     dispatch(getOneSpotThunk(spotId))
     dispatch(getReviewsThunk(spotId))
   }, [dispatch, spotId])
+
+  if (!spot) return <div>...Loading</div>
 
   return (
     <div className='spot-details-page'>
