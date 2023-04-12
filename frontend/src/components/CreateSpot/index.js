@@ -56,7 +56,9 @@ function CreateSpot() {
         dispatch(createSpotImageThunk(spots[spots.length - 1].id + 1, preview, true))
         )
         .catch(async (res) => {
+          console.log('hi!')
           const data = await res.json();
+          console.log(data)
           if (data && data.errors) {
             setErrors(data.errors);
           }

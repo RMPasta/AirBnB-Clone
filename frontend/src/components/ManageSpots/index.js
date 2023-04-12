@@ -12,7 +12,7 @@ export default function ManageSpots() {
     const history = useHistory();
     const sessionUser = useSelector(state=>state.session.user); // populate from Redux store
     const spotsObj = useSelector(state=>state.spots); // populate from Redux store
-    const ownedSpots = Object.values(spotsObj).filter(spot => spot.ownerId === sessionUser.id);
+    const spots = Object.values(spotsObj)
 
     const handleClick = (spot) => {
       history.push(`/spots/${spot.id}`)
@@ -23,8 +23,10 @@ export default function ManageSpots() {
     }
 
     useEffect(() => {
-        dispatch(getSpotsThunk())
-      }, [dispatch])
+      dispatch(getSpotsThunk())
+    }, [dispatch])
+
+    const ownedSpots = spots.filter(spot => spot.ownerId === sessionUser.id);
 
   return (
       <div className="manage-page">
@@ -51,7 +53,7 @@ export default function ManageSpots() {
                 <button className='udpate-button' onClick={() => handleUpdate(spot)}>Update</button>
                 <OpenModalButton
                 buttonText="Delete"
-                modalComponent={<DeleteSpotModal />}
+                modalComponent={<DeleteSpotModal spot={spot} />}
               />
             </div>
          </li>

@@ -1,27 +1,26 @@
-import React, { useState, useEffect } from "react";
-import * as sessionActions from "../../store/session";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
+import { deleteSpotThunk } from "../../store/spots";
 import { useModal } from "../../context/Modal";
 
-const DeleteSpotModal = () => {
+const DeleteSpotModal = ({ spot }) => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setErrors({});
-    dispatch({})
-    .then(closeModal)
+  const [deleted, setDeleted] = useState(false)
+  const deleteSpot = (spot) => {
+    dispatch(deleteSpotThunk(spot))
+    // history.push('/')
+    // history.push('/spots/current')
   }
+
 
   return (
     <div className="form-page">
       <h1>Confirm Delete</h1>
-        <button className="yes-delete">Delete</button>
-        <button className="no-delete">Dont Delete</button>
+        <button className="yes-delete" onClick={() => deleteSpot(spot)}>Delete</button>
+        <button className="no-delete" onClick={closeModal}>Dont Delete</button>
     </div>
   );
 }

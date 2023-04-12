@@ -4,7 +4,7 @@ export const LOAD_SPOTS = 'spots/LOAD_SPOTS';
 export const LOAD_SPOT = 'spots/LOAD_SPOT';
 export const RECEIVE_SPOT = 'spots/RECEIVE_SPOT';
 export const UPDATE_SPOT = 'spots/UPDATE_SPOT';
-// export const REMOVE_SPOT = 'spots/REMOVE_SPOT';
+export const REMOVE_SPOT = 'spots/REMOVE_SPOT';
 
 export const loadSpots = (spots) => ({
     type: LOAD_SPOTS,
@@ -26,10 +26,10 @@ export const loadSpot = (spot) => ({
     spot,
   });
 
-//   export const removeSpot = (spotId) => ({
-//     type: REMOVE_SPOT,
-//     spotId,
-//   });
+  export const removeSpot = (spotId) => ({
+    type: REMOVE_SPOT,
+    spotId,
+  });
 
   export const getSpotsThunk = () => async dispatch => {
     const response = await csrfFetch('/api/spots');
@@ -80,6 +80,20 @@ export const loadSpot = (spot) => ({
     }
   }
 
+  export const deleteSpotThunk = (spot) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${spot.id}`, {
+      method: "DELETE",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(spot)
+    });
+
+    if (response.ok) {
+      const spot = await response.json();
+      dispatch(removeSpot(spot))
+      return spot;
+    }
+  }
+
   const spotsReducer = (state = {}, action) => {
     switch (action.type) {
       case LOAD_SPOTS: {
@@ -98,10 +112,10 @@ export const loadSpot = (spot) => ({
       }
       case UPDATE_SPOT:
         return { ...state, [action.spot.id]: action.spot };
-    //   case REMOVE_SPOT:
-    //     const newState = { ...state };
-    //     delete newState[action.spotId];
-    //     return newState;
+      case REMOVE_SPOT:
+        const newState = { ...state };
+        delete newState[action.spotId];
+        return newState;
       default:
         return state;
     }
