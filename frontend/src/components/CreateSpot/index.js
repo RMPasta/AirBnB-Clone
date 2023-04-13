@@ -11,7 +11,6 @@ function CreateSpot() {
   const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
 
-<<<<<<< HEAD
   const [country, setCountry] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
@@ -22,32 +21,6 @@ function CreateSpot() {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [preview, setPreview] = useState("");
-
-  // const [country, setCountry] = useState("USA");
-  // const [address, setAddress] = useState("1 cool street");
-  // const [city, setCity] = useState("hamilton");
-  // const [state, setState] = useState("nj");
-  // const [lat, setLat] = useState(111);
-  // const [lng, setLng] = useState(111);
-  // const [description, setDescription] = useState(
-  //   "Really cool place right by all the good things. You're going to love this spot."
-  // );
-  // const [name, setName] = useState("great cool new place");
-  // const [price, setPrice] = useState(111);
-  // const [preview, setPreview] = useState(
-  //   "https://a0.muscache.com/im/pictures/9b1dac05-b810-46ea-8d35-f57072af1fe1.jpg?im_w=1200"
-  // );
-=======
-  // const [country, setCountry] = useState("");
-  // const [address, setAddress] = useState("");
-  // const [city, setCity] = useState("");
-  // const [state, setState] = useState("");
-  // const [lat, setLat] = useState("");
-  // const [lng, setLng] = useState("");
-  // const [description, setDescription] = useState("");
-  // const [name, setName] = useState("");
-  // const [price, setPrice] = useState("");
-  // const [preview, setPreview] = useState("");
 
   const [country, setCountry] = useState("USA");
   const [address, setAddress] = useState("1 cool street");
@@ -63,7 +36,6 @@ function CreateSpot() {
   const [preview, setPreview] = useState(
     "https://a0.muscache.com/im/pictures/9b1dac05-b810-46ea-8d35-f57072af1fe1.jpg?im_w=1200"
   );
->>>>>>> dev
 
   const [errors, setErrors] = useState({});
   const [disabled, setDisabled] = useState(true);
