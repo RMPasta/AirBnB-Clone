@@ -11,7 +11,8 @@ export default function SpotDetails() {
   const reviews = useSelector(state=>Object.values(state.reviews));
   const sessionUser = useSelector(state=>state.session.user);
   const dispatch = useDispatch();
-  const [reviewed, setReviewed] = useState();
+  const [reviewed, setReviewed] = useState(false);
+  const [owned, setOwned] = useState(false);
   let usersReview;
   useEffect(() => {
     setReviewed(false)
@@ -65,7 +66,7 @@ export default function SpotDetails() {
                     <i className="fas fa-star"></i>
                   </div>
                 </div>
-                {!reviewed && <OpenModalButton
+                {!reviewed && spot.ownerId !== parseInt(sessionUser.id) && <OpenModalButton
                 buttonText="Add Review"
                 modalComponent={<AddReviewModal spot={spot} />} /> }
                 {reviews.length < 1 && <p>Be the first to post a review!</p>}
