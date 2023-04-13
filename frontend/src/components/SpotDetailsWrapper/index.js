@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getOneSpotThunk } from '../../store/spots';
 import { getReviewsThunk } from '../../store/reviews';
-import { addReviewThunk } from '../../store/reviews';
 import SpotDetails from '../SpotDetails';
 
 export default function SpotDetailWrapper() {

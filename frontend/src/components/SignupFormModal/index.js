@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { useModal } from "../../context/Modal";
@@ -15,7 +15,19 @@ function SignupFormModal() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const [disabled, setDisabled] = useState(true);
   const { closeModal } = useModal();
+
+  useEffect(() => {
+    if (email && username && firstName && lastName && password && confirmPassword) {
+      setDisabled(false)
+    } else {
+      setDisabled(true)
+    }
+    // if (username.length < 4 && password.length < 6) {
+    //   setDisabled(true)
+    // }
+  }, [email, username, firstName, lastName, password, confirmPassword])
 
   if (sessionUser) return <Redirect to="/" />;
 
@@ -121,7 +133,7 @@ function SignupFormModal() {
         <div className="error-container">
         {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
         </div>
-        <button type="submit">Sign Up</button>
+        <button disabled={disabled} type="submit">Sign Up</button>
       </form>
     </div>
   );

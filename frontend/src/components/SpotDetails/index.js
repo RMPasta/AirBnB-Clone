@@ -1,16 +1,32 @@
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import OpenModalButton from '../OpenModalButton';
 import { nanoid } from 'nanoid';
 import './SpotDetails.css';
 import AddReviewModal from '../AddReviewModal';
+import DeleteReviewModal from '../DeleteReviewModal';
 
 export default function SpotDetails() {
   const spot = useSelector(state=>state.spots.spot);
   const reviews = useSelector(state=>Object.values(state.reviews));
   const sessionUser = useSelector(state=>state.session.user);
+  const dispatch = useDispatch();
+  const [reviewed, setReviewed] = useState();
+  let usersReview;
+  useEffect(() => {
+    setReviewed(false)
+    reviews.forEach((review) => {
+      if (review.User && sessionUser && review.User.id === parseInt(sessionUser.id)) {
+        usersReview = review;
+        setReviewed(true);
+      }
+    })
+  }, [reviews])
   if (!spot) return <div>...Loading</div>
   if (!reviews) return <div>...Loading</div>
+
+
+
 
   return (
     <div className='spot-details-page'>
@@ -31,8 +47,8 @@ export default function SpotDetails() {
             <div className="top-stats">
               {spot && <p className='detail-price'>${spot.price} night</p>}
                 <div className='rating'>
-                {spot.avgStarRating && <p> - {spot.numReviews} {spot.numReviews > 1 ? "reviews" : "review"}</p> }
-                  <p className="avgRating">{spot.avgStarRating ? spot.avgStarRating : "New"}</p>
+                {spot.avgStarRating && <p>{spot.numReviews} {spot.numReviews > 1 ? "reviews" : "review"}</p> }
+                  <p className="avgRating">{spot.avgStarRating ? spot.avgStarRating + " · " : "New"}</p>
                   <i className="fas fa-star"></i>
                 </div>
             </div>
@@ -45,21 +61,24 @@ export default function SpotDetails() {
           <div className='rating-reviews-section'>
                 {spot.avgStarRating && <p>{spot.numReviews} {spot.numReviews > 1 ? "reviews" : "review"}</p>}
                   <div className='rating'>
-                    <p className="avgRating">{spot.avgStarRating ? spot.avgStarRating : "New"}</p>
+                    <p className="avgRating">{spot.avgStarRating ? spot.avgStarRating + " · " : "New"}</p>
                     <i className="fas fa-star"></i>
                   </div>
                 </div>
-                <OpenModalButton
+                {!reviewed && <OpenModalButton
                 buttonText="Add Review"
-                modalComponent={<AddReviewModal spot={spot} />} />
+                modalComponent={<AddReviewModal spot={spot} />} /> }
                 {reviews.length < 1 && <p>Be the first to post a review!</p>}
             {reviews && reviews.map(review => {
               return <li key={nanoid(5)}  className='review'>
                 <div className='review-name'>{review.User ? review.User.firstName : sessionUser.firstName}</div>
                 <div className='review-date'>{review.createdAt.split('T')[0].slice(0, 7).split('-')[1] + ' ' + review.createdAt.split('T')[0].slice(0, 7).split('-')[0]}</div>
                 <div>{review.review}</div>
+                { review.User && sessionUser && review.User.id === parseInt(sessionUser.id) && <OpenModalButton
+                buttonText="Delete Review"
+                modalComponent={<DeleteReviewModal spot={spot} />} /> }
               </li>
-            })}
+            }).reverse()}
           </div>
     </div>
   )

@@ -26,7 +26,7 @@ export default function ManageSpots() {
     useEffect(() => {
       dispatch(getSpotsThunk())
     }, [dispatch])
-
+    if (!spots) return <div>...Loading</div>
     const ownedSpots = spots.filter(spot => spot.ownerId === sessionUser.id);
 
 

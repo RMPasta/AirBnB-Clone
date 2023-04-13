@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addReviewThunk } from "../../store/reviews";
+import { getReviewsThunk } from '../../store/reviews';
+import { getOneSpotThunk } from '../../store/spots';
+import { getSpotsThunk } from '../../store/spots';
 import { useModal } from "../../context/Modal";
 import RatingInput from "../RatingInput";
 import './AddReviewModal.css';
@@ -24,6 +27,9 @@ const AddReviewModal = ({ spot }) => {
       const data = await res.json();
     })
     if (addReviewRes.message) setErrors(addReviewRes);
+    dispatch(getOneSpotThunk(spot.id))
+    dispatch(getReviewsThunk(spot.id))
+    dispatch(getSpotsThunk())
     if (!addReviewRes.message) closeModal();
   }
   const onChange = (number) => setRating(parseInt(number))
@@ -34,7 +40,7 @@ const AddReviewModal = ({ spot }) => {
       <div className="error-container">
         { errors && <p>{errors.message}</p> }
       </div>
-        <textarea type="text" onChange={(e) => setReview(e.target.value)}/>
+        <textarea type="text" placeholder="Leave your review here..." className="textarea" onChange={(e) => setReview(e.target.value)}/>
         <div className="new-rating-stars">
             <RatingInput
             rating={rating}

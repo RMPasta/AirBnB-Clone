@@ -17,7 +17,8 @@ export default function Landing() {
 
     useEffect(() => {
         dispatch(getSpotsThunk())
-      }, [dispatch])
+      }, [dispatch]);
+
   return (
     <div className="page">
           {spots && spots.map((spot) => (

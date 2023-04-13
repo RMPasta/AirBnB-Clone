@@ -61,7 +61,7 @@ function UpdateSpot({ spot }) {
     return (
       <div className="create-spot-page">
       <div className="headers">
-        <h1>Update a New Spot</h1>
+        <h1>Update your Spot</h1>
         <h2>Where's your place located?</h2>
         <p>Guests will only get your exact address once they've booked a reservation.</p>
       </div>
@@ -200,7 +200,7 @@ function UpdateSpot({ spot }) {
         <div className="error-container">
         {errors.preview && <p>{errors.preview}</p>}
         </div>
-        <button type="submit">Update Spot</button>
+        <button type="submit">Update your Spot</button>
       </form>
     </div>
   );

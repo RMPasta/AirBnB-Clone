@@ -10,26 +10,26 @@ function CreateSpot() {
   const dispatch = useDispatch();
   const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
-  // const [country, setCountry] = useState("");
-  // const [address, setAddress] = useState("");
-  // const [city, setCity] = useState("");
-  // const [state, setState] = useState("");
-  // const [lat, setLat] = useState(0);
-  // const [lng, setLng] = useState(0);
-  // const [description, setDescription] = useState("");
-  // const [name, setName] = useState("");
-  // const [price, setPrice] = useState(0);
-  // const [preview, setPreview] = useState("");
-  const [country, setCountry] = useState("USA");
-  const [address, setAddress] = useState("1 cool street");
-  const [city, setCity] = useState("hamilton");
-  const [state, setState] = useState("nj");
-  const [lat, setLat] = useState(111);
-  const [lng, setLng] = useState(111);
-  const [description, setDescription] = useState("Really cool place right by all the good things. You're going to love this spot.");
-  const [name, setName] = useState("great cool new place");
-  const [price, setPrice] = useState(111);
-  const [preview, setPreview] = useState("https://a0.muscache.com/im/pictures/9b1dac05-b810-46ea-8d35-f57072af1fe1.jpg?im_w=1200");
+  const [country, setCountry] = useState("");
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [lat, setLat] = useState("");
+  const [lng, setLng] = useState("");
+  const [description, setDescription] = useState("");
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+  const [preview, setPreview] = useState("");
+  // const [country, setCountry] = useState("USA");
+  // const [address, setAddress] = useState("1 cool street");
+  // const [city, setCity] = useState("hamilton");
+  // const [state, setState] = useState("nj");
+  // const [lat, setLat] = useState(111);
+  // const [lng, setLng] = useState(111);
+  // const [description, setDescription] = useState("Really cool place right by all the good things. You're going to love this spot.");
+  // const [name, setName] = useState("great cool new place");
+  // const [price, setPrice] = useState(111);
+  // const [preview, setPreview] = useState("https://a0.muscache.com/im/pictures/9b1dac05-b810-46ea-8d35-f57072af1fe1.jpg?im_w=1200");
   const [errors, setErrors] = useState({});
 
 
@@ -84,6 +84,7 @@ function CreateSpot() {
           Country
           <input
             type="text"
+            placeholder="Country"
             value={country}
             onChange={(e) => setCountry(e.target.value)}
           />
@@ -95,6 +96,7 @@ function CreateSpot() {
           Address
           <input
             type="text"
+            placeholder="Address"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
           />
@@ -107,6 +109,7 @@ function CreateSpot() {
             City
             <input
               type="text"
+              placeholder="City"
               value={city}
               className="city"
               onChange={(e) => setCity(e.target.value)}
@@ -119,6 +122,7 @@ function CreateSpot() {
             State
             <input
               type="text"
+              placeholder="STATE"
               value={state}
               className="state"
               onChange={(e) => setState(e.target.value)}
@@ -133,10 +137,11 @@ function CreateSpot() {
             Latitude
             <input
               type="text"
+              placeholder="Latitude"
               value={lat}
               className="lat"
               onChange={(e) => setLat(e.target.value)}
-            />
+              />
           <div className="error-container">
           {errors.lat && <p>{errors.lat}</p>}
           </div>
@@ -145,10 +150,11 @@ function CreateSpot() {
             Longitude
             <input
               type="text"
+              placeholder="Longitude"
               value={lng}
               className="lng"
               onChange={(e) => setLng(e.target.value)}
-            />
+              />
           <div className="error-container">
           {errors.lng && <p>{errors.lng}</p>}
           </div>
@@ -162,9 +168,10 @@ function CreateSpot() {
           Description
           <textarea
             type="text"
+            placeholder="Please write at least 30 characters"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-          />
+            />
         </label>
         <div className="error-container">
         {errors.description && <p>{errors.description}</p>}
@@ -177,9 +184,10 @@ function CreateSpot() {
           Name
           <input
             type="text"
+            placeholder="Name of your spot"
             value={name}
             onChange={(e) => setName(e.target.value)}
-          />
+            />
         </label>
         <div className="error-container">
         {errors.name && <p>{errors.name}</p>}
@@ -192,9 +200,10 @@ function CreateSpot() {
           Price
           <div>$ <input
             type="text"
+            placeholder="Price per night (USD)"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
-          /></div>
+            /></div>
         </label>
         <div className="error-container">
         {errors.price && <p>{errors.price}</p>}
@@ -207,6 +216,7 @@ function CreateSpot() {
           Preview Image URL
           <input
             type="text"
+            placeholder="Preview Url"
             value={preview}
             onChange={(e) => setPreview(e.target.value)}
           />

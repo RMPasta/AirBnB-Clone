@@ -1,0 +1,9 @@
+.yes-delete {
+    background-color: salmon;
+    color: white;
+}
+
+.no-delete {
+    background-color: darkgrey;
+    color: white;
+}
