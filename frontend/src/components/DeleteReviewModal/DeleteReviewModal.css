@@ -1,11 +1,11 @@
 .yes-delete {
-    background-color: salmon;
+    background-color: rgb(196, 74, 61);
     color: white;
     width: 150px;
 }
 
 .yes-delete:hover {
-    background-color: rgb(243, 112, 97);
+    background-color: rgb(182, 58, 45);
     color: white;
     width: 150px;
 }
