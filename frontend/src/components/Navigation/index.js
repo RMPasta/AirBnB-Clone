@@ -12,6 +12,7 @@ function Navigation({ isLoaded }){
     <ul className="nav-ul">
       <li className="home-logo">
         <NavLink exact to="/"><img src={bed} alt="bed" className='bed' /></NavLink>
+        <h2>CoolBnB</h2>
       </li>
       <div className='nav-right'>
         {sessionUser && <NavLink to="/spots/new">Create a New Spot</NavLink>}

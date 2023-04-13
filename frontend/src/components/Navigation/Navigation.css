@@ -8,6 +8,9 @@
 }
 
 .home-logo {
+    display: flex;
+    align-items: center;
+    color: rgb(15, 15, 82);
     position: relative;
     left: 10px;
     top: 0;
