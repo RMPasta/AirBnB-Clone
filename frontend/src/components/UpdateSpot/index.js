@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useHistory, useParams } from 'react-router-dom';
-import { updateSpotThunk } from '../../store/spots';
+import { Redirect, useHistory, useParams } from "react-router-dom";
+import { getOneSpotThunk, updateSpotThunk } from "../../store/spots";
 
 function UpdateSpot({ spot }) {
   const dispatch = useDispatch();
@@ -19,45 +19,57 @@ function UpdateSpot({ spot }) {
   const [price, setPrice] = useState(spot?.price);
   const [errors, setErrors] = useState({});
 
-    if (!sessionUser) return <Redirect to='/' />
+  if (!sessionUser) return <Redirect to="/" />;
 
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      setErrors({});
-      if (!lat) setErrors({...errors, lat: 'Latitude is required'})
-      if (!lng) setErrors({...errors, lng: 'Longitude is required'})
-      if (description.length < 30) setErrors({...errors, description: 'Description needs a minimum of 30 characters'})
-      if (!name) setErrors({...errors, name: 'Name is required'})
-      if (!price) setErrors({...errors, price: 'Price is required'})
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setErrors({});
+    if (!lat) setErrors({ ...errors, lat: "Latitude is required" });
+    if (!lng) setErrors({ ...errors, lng: "Longitude is required" });
+    if (description.length < 30)
+      setErrors({
+        ...errors,
+        description: "Description needs a minimum of 30 characters",
+      });
+    const errorPlaceHolder = "description error";
+    if (!name) setErrors({ ...errors, name: "Name is required" });
+    if (!price) setErrors({ ...errors, price: "Price is required" });
+    // if (Object.values(errors).length > 0) return errors;
+    if (!lat || !lng || description.length < 30 || !name || !price)
+      return errors;
+    await dispatch(
+      updateSpotThunk(
+        {
+          country,
+          address,
+          city,
+          state,
+          lat,
+          lng,
+          description,
+          name,
+          price,
+        },
+        id
+      )
+    ).catch(async (res) => {
+      const data = await res.json();
+      if (data && data.errors) {
+        setErrors(data.errors);
+      }
+    });
+    history.push(`/spots/${id}`);
+  };
 
-      if (Object.values(errors).length > 0) return errors;
-      await dispatch(updateSpotThunk({
-        country,
-        address,
-        city,
-        state,
-        lat,
-        lng,
-        description,
-        name,
-        price
-      }, id))
-        .catch(async (res) => {
-          const data = await res.json();
-          if (data && data.errors) {
-            setErrors(data.errors);
-          }
-        });
-
-        history.push(`/spots/${id}`)
-    };
-
-    return (
-      <div className="create-spot-page">
+  return (
+    <div className="create-spot-page">
       <div className="headers">
         <h1>Update your Spot</h1>
         <h2>Where's your place located?</h2>
-        <p>Guests will only get your exact address once they've booked a reservation.</p>
+        <p>
+          Guests will only get your exact address once they've booked a
+          reservation.
+        </p>
       </div>
       <form onSubmit={handleSubmit}>
         <label>
@@ -69,7 +81,7 @@ function UpdateSpot({ spot }) {
           />
         </label>
         <div className="error-container">
-        {errors.country && <p>{errors.country}</p>}
+          {errors.country && <p>{errors.country}</p>}
         </div>
         <label>
           Address
@@ -80,7 +92,7 @@ function UpdateSpot({ spot }) {
           />
         </label>
         <div className="error-container">
-        {errors.address && <p>{errors.address}</p>}
+          {errors.address && <p>{errors.address}</p>}
         </div>
         <div className="form-two-across">
           <label>
@@ -91,9 +103,9 @@ function UpdateSpot({ spot }) {
               className="city"
               onChange={(e) => setCity(e.target.value)}
             />
-          <div className="error-container">
-          {errors.city && <p>{errors.city}</p>}
-          </div>
+            <div className="error-container">
+              {errors.city && <p>{errors.city}</p>}
+            </div>
           </label>
           <label>
             State
@@ -103,9 +115,9 @@ function UpdateSpot({ spot }) {
               className="state"
               onChange={(e) => setState(e.target.value)}
             />
-          <div className="error-container">
-          {errors.state && <p>{errors.state}</p>}
-          </div>
+            <div className="error-container">
+              {errors.state && <p>{errors.state}</p>}
+            </div>
           </label>
         </div>
         <div className="form-two-across">
@@ -117,9 +129,9 @@ function UpdateSpot({ spot }) {
               className="lat"
               onChange={(e) => setLat(e.target.value)}
             />
-          <div className="error-container">
-          {errors.lat && <p>{errors.lat}</p>}
-          </div>
+            <div className="error-container">
+              {errors.lat && <p>{errors.lat}</p>}
+            </div>
           </label>
           <label>
             Longitude
@@ -129,14 +141,17 @@ function UpdateSpot({ spot }) {
               className="lng"
               onChange={(e) => setLng(e.target.value)}
             />
-          <div className="error-container">
-          {errors.lng && <p>{errors.lng}</p>}
-          </div>
+            <div className="error-container">
+              {errors.lng && <p>{errors.lng}</p>}
+            </div>
           </label>
         </div>
         <div className="description">
           <h2 className="h2">Describe your place to guests</h2>
-          <p>Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about your neighborhood.</p>
+          <p>
+            Mention the best features of your space, any special amentities like
+            fast wifi or parking, and what you love about your neighborhood.
+          </p>
         </div>
         <label>
           Description
@@ -147,11 +162,14 @@ function UpdateSpot({ spot }) {
           />
         </label>
         <div className="error-container">
-        {errors.description && <p>{errors.description}</p>}
+          {errors.description && <p>{errors.description}</p>}
         </div>
         <div className="description">
           <h2 className="h2">Create a title for your spot</h2>
-          <p>Catch guests' attention with a spot title ethat highlights what makes your place special.</p>
+          <p>
+            Catch guests' attention with a spot title ethat highlights what
+            makes your place special.
+          </p>
         </div>
         <label>
           Name
@@ -162,19 +180,25 @@ function UpdateSpot({ spot }) {
           />
         </label>
         <div className="error-container">
-        {errors.name && <p>{errors.name}</p>}
+          {errors.name && <p>{errors.name}</p>}
         </div>
         <div className="description">
           <h2 className="h2">Set a base price for your spot</h2>
-          <p>Competetive pricing can help your listing stand out and rank higher in search results.</p>
+          <p>
+            Competetive pricing can help your listing stand out and rank higher
+            in search results.
+          </p>
         </div>
         <label>
           Price
-          <div>$ <input
-            type="text"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-          /></div>
+          <div>
+            ${" "}
+            <input
+              type="text"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
+          </div>
         </label>
         <div className="error-container">
           {errors.price && <p>{errors.price}</p>}

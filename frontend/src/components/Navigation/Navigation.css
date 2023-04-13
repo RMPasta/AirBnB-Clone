@@ -38,6 +38,9 @@
 }
 
 .profile-dropdown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: 2px solid black;
     position: absolute;
     top: 70px;

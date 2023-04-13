@@ -78,6 +78,11 @@
 
 .review {
     margin-bottom: 40px;
+    width: 500px;
+    box-shadow: 2px 2px 2px grey;
+    border: 1px solid grey;
+    border-radius: 10px;
+    padding: 10px;
 }
 
 .review-name {
