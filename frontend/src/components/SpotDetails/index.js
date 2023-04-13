@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import OpenModalButton from '../OpenModalButton';
 import { nanoid } from 'nanoid';
 import './SpotDetails.css';
@@ -10,24 +10,19 @@ export default function SpotDetails() {
   const spot = useSelector(state=>state.spots.spot);
   const reviews = useSelector(state=>Object.values(state.reviews));
   const sessionUser = useSelector(state=>state.session.user);
-  const dispatch = useDispatch();
   const [reviewed, setReviewed] = useState(false);
-  const [owned, setOwned] = useState(false);
-  let usersReview;
+
   useEffect(() => {
     setReviewed(false)
     reviews.forEach((review) => {
       if (review.User && sessionUser && review.User.id === parseInt(sessionUser.id)) {
-        usersReview = review;
         setReviewed(true);
       }
     })
-  }, [reviews])
+  }, [reviews, sessionUser])
+
   if (!spot) return <div>...Loading</div>
   if (!reviews) return <div>...Loading</div>
-
-
-
 
   return (
     <div className='spot-details-page'>
@@ -66,7 +61,7 @@ export default function SpotDetails() {
                     <i className="fas fa-star"></i>
                   </div>
                 </div>
-                {!reviewed && spot.ownerId !== parseInt(sessionUser.id) && <OpenModalButton
+                {!reviewed && sessionUser && spot.ownerId !== parseInt(sessionUser.id) && <OpenModalButton
                 buttonText="Add Review"
                 modalComponent={<AddReviewModal spot={spot} />} /> }
                 {reviews.length < 1 && <p>Be the first to post a review!</p>}

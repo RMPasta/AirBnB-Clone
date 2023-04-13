@@ -15,7 +15,8 @@ const DeleteReviewModal = ({ spot }) => {
 useEffect(() => {
     dispatch(getOneSpotThunk(spot.id))
     dispatch(getReviewsThunk(spot.id))
-}, [])
+}, [dispatch, spot.id])
+
 let usersReview;
 useEffect(() => {
     reviews.forEach((review) => {
@@ -25,10 +26,10 @@ useEffect(() => {
     })
   }, [reviews])
 
-const deleteReview = () => {
-    dispatch(removeReviewThunk(usersReview.id))
-    dispatch(getOneSpotThunk(spot.id))
-    dispatch(getReviewsThunk(spot.id))
+const deleteReview = async () => {
+    await dispatch(removeReviewThunk(usersReview.id))
+    await dispatch(getReviewsThunk(spot.id))
+    await dispatch(getOneSpotThunk(spot.id))
     closeModal();
   }
 

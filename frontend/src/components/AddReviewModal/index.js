@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addReviewThunk } from "../../store/reviews";
 import { getReviewsThunk } from '../../store/reviews';
 import { getOneSpotThunk } from '../../store/spots';
@@ -25,11 +25,12 @@ const AddReviewModal = ({ spot }) => {
     const addReviewRes = await dispatch(addReviewThunk(review, rating, spot.id))
     .catch(async (res) => {
       const data = await res.json();
+      return data;
     })
     if (addReviewRes.message) setErrors(addReviewRes);
-    dispatch(getOneSpotThunk(spot.id))
     dispatch(getReviewsThunk(spot.id))
     dispatch(getSpotsThunk())
+    dispatch(getOneSpotThunk(spot.id))
     if (!addReviewRes.message) closeModal();
   }
   const onChange = (number) => setRating(parseInt(number))
