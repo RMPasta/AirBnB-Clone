@@ -45,8 +45,8 @@ export default function SpotDetails() {
         { spot && <div>{spot.city}, {spot.state}, {spot.country}</div> }
         {spot && spot.previewImage && <img src={spot.previewImage} alt={spot.name} /> }
         <div className='spot-images-container'>
-          {spot && spot.SpotImages && spot.SpotImages.map(image => {
-            return <img key={nanoid(5)} src={image.url} alt={spot.name} className={image.preview ? "previewImage" : "spotImage"} />
+          {spot && spot.SpotImages && spot.SpotImages.map((image, i) => {
+            return <img key={nanoid(5)} src={image.url} alt={spot.name} className={image.preview ? `previewImage` : `spotImage spotImage-${i}`} />
           })}
         </div>
         <div className='spot-info'>
@@ -80,7 +80,7 @@ export default function SpotDetails() {
                 buttonText="Add Review"
                 modalComponent={<AddReviewModal spot={spot} />} /> }
                 {reviews.length < 1 && sessionUser && spot.ownerId !== parseInt(sessionUser.id) && <p>Be the first to post a review!</p>}
-            {reviews && reviews.map(review => {
+            {reviews && reviews.map((review) => {
               return <li key={nanoid(5)}  className='review'>
                 <div className='review-name'>{review.User ? review.User.firstName : sessionUser.firstName}</div>
                 <div className='review-date'>{months[review.createdAt.split('T')[0].slice(0, 7).split('-')[1]] + ' ' + review.createdAt.split('T')[0].slice(0, 7).split('-')[0]}</div>
