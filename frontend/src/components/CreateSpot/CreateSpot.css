@@ -1,0 +1,48 @@
+.create-spot-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h2 {
+    margin: 4px 0;
+}
+
+.h2 {
+    margin-top: 10px;
+}
+
+h3 {
+    margin: 0;
+}
+
+.headers {
+    width: 400px;
+}
+
+.form-two-across {
+    display: flex;
+    gap: 10px;
+}
+
+.state {
+    width: 100px;
+}
+
+.city {
+    width: 260px;
+}
+
+.lat {
+    width: 180px;
+}
+
+.lng {
+    width: 180px;
+}
+
+.description {
+    margin: 24px 0;
+    border-top: 1px solid grey;
+}

@@ -1,0 +1,19 @@
+.new-rating-stars {
+    display: flex;
+    justify-content: center;
+}
+
+.error-container {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.error-container p {
+    height: 50px;
+    color: red;
+}
+
+.textarea {
+    height: 100px;
+}

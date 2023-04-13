@@ -10,10 +10,10 @@ function Navigation({ isLoaded }){
   return (
     <ul className="nav-ul">
       <li className="home-logo">
-        <NavLink exact to="/">Home</NavLink>
+        <NavLink exact to="/"><img src="./bed.jpg" alt="bed" /></NavLink>
       </li>
       <div className='nav-right'>
-        {sessionUser && <div>Create a New Spot</div>}
+        {sessionUser && <NavLink to="/spots/new">Create a New Spot</NavLink>}
         {isLoaded && (
           <li className="dropdown-container">
             <ProfileButton user={sessionUser} />
