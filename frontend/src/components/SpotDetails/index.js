@@ -43,7 +43,7 @@ export default function SpotDetails() {
     <div className='spot-details-page'>
         { spot && <h1>{spot.name}</h1> }
         { spot && <div>{spot.city}, {spot.state}, {spot.country}</div> }
-        {spot && <img src={spot.previewImage} alt={spot.name} /> }
+        {spot && spot.previewImage && <img src={spot.previewImage} alt={spot.name} /> }
         <div className='spot-images-container'>
           {spot && spot.SpotImages && spot.SpotImages.map(image => {
             return <img key={nanoid(5)} src={image.url} alt={spot.name} className={image.preview ? "previewImage" : "spotImage"} />

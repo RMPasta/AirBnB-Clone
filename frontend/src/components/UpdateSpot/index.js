@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory, useParams } from 'react-router-dom';
-// import { getOneSpotThunk } from '../../store/spots';
 import { updateSpotThunk } from '../../store/spots';
-import { createSpotImageThunk } from '../../store/spotImage';
 
 function UpdateSpot({ spot }) {
   const dispatch = useDispatch();
-  const { spotId } = useParams();
+  const { id } = useParams();
   const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
   const [country, setCountry] = useState(spot?.country);
@@ -19,7 +17,6 @@ function UpdateSpot({ spot }) {
   const [description, setDescription] = useState(spot?.description);
   const [name, setName] = useState(spot?.name);
   const [price, setPrice] = useState(spot?.price);
-  const [preview, setPreview] = useState(spot?.SpotImages[0].url);
   const [errors, setErrors] = useState({});
 
     if (!sessionUser) return <Redirect to='/' />
@@ -32,7 +29,6 @@ function UpdateSpot({ spot }) {
       if (description.length < 30) setErrors({...errors, description: 'Description needs a minimum of 30 characters'})
       if (!name) setErrors({...errors, name: 'Name is required'})
       if (!price) setErrors({...errors, price: 'Price is required'})
-      if (!preview) setErrors({...errors, preview: 'Preview Image is required'})
 
       if (Object.values(errors).length > 0) return errors;
       await dispatch(updateSpotThunk({
@@ -45,17 +41,15 @@ function UpdateSpot({ spot }) {
         description,
         name,
         price
-      }, spotId))
-      .then(
-        await dispatch(createSpotImageThunk(spotId, preview, false))
-        )
+      }, id))
         .catch(async (res) => {
           const data = await res.json();
           if (data && data.errors) {
             setErrors(data.errors);
           }
         });
-          history.push(`/spots/${spotId}`)
+
+        history.push(`/spots/${id}`)
     };
 
     return (
@@ -183,22 +177,7 @@ function UpdateSpot({ spot }) {
           /></div>
         </label>
         <div className="error-container">
-        {errors.price && <p>{errors.price}</p>}
-        </div>
-        <div className="description">
-          <h2 className="h2">Liven up your spot with a photo</h2>
-          <p>Submit a link to a photo to publish your spot.</p>
-        </div>
-        <label>
-          Preview Image URL
-          <input
-            type="text"
-            value={preview}
-            onChange={(e) => setPreview(e.target.value)}
-          />
-        </label>
-        <div className="error-container">
-        {errors.preview && <p>{errors.preview}</p>}
+          {errors.price && <p>{errors.price}</p>}
         </div>
         <button type="submit">Update your Spot</button>
       </form>

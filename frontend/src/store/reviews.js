@@ -76,7 +76,6 @@ export const receiveReview = (review) => ({
       case RECEIVE_REVIEW: {
         const newState = {...state}
         newState[action.review.id] = action.review;
-        // newState[action.review.id].User.firstName = action.review;
         return { ...state, [action.review.id]: action.review };
       }
       case REMOVE_REVIEW:
