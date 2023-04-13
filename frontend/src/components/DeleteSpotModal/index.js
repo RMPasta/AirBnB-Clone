@@ -15,8 +15,8 @@ const DeleteSpotModal = ({ spot }) => {
   return (
     <div className="form-page">
       <h1>Confirm Delete</h1>
-        <button className="yes-delete" onClick={() => deleteSpot(spot)}>Delete</button>
-        <button className="no-delete" onClick={closeModal}>Dont Delete</button>
+        <button className="yes-delete" onClick={() => deleteSpot(spot)}>Yes (Delete Spot)</button>
+        <button className="no-delete" onClick={closeModal}>No (Keep Spot)</button>
     </div>
   );
 }

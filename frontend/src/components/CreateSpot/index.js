@@ -21,6 +21,7 @@ function CreateSpot() {
   // const [name, setName] = useState("");
   // const [price, setPrice] = useState("");
   // const [preview, setPreview] = useState("");
+
   const [country, setCountry] = useState("USA");
   const [address, setAddress] = useState("1 cool street");
   const [city, setCity] = useState("hamilton");
@@ -35,6 +36,7 @@ function CreateSpot() {
   const [preview, setPreview] = useState(
     "https://a0.muscache.com/im/pictures/9b1dac05-b810-46ea-8d35-f57072af1fe1.jpg?im_w=1200"
   );
+
   const [errors, setErrors] = useState({});
   const [disabled, setDisabled] = useState(true);
 

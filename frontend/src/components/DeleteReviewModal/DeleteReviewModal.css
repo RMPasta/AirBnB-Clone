@@ -1,9 +1,23 @@
 .yes-delete {
     background-color: salmon;
     color: white;
+    width: 150px;
+}
+
+.yes-delete:hover {
+    background-color: rgb(243, 112, 97);
+    color: white;
+    width: 150px;
 }
 
 .no-delete {
     background-color: darkgrey;
     color: white;
+    width: 150px;
+}
+
+.no-delete:hover {
+    background-color: grey;
+    color: white;
+    width: 150px;
 }
