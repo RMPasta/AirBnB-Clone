@@ -3,7 +3,6 @@
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-gap: 40px;
     padding-top: 60px;
-    font-family: Roboto;
 }
 
 p {
@@ -38,7 +37,7 @@ p {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: space-between;
+    width: 280px;
     margin: 0 auto;
     padding: 14px;
     border-radius: 20px;
