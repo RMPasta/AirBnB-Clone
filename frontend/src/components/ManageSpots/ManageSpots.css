@@ -1,0 +1,15 @@
+.manage-buttons {
+    margin: 0 auto;
+}
+
+button {
+    background-color: white;
+    margin: 10px 16px;
+    width: 120px;
+    box-shadow: 1px 1px 2px grey;
+}
+
+button:hover {
+    background-color: rgb(124, 124, 124);
+    color: white;
+}

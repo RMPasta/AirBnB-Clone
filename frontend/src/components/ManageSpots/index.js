@@ -50,7 +50,7 @@ export default function ManageSpots() {
             <p>${spot && spot.price} night</p>
             </div>
             </div>
-            <div>
+            <div className='manage-buttons'>
                 <button className='udpate-button' onClick={() => handleUpdate(spot)}>Update</button>
                 <OpenModalButton
                 buttonText="Delete"
