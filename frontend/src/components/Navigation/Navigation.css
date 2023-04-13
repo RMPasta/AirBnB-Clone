@@ -76,3 +76,7 @@ li {
 .hidden {
     display: none;
 }
+
+.bed {
+    width: 80px;
+}
