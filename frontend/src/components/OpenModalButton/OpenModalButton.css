@@ -4,3 +4,13 @@
     box-shadow: 2px 2px 2px grey;
     background-color: transparent;
 }
+
+.delete-button {
+   background-color: rgb(196, 74, 61);
+    color: white;
+}
+
+.delete-button:hover {
+    background-color: rgb(182, 58, 45);
+    color: white;
+}

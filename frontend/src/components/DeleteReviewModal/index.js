@@ -38,7 +38,7 @@ const deleteReview = async () => {
     <div className="form-page">
       <h1>Confirm Delete</h1>
       <h3>Are you sure you want to delete this review?</h3>
-        <button className="yes-delete" onClick={() => deleteReview(spot)}>Yes (Delete Review)</button>
+        <button className="yes-delete delete-button" onClick={() => deleteReview(spot)}>Yes (Delete Review)</button>
         <button className="no-delete" onClick={closeModal}>No (Keep Review)</button>
     </div>
   );

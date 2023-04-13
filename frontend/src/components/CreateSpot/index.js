@@ -61,7 +61,7 @@ function CreateSpot() {
     } else {
       setDisabled(true);
     }
-  }, [country, address, city, state, lat, lng]);
+  }, [country, address, city, state, lat, lng, description, name, price, preview]);
 
   if (!sessionUser) return <Redirect to="/" />;
 
