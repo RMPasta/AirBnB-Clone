@@ -28,9 +28,9 @@ const AddReviewModal = ({ spot }) => {
       return data;
     })
     if (addReviewRes.message) setErrors(addReviewRes);
-    dispatch(getReviewsThunk(spot.id))
-    dispatch(getSpotsThunk())
-    dispatch(getOneSpotThunk(spot.id))
+    await dispatch(getReviewsThunk(spot.id))
+    // dispatch(getSpotsThunk())
+    await dispatch(getOneSpotThunk(spot.id))
     if (!addReviewRes.message) closeModal();
   }
   const onChange = (number) => setRating(parseInt(number))

@@ -6,7 +6,6 @@ import { getReviewsThunk } from '../../store/reviews';
 import SpotDetails from '../SpotDetails';
 
 export default function SpotDetailWrapper() {
-  console.log("WRAPPER RUNNING")
 const dispatch = useDispatch();
 const { spotId } = useParams();
 const spotData = useSelector(state=>state.spots.spot);
