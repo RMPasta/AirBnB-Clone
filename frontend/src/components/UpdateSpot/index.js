@@ -24,7 +24,7 @@ function UpdateSpot({ spot }) {
 
     if (!sessionUser) return <Redirect to='/' />
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
       e.preventDefault();
       setErrors({});
       if (!lat) setErrors({...errors, lat: 'Latitude is required'})
@@ -35,7 +35,7 @@ function UpdateSpot({ spot }) {
       if (!preview) setErrors({...errors, preview: 'Preview Image is required'})
 
       if (Object.values(errors).length > 0) return errors;
-      dispatch(updateSpotThunk({
+      await dispatch(updateSpotThunk({
         country,
         address,
         city,
@@ -47,7 +47,7 @@ function UpdateSpot({ spot }) {
         price
       }, spotId))
       .then(
-        dispatch(createSpotImageThunk(spotId, preview, false))
+        await dispatch(createSpotImageThunk(spotId, preview, false))
         )
         .catch(async (res) => {
           const data = await res.json();

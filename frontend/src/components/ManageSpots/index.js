@@ -20,7 +20,6 @@ export default function ManageSpots() {
 
     const handleUpdate = (spot) => {
       history.push(`/spots/${spot.id}/edit`)
-      // return <Redirect to={`/spots/${spot.id}/edit`} />
     }
 
     useEffect(() => {

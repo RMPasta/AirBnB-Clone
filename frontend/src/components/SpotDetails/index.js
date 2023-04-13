@@ -24,6 +24,21 @@ export default function SpotDetails() {
   if (!spot) return <div>...Loading</div>
   if (!reviews) return <div>...Loading</div>
 
+  const months = {
+    '01': 'January',
+    '02': 'February',
+    '03': 'March',
+    '04': 'April',
+    '05': 'May',
+    '06': 'June',
+    '07': 'July',
+    '08': 'August',
+    '09': 'September',
+    '10': 'October',
+    '11': 'November',
+    '12': 'December'
+  };
+
   return (
     <div className='spot-details-page'>
         { spot && <h1>{spot.name}</h1> }
@@ -64,11 +79,11 @@ export default function SpotDetails() {
                 {!reviewed && sessionUser && spot.ownerId !== parseInt(sessionUser.id) && <OpenModalButton
                 buttonText="Add Review"
                 modalComponent={<AddReviewModal spot={spot} />} /> }
-                {reviews.length < 1 && <p>Be the first to post a review!</p>}
+                {reviews.length < 1 && spot.ownerId !== parseInt(sessionUser.id) && <p>Be the first to post a review!</p>}
             {reviews && reviews.map(review => {
               return <li key={nanoid(5)}  className='review'>
                 <div className='review-name'>{review.User ? review.User.firstName : sessionUser.firstName}</div>
-                <div className='review-date'>{review.createdAt.split('T')[0].slice(0, 7).split('-')[1] + ' ' + review.createdAt.split('T')[0].slice(0, 7).split('-')[0]}</div>
+                <div className='review-date'>{months[review.createdAt.split('T')[0].slice(0, 7).split('-')[1]] + ' ' + review.createdAt.split('T')[0].slice(0, 7).split('-')[0]}</div>
                 <div>{review.review}</div>
                 { review.User && sessionUser && review.User.id === parseInt(sessionUser.id) && <OpenModalButton
                 buttonText="Delete Review"

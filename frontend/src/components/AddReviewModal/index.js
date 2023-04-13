@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { addReviewThunk } from "../../store/reviews";
 import { getReviewsThunk } from '../../store/reviews';
 import { getOneSpotThunk } from '../../store/spots';
-import { getSpotsThunk } from '../../store/spots';
 import { useModal } from "../../context/Modal";
 import RatingInput from "../RatingInput";
 import './AddReviewModal.css';

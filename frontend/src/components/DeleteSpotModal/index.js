@@ -9,8 +9,6 @@ const DeleteSpotModal = ({ spot }) => {
   const deleteSpot = (spot) => {
     dispatch(deleteSpotThunk(spot))
     .then(closeModal())
-    // history.push('/')
-    // history.push('/spots/current')
   }
 
 

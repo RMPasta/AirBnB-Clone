@@ -13,8 +13,8 @@ const DeleteReviewModal = ({ spot }) => {
   const sessionUser = useSelector(state=>state.session.user);
 
 useEffect(() => {
-    dispatch(getOneSpotThunk(spot.id))
     dispatch(getReviewsThunk(spot.id))
+    dispatch(getOneSpotThunk(spot.id))
 }, [dispatch, spot.id])
 
 let usersReview;
