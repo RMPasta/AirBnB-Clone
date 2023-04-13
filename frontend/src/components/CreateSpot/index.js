@@ -20,6 +20,7 @@ function CreateSpot() {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [preview, setPreview] = useState("");
+  const [disabled, setDisabled] = useState(true);
   // const [country, setCountry] = useState("USA");
   // const [address, setAddress] = useState("1 cool street");
   // const [city, setCity] = useState("hamilton");
@@ -36,6 +37,14 @@ function CreateSpot() {
   useEffect(() => {
     dispatch(getSpotsThunk())
   }, [dispatch])
+
+  useEffect(() => {
+    if (country && address && city && state && lat && lng && description && name && price && preview) {
+      setDisabled(false)
+    } else {
+      setDisabled(true)
+    }
+  }, [country, address, city, state, lat, lng]);
 
   if (!sessionUser) return <Redirect to='/' />
 
@@ -224,7 +233,7 @@ function CreateSpot() {
         <div className="error-container">
         {errors.preview && <p>{errors.preview}</p>}
         </div>
-        <button type="submit">Create Spot</button>
+        <button disabled={disabled} type="submit">Create Spot</button>
       </form>
     </div>
   );

@@ -24,10 +24,13 @@ function SignupFormModal() {
     } else {
       setDisabled(true)
     }
-    // if (username.length < 4 && password.length < 6) {
-    //   setDisabled(true)
-    // }
-  }, [email, username, firstName, lastName, password, confirmPassword])
+  }, [email, username, firstName, lastName, password, confirmPassword]);
+
+  useEffect(() => {
+    if (username.length < 4 || password.length < 6) {
+      setDisabled(true)
+    }
+  }, [username, password])
 
   if (sessionUser) return <Redirect to="/" />;
 
