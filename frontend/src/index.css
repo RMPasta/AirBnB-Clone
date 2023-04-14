@@ -12,3 +12,11 @@ button {
 button:hover {
     cursor: pointer;
 }
+
+button:disabled {
+    background-color: rgb(186, 183, 183);
+}
+
+button:disabled:hover {
+    background-color: rgb(186, 183, 183);
+}
