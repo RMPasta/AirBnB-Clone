@@ -37,7 +37,7 @@ export default function ManageSpots() {
           {ownedSpots && ownedSpots.map((spot) => (
          <li key={nanoid(5)} className="spot-card">
             <div className="clickable" onClick={() => handleClick(spot)}>
-          <div className='tool-tip'>{spot && spot.name}</div>
+          {/* <div className='tool-tip'>{spot && spot.name}</div> */}
             <img src={spot && spot.previewImage} alt={spot && spot.description} className="previewImageLanding" />
             <div className="name-rating-container">
               <p>{spot && spot.city}, {spot && spot.state}</p>
