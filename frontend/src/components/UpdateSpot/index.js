@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory, useParams } from "react-router-dom";
-import { getOneSpotThunk, updateSpotThunk } from "../../store/spots";
+import { updateSpotThunk } from "../../store/spots";
+import './UpdateSpot.css';
 
 function UpdateSpot({ spot }) {
   const dispatch = useDispatch();
@@ -203,7 +204,7 @@ function UpdateSpot({ spot }) {
         <div className="error-container">
           {errors.price && <p>{errors.price}</p>}
         </div>
-        <button type="submit">Update your Spot</button>
+        <button className="update-button" type="submit">Update your Spot</button>
       </form>
     </div>
   );

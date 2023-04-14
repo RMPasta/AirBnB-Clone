@@ -40,6 +40,7 @@ const RatingInput = ({ rating, disabled, onChange }) => {
       onClick={() => {if (!disabled) onChange(5)}} >
       <i className={activeRating >= 5 ? "fa fa-star" : "fa-regular fa-star"}></i>
     </div>
+    Stars
   </div>
   );
 };

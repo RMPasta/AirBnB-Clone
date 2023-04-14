@@ -3,6 +3,7 @@
     border: 1px 1px 1px black;
     box-shadow: 2px 2px 2px grey;
     background-color: transparent;
+    width: 100px;
 }
 
 .delete-button {

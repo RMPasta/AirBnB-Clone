@@ -2,6 +2,7 @@
     background-color: rgb(196, 74, 61);
     color: white;
     width: 150px;
+    margin-bottom: 10px;
 }
 
 .yes-delete:hover {
@@ -14,6 +15,7 @@
     background-color: darkgrey;
     color: white;
     width: 150px;
+    margin-bottom: 10px;
 }
 
 .no-delete:hover {

@@ -45,7 +45,6 @@ const AddReviewModal = ({ spot }) => {
             <RatingInput
             rating={rating}
             onChange={onChange}  />
-            <p>Stars</p>
         </div>
         <button disabled={disabled} className="review-submit">Submit Your Review</button>
       </form>

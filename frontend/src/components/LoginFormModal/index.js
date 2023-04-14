@@ -56,7 +56,7 @@ const LoginFormModal = () => {
     <div className="form-page">
       <h1>Log In</h1>
       <form onSubmit={handleSubmit}>
-        <label>
+        <label className="username-container">
           Username/Email:
           <input
             type="text"
@@ -65,7 +65,7 @@ const LoginFormModal = () => {
             required
           />
         </label>
-        <label>
+        <label className="password-container">
           Password:
           <input
             type="password"
@@ -77,9 +77,9 @@ const LoginFormModal = () => {
         <div className="error-container">
         {errors.credential && <p>{errors.credential}</p>}
         </div>
-        <button type="submit" disabled={disabled}>Log In</button>
+        <button type="submit" disabled={disabled} className="login-button">Log In</button>
+        <button onClick={() => demoSubmit()} className="login-button">Demo User</button>
       </form>
-        <button className="demo-login" onClick={() => demoSubmit()}>Demo User</button>
     </div>
   );
 }

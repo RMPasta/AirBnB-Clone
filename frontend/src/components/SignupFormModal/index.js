@@ -136,7 +136,7 @@ function SignupFormModal() {
         <div className="error-container">
         {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
         </div>
-        <button disabled={disabled} type="submit">Sign Up</button>
+        <button disabled={disabled} type="submit" className="submit-signup">Sign Up</button>
       </form>
     </div>
   );

@@ -283,7 +283,7 @@ function CreateSpot() {
         <div className="error-container">
           {errors.preview && <p>{errors.preview}</p>}
         </div>
-        <button disabled={disabled} type="submit">
+        <button disabled={disabled} type="submit" className="submit-create">
           Create Spot
         </button>
       </form>
