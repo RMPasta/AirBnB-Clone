@@ -22,9 +22,8 @@ export default function Landing() {
   return (
     <div className="page">
           {spots && spots.map((spot) => (
-         <li key={nanoid(5)} className="spot-card">
+         <li key={nanoid(5)} className="spot-card" title={spot.name}>
               <div className="clickable" onClick={() => handleClick(spot)}>
-          <div className='tool-tip'>{spot && spot.name}</div>
             <img src={spot && spot.previewImage} alt={spot && spot.description} className="previewImageLanding" />
             <div className="name-rating-container">
               <p>{spot && spot.city}, {spot && spot.state}</p>
@@ -32,6 +31,7 @@ export default function Landing() {
                 { spot && <p className="avgRating">{spot.avgRating > 0 ? spot.avgRating : "New"}</p> }
                 <i className="fas fa-star"></i>
               </div>
+              <div className='tool-tip'>{spot && spot.name}</div>
             </div>
             <div className="price">
             <p>${spot && spot.price} night</p>

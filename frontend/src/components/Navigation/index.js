@@ -11,7 +11,7 @@ function Navigation({ isLoaded }) {
   return (
     <ul className="nav-ul">
       <li className="home-logo">
-        <NavLink exact to="/">
+        <NavLink exact to="/" style={{ textDecoration: 'none' }}>
           <div className="logo-container">
             <img src={bed} alt="bed" className="bed" />
             <h1 className="logo-h1">CoolBnB</h1>
@@ -19,7 +19,7 @@ function Navigation({ isLoaded }) {
         </NavLink>
       </li>
       <div className="nav-right">
-        {sessionUser && <NavLink to="/spots/new">Create a New Spot</NavLink>}
+        {sessionUser && <NavLink to="/spots/new" style={{ textDecoration: 'none' }}>Create a New Spot</NavLink>}
         {isLoaded && (
           <li className="dropdown-container">
             <ProfileButton user={sessionUser} />

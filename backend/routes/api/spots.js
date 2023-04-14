@@ -221,7 +221,6 @@ const validateSpot = [
                 spot.SpotImages.forEach(image => {
                     if (image.preview) previewImage = image;
                 })
-                // let previewImage = spot.SpotImages[0];
                 if (previewImage) {
                     spot.previewImage = previewImage.url;
                 }else {
