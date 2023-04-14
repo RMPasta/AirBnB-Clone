@@ -30,7 +30,7 @@ const AddReviewModal = ({ spot }) => {
     await dispatch(getReviewsThunk(spot.id))
     // dispatch(getSpotsThunk())
     await dispatch(getOneSpotThunk(spot.id))
-    if (!addReviewRes.message) closeModal();
+    closeModal();
   }
   const onChange = (number) => setRating(parseInt(number))
   return (
