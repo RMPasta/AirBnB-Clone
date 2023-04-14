@@ -28,6 +28,7 @@ label {
 
 .login-button:active {
     box-shadow: 1px 1x 1px black;
+    border: none;
 }
 
 .demo-button {
