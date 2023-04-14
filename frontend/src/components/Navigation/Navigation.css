@@ -7,13 +7,16 @@
     /* border: 1px solid grey; */
 }
 
-.home-logo {
+.logo-container {
+    display: flex;
+    justify-content: center;
     align-items: center;
+}
+
+.logo-h1 {
     color: rgb(15, 15, 82);
-    position: relative;
-    left: 10px;
-    top: 0;
     text-decoration: none;
+    font-size: 24px;
 }
 
 .navLink {

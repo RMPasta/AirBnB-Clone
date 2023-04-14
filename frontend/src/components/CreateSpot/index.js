@@ -61,7 +61,18 @@ function CreateSpot() {
     } else {
       setDisabled(true);
     }
-  }, [country, address, city, state, lat, lng, description, name, price, preview]);
+  }, [
+    country,
+    address,
+    city,
+    state,
+    lat,
+    lng,
+    description,
+    name,
+    price,
+    preview,
+  ]);
 
   if (!sessionUser) return <Redirect to="/" />;
 
@@ -80,7 +91,8 @@ function CreateSpot() {
     if (!preview)
       setErrors({ ...errors, preview: "Preview Image is required" });
 
-    if (Object.values(errors).length > 0) return errors;
+    if (!lat || !lng || description.length < 30 || !name || !price || !preview)
+      return errors;
     const newSpot = await dispatch(
       createSpotThunk({
         country,
