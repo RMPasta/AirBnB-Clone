@@ -2,9 +2,18 @@
     margin: 20px 0 0 0;
     border: 1px 1px 1px black;
     box-shadow: 2px 2px 2px black;
-    background-color: whitesmoke;
-    color: black;
+    background-color: rgb(110, 108, 108);
+    color: white;
     width: 100px;
+}
+
+.modal-buttons:hover {
+    color: white;
+}
+
+.modal-buttons:active {
+    box-shadow: 1px 1px 1px black;
+    border: none;
 }
 
 .delete-button {
@@ -23,4 +32,9 @@
 .delete-button:hover {
     background-color: rgb(182, 58, 45);
     color: white;
+}
+
+.delete-button:active {
+    box-shadow: 1px 1px 1px black;
+    border: none;
 }

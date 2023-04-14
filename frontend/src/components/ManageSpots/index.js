@@ -32,7 +32,7 @@ export default function ManageSpots() {
   return (
       <div className="manage-page">
         <h1>Manage Your Spots</h1>
-        { !ownedSpots.length && <NavLink to="/spots/new"><button>Create a New Spot</button></NavLink> }
+        { !ownedSpots.length && <NavLink to="/spots/new"><button className='manage-spots-create'>Create a New Spot</button></NavLink> }
         <div className='page'>
           {ownedSpots && ownedSpots.map((spot) => (
          <li key={nanoid(5)} className="spot-card">

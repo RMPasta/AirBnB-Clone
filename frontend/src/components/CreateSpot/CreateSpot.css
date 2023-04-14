@@ -53,9 +53,15 @@ h3 {
     border-radius: none;
     background-color: lightcoral;
     color: white;
-    box-shadow: 1px 2px 0px 1px black;
+    box-shadow: 2px 2px 2px black;
 }
+
 .submit-create:hover {
     background-color: rgb(241, 105, 105);
     color: white;
+}
+
+.submit-create:active {
+    box-shadow: 1px 1px 1px black;
+    border: none;
 }

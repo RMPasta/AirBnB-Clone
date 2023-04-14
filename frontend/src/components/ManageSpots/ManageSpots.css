@@ -17,3 +17,19 @@ button:hover {
 .update-button {
     box-shadow: 2px 2px 2px black;
 }
+
+.update-button:active {
+    box-shadow: 1px 1px 1px black;
+    border: none;
+}
+
+.manage-spots-create {
+    width: 140px;
+    box-shadow: 2px 2px 2px black;
+}
+
+.manage-spots-create:active {
+    width: 140px;
+    box-shadow: 1px 1px 1px black;
+    border: none;
+}

@@ -78,8 +78,9 @@ export default function SpotDetails() {
                 </div>
                 {!reviewed && sessionUser && spot.ownerId !== parseInt(sessionUser.id) && <OpenModalButton
                 buttonText="Add Review"
+                className="add-review-button"
                 modalComponent={<AddReviewModal spot={spot} />} /> }
-                {reviews.length < 1 && sessionUser && spot.ownerId !== parseInt(sessionUser.id) && <p>Be the first to post a review!</p>}
+                {reviews.length < 1 && sessionUser && spot.ownerId !== parseInt(sessionUser.id) && <p className='be-the-first'>Be the first to post a review!</p>}
             {reviews && reviews.map((review) => {
               return <li key={nanoid(5)}  className='review'>
                 <div className='review-name'>{review.User ? review.User.firstName : sessionUser.firstName}</div>

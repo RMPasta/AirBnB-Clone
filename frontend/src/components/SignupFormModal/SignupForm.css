@@ -33,4 +33,14 @@ p {
 .submit-signup {
     margin-top: 8px;
     padding: 1px;
+    box-shadow: 3px 3px 3px black;
+    border: none;
+}
+
+.submit-signup:active {
+    box-shadow: 1px 1px 1px black;
+}
+
+.submit-signup:disabled {
+    background-color: rgb(190, 188, 188);
 }

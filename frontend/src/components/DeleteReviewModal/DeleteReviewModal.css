@@ -5,12 +5,17 @@
     height: 40px;
     margin-bottom: 10px;
     width: 80%;
-    box-shadow: 2px 3px 0px 2px black;
+    box-shadow: 2px 3px 2px black;
 }
 
 .yes-delete:hover {
     background-color: rgb(182, 58, 45);
     color: white;
+}
+
+.yes-delete:active {
+    box-shadow: 1px 1px 1px black;
+    border: none;
 }
 
 .no-delete {
@@ -19,10 +24,15 @@
     width: 80%;
     height: 40px;
     margin-bottom: 10px;
-    box-shadow: 2px 3px 0px 2px black;
+    box-shadow: 2px 3px 2px black;
 }
 
 .no-delete:hover {
     background-color: rgb(82, 80, 80);
     color: white;
+}
+
+.no-delete:active {
+    box-shadow: 1px 1px 1px black;
+    border: none;
 }

@@ -20,4 +20,11 @@
 
 .review-submit {
     width: 180px;
+    box-shadow: 2px 2px 2px black;
+}
+
+.review-submit:active {
+    width: 180px;
+    box-shadow: 1px 1px 1px black;
+    border: none;
 }
