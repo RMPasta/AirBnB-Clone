@@ -21,10 +21,8 @@ export default function Landing() {
 
   return (
     <div className="page">
-      {spots &&
-        spots
-          .map((spot) => (
-            <li key={nanoid(5)} className="spot-card">
+          {spots && spots.map((spot) => (
+         <li key={nanoid(5)} className="spot-card" title={spot.name}>
               <div className="clickable" onClick={() => handleClick(spot)}>
                 <div className="tool-tip">{spot && spot.name}</div>
                 <img
