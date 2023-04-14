@@ -10,7 +10,7 @@ export default function Landing() {
   const history = useHistory();
   const spotsObj = useSelector((state) => state.spots); // populate from Redux store
   const spots = Object.values(spotsObj);
-  console.log(spots);
+
   const handleClick = (spot) => {
     history.push(`/spots/${spot.id}`);
   };
