@@ -1,20 +1,24 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import ProfileButton from './ProfileButton';
-import bed from '../../assets/bed.jpg';
-import './Navigation.css';
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import ProfileButton from "./ProfileButton";
+import bed from "../../assets/bed.jpg";
+import "./Navigation.css";
 
-function Navigation({ isLoaded }){
-  const sessionUser = useSelector(state => state.session.user);
+function Navigation({ isLoaded }) {
+  const sessionUser = useSelector((state) => state.session.user);
 
   return (
     <ul className="nav-ul">
       <li className="home-logo">
-        <NavLink exact to="/"><img src={bed} alt="bed" className='bed' /></NavLink>
-        <h2>CoolBnB</h2>
+        <NavLink exact to="/">
+          <div className="logo-container">
+            <img src={bed} alt="bed" className="bed" />
+            <h1 className="logo-h1">CoolBnB</h1>
+          </div>
+        </NavLink>
       </li>
-      <div className='nav-right'>
+      <div className="nav-right">
         {sessionUser && <NavLink to="/spots/new">Create a New Spot</NavLink>}
         {isLoaded && (
           <li className="dropdown-container">
