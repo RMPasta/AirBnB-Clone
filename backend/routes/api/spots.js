@@ -217,7 +217,11 @@ const validateSpot = [
                 spot.avgRating = parseFloat(avg.toFixed(1));
 
             if (spot.SpotImages) {
-                let previewImage = spot.SpotImages[0];
+                let previewImage;
+                spot.SpotImages.forEach(image => {
+                    if (image.preview) previewImage = image;
+                })
+                // let previewImage = spot.SpotImages[0];
                 if (previewImage) {
                     spot.previewImage = previewImage.url;
                 }else {
