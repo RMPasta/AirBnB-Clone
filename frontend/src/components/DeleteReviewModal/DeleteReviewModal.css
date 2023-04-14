@@ -2,24 +2,27 @@
     background-color: rgb(196, 74, 61);
     color: white;
     width: 150px;
+    height: 40px;
     margin-bottom: 10px;
+    width: 80%;
+    box-shadow: 2px 3px 0px 2px black;
 }
 
 .yes-delete:hover {
     background-color: rgb(182, 58, 45);
     color: white;
-    width: 150px;
 }
 
 .no-delete {
-    background-color: darkgrey;
+    background-color: rgb(110, 108, 108);
     color: white;
-    width: 150px;
+    width: 80%;
+    height: 40px;
     margin-bottom: 10px;
+    box-shadow: 2px 3px 0px 2px black;
 }
 
 .no-delete:hover {
-    background-color: grey;
+    background-color: rgb(82, 80, 80);
     color: white;
-    width: 150px;
 }

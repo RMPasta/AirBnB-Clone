@@ -15,8 +15,9 @@ function OpenModalButton({
     if (typeof onModalClose === "function") setOnModalClose(onModalClose);
     setModalContent(modalComponent);
   };
-
-  return <button className={buttonText.startsWith("Delete") ? "delete-button" : "modal-buttons"} onClick={onClick}>{buttonText}</button>;
+  if (buttonText === "Delete") return <button className="delete-button" onClick={onClick}>{buttonText}</button>;
+  if (buttonText === "Delete Review") return <button className="delete-review-button" onClick={onClick}>{buttonText}</button>;
+  return <button className="modal-buttons" onClick={onClick}>{buttonText}</button>;
 }
 
 export default OpenModalButton;

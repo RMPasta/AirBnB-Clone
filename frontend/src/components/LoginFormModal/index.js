@@ -78,7 +78,7 @@ const LoginFormModal = () => {
         {errors.credential && <p>{errors.credential}</p>}
         </div>
         <button type="submit" disabled={disabled} className="login-button">Log In</button>
-        <button onClick={() => demoSubmit()} className="login-button">Demo User</button>
+        <button onClick={() => demoSubmit()} className="demo-button">Demo User</button>
       </form>
     </div>
   );

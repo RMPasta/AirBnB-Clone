@@ -51,7 +51,7 @@ export default function ManageSpots() {
             </div>
             </div>
             <div className='manage-buttons'>
-                <button className='udpate-button' onClick={() => handleUpdate(spot)}>Update</button>
+                <button className='update-button' onClick={() => handleUpdate(spot)}>Update</button>
                 <OpenModalButton
                 buttonText="Delete"
                 modalComponent={<DeleteSpotModal spot={spot} />}

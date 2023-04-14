@@ -1,5 +1,4 @@
 .page {
-    width: 1024px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     /* grid-gap: 0px; */
@@ -85,21 +84,20 @@ p {
     font-size: 18px;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 990px) {
     .page {
         grid-template-columns: 1fr 1fr 1fr;
     }
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 920px) {
     .page {
         grid-template-columns: 1fr 1fr;
     }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
     .page {
       grid-template-columns: 1fr;
-      height: 14rem;
     }
   }

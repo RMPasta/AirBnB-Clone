@@ -86,6 +86,7 @@ export default function SpotDetails() {
                 <div className='review-date'>{months[review.createdAt.split('T')[0].slice(0, 7).split('-')[1]] + ' ' + review.createdAt.split('T')[0].slice(0, 7).split('-')[0]}</div>
                 <div>{review.review}</div>
                 { review.User && sessionUser && review.User.id === parseInt(sessionUser.id) && <OpenModalButton
+                className="delete-review-button"
                 buttonText="Delete Review"
                 modalComponent={<DeleteReviewModal spot={spot} />} /> }
               </li>

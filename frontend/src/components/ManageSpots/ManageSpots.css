@@ -3,11 +3,17 @@
 }
 
 button {
-    width: 80px;
+    width: 64px;
+    height: 30px;
     margin: 0 4px;
+    background-color: rgb(110, 108, 108);
+    color: white
 }
 
 button:hover {
-    background-color: rgb(219, 219, 219);
-    color: black;
+    background-color: rgb(95, 92, 92);
+}
+
+.update-button {
+    box-shadow: 2px 2px 2px black;
 }
