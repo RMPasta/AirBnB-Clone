@@ -24,6 +24,8 @@ export default function SpotDetails() {
   if (!spot) return <div>...Loading</div>
   if (!reviews) return <div>...Loading</div>
 
+  const sortedReviews = reviews.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+
   const months = {
     '01': 'January',
     '02': 'February',
@@ -81,7 +83,7 @@ export default function SpotDetails() {
                 className="add-review-button"
                 modalComponent={<AddReviewModal spot={spot} />} /> }
                 {reviews.length < 1 && sessionUser && spot.ownerId !== parseInt(sessionUser.id) && <p className='be-the-first'>Be the first to post a review!</p>}
-            {reviews && reviews.map((review) => {
+            {sortedReviews && sortedReviews.map((review) => {
               return <li key={nanoid(5)}  className='review'>
                 <div className='review-name'>{review.User ? review.User.firstName : sessionUser.firstName}</div>
                 <div className='review-date'>{months[review.createdAt.split('T')[0].slice(0, 7).split('-')[1]] + ' ' + review.createdAt.split('T')[0].slice(0, 7).split('-')[0]}</div>
@@ -91,7 +93,7 @@ export default function SpotDetails() {
                 buttonText="Delete Review"
                 modalComponent={<DeleteReviewModal spot={spot} />} /> }
               </li>
-            }).reverse()}
+            })}
           </div>
     </div>
   )

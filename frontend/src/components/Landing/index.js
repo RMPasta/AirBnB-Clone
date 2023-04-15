@@ -19,9 +19,13 @@ export default function Landing() {
     dispatch(getSpotsThunk());
   }, [dispatch]);
 
+  if (!spots) return <div>...Loading</div>
+
+  const sortedSpots = spots.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+
   return (
     <div className="page">
-          {spots && spots.map((spot) => (
+          {sortedSpots && sortedSpots.map((spot) => (
          <li key={nanoid(5)} className="spot-card" title={spot.name}>
               <div className="clickable" onClick={() => handleClick(spot)}>
                 {/* <div className="tool-tip">{spot && spot.name}</div> */}
@@ -48,8 +52,7 @@ export default function Landing() {
                 </div>
               </div>
             </li>
-          ))
-          .reverse()}
+          ))}
     </div>
   );
 }
