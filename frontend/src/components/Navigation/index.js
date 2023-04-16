@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
-import bed from "../../assets/bed.jpg";
+import logo from "../../assets/logo.jpg";
 import "./Navigation.css";
 
 function Navigation({ isLoaded }) {
@@ -13,8 +13,7 @@ function Navigation({ isLoaded }) {
       <li className="home-logo">
         <NavLink exact to="/" style={{ textDecoration: 'none' }}>
           <div className="logo-container">
-            <img src={bed} alt="bed" className="bed" />
-            <h1 className="logo-h1">CoolBnB</h1>
+            <img src={logo} alt="logo" className="logo" />
           </div>
         </NavLink>
       </li>
