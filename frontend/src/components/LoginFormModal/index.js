@@ -44,7 +44,7 @@ const LoginFormModal = () => {
           }
         }
         );
-        history.push('/')
+        closeModal();
       };
 
   useEffect(() => {
