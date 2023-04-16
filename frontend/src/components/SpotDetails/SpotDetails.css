@@ -126,15 +126,3 @@
 .be-the-first {
     margin-top: 10px;
 }
-
-.delete-review-button {
-    margin-top: 18px;
-}
-
-.delete-review-button:hover {
-    background-color: rgb(182, 58, 45);
-}
-
-.delete-review-button:active {
-    border: none;
-}

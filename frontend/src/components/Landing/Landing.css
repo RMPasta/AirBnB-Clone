@@ -43,20 +43,20 @@ p {
     height: 210px;
     margin: 15px auto;
     padding: 14px;
-    border-radius: 16px;
-    /* box-shadow: 2px 2px 8px 3px grey; */
+    border-radius: 20px;
+    box-shadow: 2px 2px 8px 3px grey;
     cursor: pointer;
-    transition: box-shadow 600ms ease-out;
+    transition: box-shadow 1s;
 }
 
 .spot-card:hover {
-    box-shadow: 2px 2px 6px 2px grey;
+    box-shadow: 4px 4px 9px 5px grey;
 }
 
 .previewImageLanding {
     width: 180px;
     height: 120px;
-    border-radius: 20px;
+    border-radius: 10px;
 }
 
 .name-rating-container {
