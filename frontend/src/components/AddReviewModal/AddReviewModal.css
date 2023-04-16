@@ -21,7 +21,12 @@
 .review-submit {
     width: 180px;
     border: none;
+    background-color: rgb(100, 132, 192);
     box-shadow: 2px 2px 2px black;
+}
+
+.review-submit:hover {
+    background-color: rgb(71, 107, 175);
 }
 
 .review-submit:active {

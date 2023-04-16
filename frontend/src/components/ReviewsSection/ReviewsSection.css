@@ -41,10 +41,11 @@
 
 .add-review-button {
     box-shadow: 2px 2px 2px black;
-    background-color: rgb(110, 108, 108);
+    background-color: rgb(100, 132, 192);
 }
 
 .add-review-button:hover {
+    background-color: rgb(71, 107, 175);
     box-shadow: 1px 1px 1px black;
 }
 

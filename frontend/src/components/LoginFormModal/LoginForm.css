@@ -17,13 +17,13 @@ label {
     align-self: center;
     margin-bottom: 10px;
     box-shadow: 4px 4px 2px black;
-    background-color: lightcoral;
+    background-color: rgb(100, 132, 192);
     color: white;
 }
 
 .login-button:hover {
     cursor: pointer;
-    background-color: rgb(241, 105, 105);
+    background-color: rgb(71, 107, 175);
 }
 
 .login-button:active {

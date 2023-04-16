@@ -13,7 +13,7 @@
 }
 
 .logo {
-    width: 100px;
+    width: 120px;
 }
 
 .navLink {
@@ -55,7 +55,7 @@
     align-items: center;
     border: 2px solid black;
     position: absolute;
-    top: 80px;
+    top: 90px;
     right: 2px;
     flex-direction: column;
     padding: 4px 10px;
