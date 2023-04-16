@@ -2,12 +2,13 @@
     margin: 20px 0 0 0;
     border: 1px 1px 1px black;
     box-shadow: 2px 2px 2px black;
-    background-color: rgb(110, 108, 108);
+    background-color: rgb(100, 132, 192);
     color: white;
     width: 100px;
 }
 
 .modal-buttons:hover {
+    background-color: rgb(71, 107, 175);
     color: white;
 }
 
@@ -17,13 +18,13 @@
 }
 
 .delete-button {
-    background-color: rgb(196, 74, 61);
+    background-color: rgb(201, 51, 34);
     box-shadow: 2px 2px 2px black;
     color: white;
 }
 
 .delete-review-button {
-    background-color: rgb(196, 74, 61);
+    background-color: rgb(160, 17, 1);
     box-shadow: 2px 2px 2px black;
     width: 100px;
     color: white;

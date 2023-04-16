@@ -12,6 +12,7 @@ button {
     background-color: #f5f5f5;
     align-self: center;
     padding: 4px;
+    transition: background-color 500ms;
 }
 
 button:hover {

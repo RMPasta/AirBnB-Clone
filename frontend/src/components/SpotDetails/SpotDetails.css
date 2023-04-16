@@ -60,13 +60,13 @@
 .reserve-button {
     width: 300px;
     height: 50px;
-    background-color: lightcoral;
+    background-color: rgb(100, 132, 192);
     color: white;
     box-shadow: 3px 3px 2px black;
 }
 
 .reserve-button:hover {
-    background-color: rgb(241, 105, 105);
+    background-color: rgb(71, 107, 175);
     color: white;
 }
 
