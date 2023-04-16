@@ -4,7 +4,7 @@ Live Site: https://air-bnb-yykb.onrender.com/spots/current
 
 This is a web application inspired by airbnb.
 
-Stack: 
+Stack:
 - Express JS,
 - PostgreSQL,
 - React,
