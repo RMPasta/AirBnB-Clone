@@ -22,7 +22,7 @@ export default function SpotDetails() {
           })}
         </div>
         <div className='spot-info'>
-          <div>
+          <div className='reserve-container'>
             {spot.Owner && <h2>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h2> }
             <p>{spot.description}</p>
           </div>

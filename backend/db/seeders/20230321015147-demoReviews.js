@@ -88,7 +88,7 @@ module.exports = {
       {
         spotId: 8,
         userId: 11,
-        review: "loved it",
+        review: "loved it Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Dui id ornare arcu odio ut sem nulla pharetra diam. Adipiscing enim eu turpis egestas pretium aenean pharetra. Nisl rhoncus mattis rhoncus urna neque. Ornare suspendisse sed nisi lacus sed viverra tellus. Purus in massa tempor nec feugiat nisl pretium fusce.",
         stars: 5,
       },
       {
