@@ -16,7 +16,7 @@ module.exports = {
       {
         spotId: 1,
         userId: 4,
-        review: "such cool spot. i wish i lived there. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        review: "such cool spot. i wish i lived there. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pellentesque habitant morbi tristique senectus et netus et malesuada. Morbi blandit cursus risus at ultrices mi.",
         stars: 5,
       },
       {
@@ -28,7 +28,7 @@ module.exports = {
       {
         spotId: 1,
         userId: 11,
-        review: "I WILL BE BACK!!! COOL SPOT. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        review: "I WILL BE BACK!!! COOL SPOT. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pellentesque habitant morbi tristique senectus et netus et malesuada. Morbi blandit cursus risus at ultrices mi.",
         stars: 4,
       },
       {
@@ -52,7 +52,7 @@ module.exports = {
       {
         spotId: 3,
         userId: 5,
-        review: "business Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        review: "business Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pellentesque habitant morbi tristique senectus et netus et malesuada. Morbi blandit cursus risus at ultrices mi.",
         stars: 4,
       },
       {
@@ -76,7 +76,7 @@ module.exports = {
       {
         spotId: 6,
         userId: 12,
-        review: "Pretty cool Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        review: "Pretty cool Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pellentesque habitant morbi tristique senectus et netus et malesuada. Morbi blandit cursus risus at ultrices mi.",
         stars: 4,
       },
       {
@@ -112,7 +112,7 @@ module.exports = {
       {
         spotId: 12,
         userId: 6,
-        review: "Wow! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        review: "Wow! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pellentesque habitant morbi tristique senectus et netus et malesuada. Morbi blandit cursus risus at ultrices mi.",
         stars: 5,
       },
       {
@@ -142,7 +142,7 @@ module.exports = {
       {
         spotId: 15,
         userId: 8,
-        review: "Really good Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        review: "Really good Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pellentesque habitant morbi tristique senectus et netus et malesuada. Morbi blandit cursus risus at ultrices mi.",
         stars: 4,
       },
     ], {})
