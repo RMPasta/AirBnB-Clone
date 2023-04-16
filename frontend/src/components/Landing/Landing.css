@@ -1,7 +1,6 @@
 .page {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    /* grid-gap: 0px; */
     padding-top: 30px;
     margin: 0 auto;
 }
@@ -10,30 +9,12 @@ p {
     color: black;
 }
 
-/* .tool-tip {
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    background-color: rgba(238, 234, 234, 0.7);
-    width: fit-content;
-    padding: 4px;
-    border-radius: 10px 0;
-} */
-
-
 .clickable {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: space-between;
-    /* border: 1px solid red; */
 }
-
-/* .spot-card:hover .tool-tip {
-    display: flex;
-    align-self: center;
-} */
-
 
 .spot-card {
     display: flex;
@@ -42,11 +23,10 @@ p {
     width: 180px;
     height: 210px;
     margin: 15px auto;
-    padding: 14px;
-    border-radius: 20px;
-    /* box-shadow: 2px 2px 8px 3px grey; */
+    padding: 22px;
+    border-radius: 10px;
     cursor: pointer;
-    transition: box-shadow 600ms;
+    transition: box-shadow 400ms linear;
 }
 
 .spot-card:hover {
@@ -54,8 +34,9 @@ p {
 }
 
 .previewImageLanding {
-    width: 180px;
-    height: 120px;
+    align-self: center;
+    width: 199px;
+    height: 140px;
     border-radius: 10px;
 }
 
@@ -85,8 +66,6 @@ p {
     font-size: 18px;
 }
 
-
-
 @media screen and (min-width: 1150px) {
     .page {
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -99,19 +78,19 @@ p {
     }
 }
 
-@media screen and (max-width: 990px) {
+@media screen and (max-width: 930px) {
     .page {
         grid-template-columns: 1fr 1fr 1fr;
     }
 }
 
-@media screen and (max-width: 920px) {
+@media screen and (max-width: 700px) {
     .page {
         grid-template-columns: 1fr 1fr;
     }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 460px) {
     .page {
       grid-template-columns: 1fr;
     }
