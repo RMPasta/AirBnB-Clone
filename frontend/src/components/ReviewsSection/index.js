@@ -4,6 +4,7 @@ import AddReviewModal from '../AddReviewModal';
 import DeleteReviewModal from '../DeleteReviewModal';
 import { useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
+import './ReviewsSection.css'
 
 export default function ReviewsSection({ spot, reviews}) {
     const [reviewed, setReviewed] = useState(false);

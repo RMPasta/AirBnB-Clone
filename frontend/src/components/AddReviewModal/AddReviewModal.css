@@ -20,6 +20,7 @@
 
 .review-submit {
     width: 180px;
+    border: none;
     box-shadow: 2px 2px 2px black;
 }
 

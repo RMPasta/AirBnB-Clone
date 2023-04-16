@@ -1,0 +1,12 @@
+.delete-review-button {
+    margin-top: 12px;
+}
+
+.delete-review-button:hover {
+    background-color: rgb(182, 58, 45);
+}
+
+.delete-review-button:active {
+    border: none;
+    box-shadow: 1px 1px 1px black;
+}
