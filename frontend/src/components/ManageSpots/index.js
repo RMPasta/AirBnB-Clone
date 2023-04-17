@@ -35,7 +35,7 @@ export default function ManageSpots() {
         { !ownedSpots.length && <NavLink to="/spots/new"><button className='manage-spots-create'>Create a New Spot</button></NavLink> }
         <div className='page'>
           {ownedSpots && ownedSpots.map((spot) => (
-         <li key={nanoid(5)} className="spot-card">
+         <li key={nanoid(5)} className="spot-card-manage">
             <div className="clickable" onClick={() => handleClick(spot)}>
           {/* <div className='tool-tip'>{spot && spot.name}</div> */}
             <img src={spot && spot.previewImage} alt={spot && spot.description} className="previewImageLanding" />

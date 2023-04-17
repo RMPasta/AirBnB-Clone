@@ -56,24 +56,21 @@ const LoginFormModal = () => {
     <div className="form-page">
       <h1>Log In</h1>
       <form onSubmit={handleSubmit}>
-        <label className="username-container">
-          Username/Email:
           <input
             type="text"
             value={credential}
+            placeholder="Username/Email"
+            className="username-email"
             onChange={(e) => setCredential(e.target.value)}
             required
           />
-        </label>
-        <label className="password-container">
-          Password:
           <input
             type="password"
             value={password}
+            placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </label>
         <div className="error-container">
         {errors.credential && <p>{errors.credential}</p>}
         </div>
