@@ -38,6 +38,30 @@ module.exports = {
         stars: 1,
       },
       {
+        spotId: 1,
+        userId: 6,
+        review: "I really like it not gonna lie. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        stars: 4,
+      },
+      {
+        spotId: 1,
+        userId: 10,
+        review: "PERFECT Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. In eu mi bibendum neque egestas congue. Nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aenean et tortor at risus viverra adipiscing at in tellus.",
+        stars: 5,
+      },
+      {
+        spotId: 1,
+        userId: 8,
+        review: "no no. bad! stay. a. way. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        stars: 1,
+      },
+      {
+        spotId: 1,
+        userId: 9,
+        review: "no no. bad! stay. a. way. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        stars: 1,
+      },
+      {
         spotId: 2,
         userId: 3,
         review: "cool cool coooooooool Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
@@ -68,6 +92,18 @@ module.exports = {
         stars: 5,
       },
       {
+        spotId: 4,
+        userId: 7,
+        review: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. In eu mi bibendum neque egestas congue. Nulla aliquet porttitor lacus luctus accumsan tortor posuere. Aenean et tortor at risus viverra adipiscing at in tellus.",
+        stars: 4,
+      },
+      {
+        spotId: 4,
+        userId: 12,
+        review: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim. Cursus vitae congue mauris rhoncus aenean vel elit. Quam viverra orci sagittis eu volutpat odio facilisis mauris. Placerat in egestas erat imperdiet. Id venenatis a condimentum vitae sapien pellentesque. Ut etiam sit amet nisl purus in mollis nunc sed.",
+        stars: 5,
+      },
+      {
         spotId: 5,
         userId: 4,
         review: "just ok Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
@@ -77,6 +113,18 @@ module.exports = {
         spotId: 6,
         userId: 12,
         review: "Pretty cool Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pellentesque habitant morbi tristique senectus et netus et malesuada. Morbi blandit cursus risus at ultrices mi.",
+        stars: 4,
+      },
+      {
+        spotId: 6,
+        userId: 1,
+        review: "Yes please! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim. Cursus vitae congue mauris rhoncus aenean vel elit. Quam viverra orci sagittis eu volutpat odio facilisis mauris. Placerat in egestas erat imperdiet. Id venenatis a condimentum vitae sapien pellentesque. Ut etiam sit amet nisl purus in mollis nunc sed.",
+        stars: 4,
+      },
+      {
+        spotId: 6,
+        userId: 3,
+        review: "Very clean spot. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pellentesque habitant morbi tristique senectus et netus et malesuada. Morbi blandit cursus risus at ultrices mi.",
         stars: 4,
       },
       {
@@ -119,6 +167,18 @@ module.exports = {
         spotId: 13,
         userId: 8,
         review: "So cool! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        stars: 4,
+      },
+      {
+        spotId: 13,
+        userId: 9,
+        review: "GG!! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis ultricies lacus sed turpis tincidunt id aliquet risus feugiat. A scelerisque purus semper eget duis. Ullamcorper velit sed ullamcorper morbi tincidunt ornare massa. Scelerisque purus semper eget duis at tellus at urna.",
+        stars: 4,
+      },
+      {
+        spotId: 13,
+        userId: 5,
+        review: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet justo donec enim diam vulputate. Eros in cursus turpis massa tincidunt dui ut ornare lectus. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         stars: 4,
       },
       {

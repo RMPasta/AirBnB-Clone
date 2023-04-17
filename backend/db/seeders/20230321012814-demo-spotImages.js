@@ -305,6 +305,56 @@ module.exports = {
         url: "https://a0.muscache.com/im/pictures/1eadc23c-2040-476a-994a-57835056d13e.jpg?im_w=720",
         preview: false,
       },
+      {
+        spotId: 16,
+        url: "https://a0.muscache.com/im/pictures/miso/Hosting-45178572/original/7fae161f-1d04-4c9b-acea-8bf3593fc004.jpeg?im_w=1200",
+        preview: true,
+      },
+      {
+        spotId: 16,
+        url: "https://a0.muscache.com/im/pictures/miso/Hosting-45178572/original/fd8fa075-7aaa-4b2c-afc8-0c456ff57d57.jpeg?im_w=720",
+        preview: false,
+      },
+      {
+        spotId: 16,
+        url: "https://a0.muscache.com/im/pictures/miso/Hosting-45178572/original/877cb0a0-4a5d-451b-909c-8ba287334e08.jpeg?im_w=720",
+        preview: false,
+      },
+      {
+        spotId: 16,
+        url: "https://a0.muscache.com/im/pictures/5f390c40-aaaf-4215-85d1-9423cceea1d3.jpg?im_w=720",
+        preview: false,
+      },
+      {
+        spotId: 16,
+        url: "https://a0.muscache.com/im/pictures/5f390c40-aaaf-4215-85d1-9423cceea1d3.jpg?im_w=720",
+        preview: false,
+      },
+      {
+        spotId: 17,
+        url: "https://a0.muscache.com/im/pictures/miso/Hosting-52513855/original/62dd6c05-0ebf-41c9-b123-fd7963410e5d.jpeg?im_w=1200",
+        preview: true,
+      },
+      {
+        spotId: 17,
+        url: "https://a0.muscache.com/im/pictures/miso/Hosting-52513855/original/79b96cc3-3ecc-4793-b1cb-5bd335e59cae.jpeg?im_w=720",
+        preview: false,
+      },
+      {
+        spotId: 17,
+        url: "https://a0.muscache.com/im/pictures/miso/Hosting-52513855/original/f86eae7c-71e8-465c-be9b-1b3770ed2f1d.jpeg?im_w=720",
+        preview: false,
+      },
+      {
+        spotId: 17,
+        url: "https://a0.muscache.com/im/pictures/miso/Hosting-52513855/original/8195c8d5-a8dd-47ee-8cf5-26236e3ac6dc.jpeg?im_w=720",
+        preview: false,
+      },
+      {
+        spotId: 17,
+        url: "https://a0.muscache.com/im/pictures/miso/Hosting-52513855/original/0f6e6824-f4b1-4385-b900-ee390f354aa0.jpeg?im_w=720",
+        preview: false,
+      },
     ], {})
   },
 

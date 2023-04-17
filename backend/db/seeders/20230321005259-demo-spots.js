@@ -190,6 +190,30 @@ module.exports = {
         description: "Big, big place. I mean wow, it's huge. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eget nunc lobortis mattis aliquam.",
         price: 1600,
       },
+      {
+        ownerId: 13,
+        address: "16 Cool Street",
+        city: "Woodbury",
+        state: "Connecticut",
+        country: "United States of America",
+        lat: 777,
+        lng: 777,
+        name: "Really great pool place",
+        description: "Just look at this pool and book this spot! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eget nunc lobortis mattis aliquam.",
+        price: 200,
+      },
+      {
+        ownerId: 13,
+        address: "17 Cool Street",
+        city: "Seaside Heights",
+        state: "New Jersey",
+        country: "United States of America",
+        lat: 666,
+        lng: 666,
+        name: "Right by the beach",
+        description: "Doesn't get much closer to the beach than this. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eget nunc lobortis mattis aliquam.",
+        price: 600,
+      }
     ], {})
   },
 
@@ -197,7 +221,7 @@ module.exports = {
     options.tableName = 'Spots';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      ownerId: { [Op.in]: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15] }
+      ownerId: { [Op.in]: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17] }
     }, {});
   }
 };
