@@ -205,6 +205,42 @@ module.exports = {
         review: "Really good Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pellentesque habitant morbi tristique senectus et netus et malesuada. Morbi blandit cursus risus at ultrices mi.",
         stars: 4,
       },
+      {
+        spotId: 16,
+        userId: 2,
+        review: "Really really realy good Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pellentesque habitant morbi tristique senectus et netus et malesuada. Morbi blandit cursus risus at ultrices mi.",
+        stars: 5,
+      },
+      {
+        spotId: 16,
+        userId: 8,
+        review: "I had the time of my life. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pellentesque habitant morbi tristique senectus et netus et malesuada. Morbi blandit cursus risus at ultrices mi. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        stars: 4,
+      },
+      {
+        spotId: 16,
+        userId: 10,
+        review: "Bah humbuh. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tortor id aliquet lectus proin nibh nisl condimentum id venenatis. Metus vulputate eu scelerisque felis imperdiet. Phasellus vestibulum lorem sed risus. Nisl condimentum id venenatis a condimentum vitae sapien pellentesque. Nulla aliquet enim tortor at auctor urna nunc id. Quis risus sed vulputate odio. Erat pellentesque adipiscing commodo elit. Dui vivamus arcu felis bibendum ut tristique et egestas. Ipsum faucibus vitae aliquet nec ullamcorper sit. Leo in vitae turpis massa sed elementum tempus egestas sed. Ut faucibus pulvinar elementum integer enim. Egestas maecenas pharetra convallis posuere morbi leo. Quis imperdiet massa tincidunt nunc pulvinar sapien et ligula ullamcorper. Ultrices neque ornare aenean euismod elementum nisi quis eleifend quam. Enim praesent elementum facilisis leo vel. Suspendisse sed nisi lacus sed viverra tellus. Cursus sit amet dictum sit amet justo donec enim. Odio euismod lacinia at quis risus.",
+        stars: 2,
+      },
+      {
+        spotId: 17,
+        userId: 10,
+        review: "Average. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tortor id aliquet lectus proin nibh nisl condimentum id venenatis. Metus vulputate eu scelerisque felis imperdiet. Phasellus vestibulum lorem sed risus. Nisl condimentum id venenatis a condimentum vitae sapien pellentesque. Nulla aliquet enim tortor at auctor urna nunc id. Quis risus sed vulputate odio. Erat pellentesque adipiscing commodo elit. Dui vivamus arcu felis bibendum ut tristique et egestas. Ipsum faucibus vitae aliquet nec ullamcorper sit. Leo in vitae turpis massa sed elementum tempus egestas sed. Ut faucibus pulvinar elementum integer enim. Egestas maecenas pharetra convallis posuere morbi leo. Quis imperdiet massa tincidunt nunc pulvinar sapien et ligula ullamcorper. Ultrices neque ornare aenean euismod elementum nisi quis eleifend quam. Enim praesent elementum facilisis leo vel. Suspendisse sed nisi lacus sed viverra tellus. Cursus sit amet dictum sit amet justo donec enim. Odio euismod lacinia at quis risus.",
+        stars: 3,
+      },
+      {
+        spotId: 17,
+        userId: 7,
+        review: "Really really excellent! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pellentesque habitant morbi tristique senectus et netus et malesuada. Morbi blandit cursus risus at ultrices mi.",
+        stars: 5,
+      },
+      {
+        spotId: 17,
+        userId: 11,
+        review: "I had the time of my life. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pellentesque habitant morbi tristique senectus et netus et malesuada. Morbi blandit cursus risus at ultrices mi. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        stars: 4,
+      },
     ], {})
   },
 
@@ -212,7 +248,7 @@ module.exports = {
     options.tableName = 'Reviews';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      spotId: { [Op.in]: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15] }
+      spotId: { [Op.in]: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17] }
     }, {});
   }
 };
