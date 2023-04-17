@@ -57,7 +57,7 @@ module.exports = {
       },
       {
         spotId: 3,
-        userId: 1,
+        userId: 12,
         review: "business like Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         stars: 3,
       },
