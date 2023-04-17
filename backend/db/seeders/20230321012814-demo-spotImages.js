@@ -152,12 +152,12 @@ module.exports = {
       },
       {
         spotId: 6,
-        url: "https://a0.muscache.com/im/pictures/75bf2ff8-2ae2-4fb4-851e-a6b24affbf7b.jpg?im_w=720",
+        url: "https://a0.muscache.com/im/pictures/miso/Hosting-562169802731389677/original/7e99aa33-aa4b-4686-b05d-4ffb70265a60.jpeg?im_w=720",
         preview: false,
       },
       {
         spotId: 6,
-        url: "https://a0.muscache.com/im/pictures/1c135aeb-fb1a-4f56-b388-2f1da3f53682.jpg?im_w=7200",
+        url: "https://a0.muscache.com/im/pictures/miso/Hosting-858937144592404355/original/798832c9-00a7-4847-b240-7721aa1a5f14.jpeg?im_w=1200",
         preview: false,
       },
       {
