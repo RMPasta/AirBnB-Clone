@@ -27,6 +27,8 @@ function UpdateSpot({ spot }) {
     setErrors({});
     if (!lat) setErrors({ ...errors, lat: "Latitude is required" });
     if (!lng) setErrors({ ...errors, lng: "Longitude is required" });
+    if (!Number.isInteger(lat)) setErrors({ ...errors, lat: "Latitude must be a number" });
+    if (!Number.isInteger(lng)) setErrors({ ...errors, lng: "Longitude must be a number" });
     if (description.length < 30)
       setErrors({
         ...errors,
@@ -36,7 +38,7 @@ function UpdateSpot({ spot }) {
     if (!name) setErrors({ ...errors, name: "Name is required" });
     if (!price) setErrors({ ...errors, price: "Price is required" });
     // if (Object.values(errors).length > 0) return errors;
-    if (!lat || !lng || description.length < 30 || !name || !price)
+    if (!lat || !lng || description.length < 30 || !name || !price || !Number.isInteger(lat) || !Number.isInteger(lng))
       return errors;
     await dispatch(
       updateSpotThunk(

@@ -22,21 +22,6 @@ function CreateSpot() {
   const [price, setPrice] = useState("");
   const [preview, setPreview] = useState("");
 
-  // const [country, setCountry] = useState("USA");
-  // const [address, setAddress] = useState("1 cool street");
-  // const [city, setCity] = useState("hamilton");
-  // const [state, setState] = useState("nj");
-  // const [lat, setLat] = useState(111);
-  // const [lng, setLng] = useState(111);
-  // const [description, setDescription] = useState(
-  //   "Really cool place right by all the good things. You're going to love this spot."
-  // );
-  // const [name, setName] = useState("great cool new place");
-  // const [price, setPrice] = useState(111);
-  // const [preview, setPreview] = useState(
-  //   "https://a0.muscache.com/im/pictures/9b1dac05-b810-46ea-8d35-f57072af1fe1.jpg?im_w=1200"
-  // );
-
   const [errors, setErrors] = useState({});
   const [disabled, setDisabled] = useState(true);
 
@@ -81,6 +66,8 @@ function CreateSpot() {
     setErrors({});
     if (!lat) setErrors({ ...errors, lat: "Latitude is required" });
     if (!lng) setErrors({ ...errors, lng: "Longitude is required" });
+    if (!Number.isInteger(lat)) setErrors({ ...errors, lat: "Latitude must be a number" });
+    if (!Number.isInteger(lng)) setErrors({ ...errors, lng: "Longitude must be a number" });
     if (description.length < 30)
       setErrors({
         ...errors,
@@ -91,7 +78,7 @@ function CreateSpot() {
     if (!preview)
       setErrors({ ...errors, preview: "Preview Image is required" });
 
-    if (!lat || !lng || description.length < 30 || !name || !price || !preview)
+    if (!lat || !lng || description.length < 30 || !name || !price || !preview || !Number.isInteger(lat) || !Number.isInteger(lng))
       return errors;
     const newSpot = await dispatch(
       createSpotThunk({
