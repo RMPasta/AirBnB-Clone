@@ -20,7 +20,7 @@ module.exports = {
       }
     },
     define: {
-      schema: "air_bnb"
+      schema: process.env.SCHEMA
     }
   }
 };
