@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { removeReviewThunk } from '../../store/reviews';
@@ -11,23 +11,25 @@ const DeleteReviewModal = ({ spot }) => {
   const { closeModal } = useModal();
   const reviews = useSelector(state=>Object.values(state.reviews));
   const sessionUser = useSelector(state=>state.session.user);
+  const [usersReview, setUsersReview] = useState("")
 
 useEffect(() => {
     dispatch(getReviewsThunk(spot.id))
     dispatch(getOneSpotThunk(spot.id))
 }, [dispatch, spot.id])
 
-let usersReview;
 useEffect(() => {
     reviews.forEach((review) => {
       if (review.User && review.User.id === parseInt(sessionUser.id)) {
-        usersReview = review;
+        setUsersReview(review);
       }
     })
-  }, [reviews])
+  }, [reviews, sessionUser])
 
 const deleteReview = async () => {
-    await dispatch(removeReviewThunk(usersReview.id))
+    if (usersReview) {
+      await dispatch(removeReviewThunk(usersReview.id))
+    }
     await dispatch(getReviewsThunk(spot.id))
     await dispatch(getOneSpotThunk(spot.id))
     closeModal();

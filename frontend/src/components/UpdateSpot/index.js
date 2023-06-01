@@ -34,7 +34,7 @@ function UpdateSpot({ spot }) {
         ...errors,
         description: "Description needs a minimum of 30 characters",
       });
-    const errorPlaceHolder = "description error";
+    // const errorPlaceHolder = "description error";
     if (!name) setErrors({ ...errors, name: "Name is required" });
     if (!price) setErrors({ ...errors, price: "Price is required" });
     // if (Object.values(errors).length > 0) return errors;
