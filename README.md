@@ -1,6 +1,6 @@
 ### CoolBnB
 
-Live Site: https://air-bnb-yykb.onrender.com/spots/current
+Live Site: [CoolBnB](https://air-bnb-yykb.onrender.com/spots/current)
 
 This is a web application inspired by airbnb.
 
@@ -25,7 +25,7 @@ Backend Features:
 Frontend Supports:
 - Authentication
 - CRUD for Spots
-- Create Read and Delete Reviews
+- CRD for Reviews
 
 ![](https://github.com/RMPasta/AirBnB-Clone/blob/main/frontend/src/assets/ezgif.com-gif-maker.gif)
 
