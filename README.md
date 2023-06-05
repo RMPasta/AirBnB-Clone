@@ -4,7 +4,7 @@ Live Site: https://air-bnb-yykb.onrender.com/spots/current
 
 This is a web application inspired by airbnb.
 
-## Technologies Usec
+## Technologies Used
 ![js](https://github.com/RMPasta/AirBnB-Clone/assets/107484881/0d42b7f0-226e-4a27-ae20-1d9cb1f4fb7c)
 ![node](https://github.com/RMPasta/AirBnB-Clone/assets/107484881/c9ded41a-ad9b-412a-9738-323e03358777)
 ![express](https://github.com/RMPasta/AirBnB-Clone/assets/107484881/6a6f45d8-e80d-448b-abeb-356927987fa5)
