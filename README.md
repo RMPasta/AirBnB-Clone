@@ -5,6 +5,7 @@ Live Site: https://air-bnb-yykb.onrender.com/spots/current
 This is a web application inspired by airbnb.
 
 Stack:
+![html5](https://github.com/RMPasta/AirBnB-Clone/assets/107484881/de294ad9-fa73-4183-a5de-cb2998f31f03)
 - Express JS,
 - PostgreSQL,
 - React,
