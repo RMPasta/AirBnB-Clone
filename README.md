@@ -43,4 +43,5 @@ Get Started:
 
 Contact Info:
 If you would like to get in touch for any reason reach out at rmpasta.code@gmail.com
+https://www.linkedin.com/in/ryan-malmos/
 Thanks!
