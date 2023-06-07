@@ -41,7 +41,8 @@ Get Started:
 - npm install
 - npm start to run the frontend
 
-Contact Info:
-If you would like to get in touch for any reason reach out at rmpasta.code@gmail.com
-https://www.linkedin.com/in/ryan-malmos/
-Thanks!
+### Built by
+
+Ryan Malmos
+- https://www.linkedin.com/in/ryan-malmos/
+- rmpasta.code@gmail.com
