@@ -451,7 +451,13 @@ const validateSpot = [
       } else {
         const bookings = await Booking.findAll({
             where: {spotId: req.params.spotId},
-            attributes: ["spotId", "startDate", "endDate"]
+            attributes: ["id", "spotId", "startDate", "endDate"],
+            include: [
+                {
+                    model: User,
+                    attributes: ['firstName']
+                }
+            ]
         });
         res.status(200)
         res.json({Bookings: bookings})

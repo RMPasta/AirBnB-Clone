@@ -3,5 +3,8 @@ npx dotenv sequelize-cli db:migrate:undo:all
 npx dotenv sequelize-cli db:migrate
 npx dotenv sequelize-cli db:seed:all
 
-on render:
+on render with reseeding:
 npm install && npm run render-postbuild && npm run sequelize --prefix backend db:seed:undo:all && npm run sequelize --prefix backend db:migrate:undo:all && npm run sequelize --prefix backend db:migrate && npm run sequelize --prefix backend db:seed:all && npm run build
+
+on render without reseeding:
+npm install && npm run build && npm run render-postbuild && npm run sequelize --prefix backend db:migrate && npm run sequelize --prefix backend db:seed:all
