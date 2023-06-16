@@ -35,6 +35,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
     res.json({ Bookings: bookingList })
 });
 
+
 //   edit a booking
 router.put('/:bookingId', requireAuth, async (req, res, next) => {
     let { startDate, endDate } = req.body;
