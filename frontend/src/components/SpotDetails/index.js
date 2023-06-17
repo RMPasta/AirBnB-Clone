@@ -69,8 +69,7 @@ export default function SpotDetails() {
           <div>
             {sessionUser && spot.ownerId !== parseInt(sessionUser.id) && (
               <OpenModalButton
-                buttonText="Reservations"
-                className="reservation-button"
+                buttonText="Reserve"
                 modalComponent={<AddBookingModal spot={spot} />}
               />
             )}

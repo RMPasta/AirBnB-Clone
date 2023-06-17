@@ -8,6 +8,7 @@ import Landing from "./components/Landing";
 import CreateSpot from "./components/CreateSpot";
 import ManageSpots from "./components/ManageSpots";
 import UpdateSpotWrapper from "./components/UpdateSpotWrapper";
+import LandingWrapper from "./components/LandingWrapper";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const App = () => {
       {isLoaded && (
         <Switch>
           <Route exact path="/">
-            <Landing />
+            <LandingWrapper />
           </Route>
           <Route exact path="/spots/new">
             <CreateSpot />
@@ -40,6 +41,6 @@ const App = () => {
       )}
     </>
   );
-}
+};
 
 export default App;

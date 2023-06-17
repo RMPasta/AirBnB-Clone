@@ -74,6 +74,10 @@
     box-shadow: 1px 1px 1px black;
 }
 
+#reserve-button-id {
+    width: 300px;
+}
+
 .detail-price {
     font-weight: bold;
     font-size: 28px;
