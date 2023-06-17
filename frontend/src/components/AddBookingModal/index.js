@@ -15,20 +15,20 @@ const AddBookingModal = ({ spot }) => {
   const [errors, setErrors] = useState({});
   const [disabled, setDisabled] = useState(true);
 
-  useEffect(() => {
-    if (booking && booking.length > 10 && rating > 0) setDisabled(false);
-  }, [booking, rating]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setBooking({ startDate: startDate, endDate: endDate });
+    if (!endDate || !startDate) {
+      setErrors({ message: "Must select start and end dates" });
+      return;
+    }
+
     const addBookingRes = await dispatch(
-      addBookingThunk(booking, spot.id)
+      addBookingThunk({ startDate, endDate }, spot.id)
     ).catch(async (res) => {
       const data = await res.json();
       return data;
     });
-    if (addBookingRes.message) setErrors(addBookingRes);
+    if (addBookingRes.message) return setErrors(addBookingRes);
     await dispatch(getBookingsThunk(spot.id));
     // dispatch(getSpotsThunk())
     await dispatch(getOneSpotThunk(spot.id));
@@ -36,8 +36,13 @@ const AddBookingModal = ({ spot }) => {
   };
   return (
     <div className="form-page">
-      <h1>When would like to stay?</h1>
-      <form onSubmit={handleSubmit}>
+      <h1>When would you like to stay?</h1>
+      <form
+        onSubmit={(e) => {
+          setBooking({ startDate, endDate });
+          handleSubmit(e);
+        }}
+      >
         <div className="error-container">
           {errors && <p>{errors.message}</p>}
         </div>
@@ -53,9 +58,7 @@ const AddBookingModal = ({ spot }) => {
           className="end-input"
           onChange={(e) => setEndDate(e.target.value)}
         />
-        <button disabled={disabled} className="booking-submit">
-          Submit Your Booking
-        </button>
+        <button className="booking-submit">Submit Your Booking</button>
       </form>
     </div>
   );

@@ -86,7 +86,7 @@ export default function SpotDetails() {
             const startMonth = startDateObj.toLocaleString("en-US", {
               month: "long",
             });
-            const startDay = startDateObj.getDate();
+            const startDay = startDateObj.getDate() + 1;
             const startYear = startDateObj.getFullYear();
 
             // Convert end date to month, day, and year
@@ -94,11 +94,11 @@ export default function SpotDetails() {
             const endMonth = endDateObj.toLocaleString("en-US", {
               month: "long",
             });
-            const endDay = endDateObj.getDate();
+            const endDay = endDateObj.getDate() + 1;
             const endYear = endDateObj.getFullYear();
             return (
               <div className="booking-card" key={booking.id}>
-                <div className="first-name">{booking.User.firstName}:</div>
+                <div className="first-name">{booking.User?.firstName}:</div>
                 <div>
                   {startMonth + " " + startDay + ", " + startYear} -{" "}
                   {endMonth + " " + endDay + ", " + endYear}
