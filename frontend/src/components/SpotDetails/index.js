@@ -5,6 +5,7 @@ import OpenModalButton from "../OpenModalButton";
 import { nanoid } from "nanoid";
 import { getBookingsThunk } from "../../store/bookings";
 import AddBookingModal from "../AddBookingModal";
+import UpdateBookingModal from "../UpdateBookingModal";
 import "./SpotDetails.css";
 
 export default function SpotDetails() {
@@ -19,7 +20,6 @@ export default function SpotDetails() {
   }, [dispatch]);
 
   if (!spot) return <div>...Loading</div>;
-
   return (
     <div className="spot-details-page">
       <h1>{spot.name}</h1>
@@ -77,6 +77,7 @@ export default function SpotDetails() {
         </div>
       </div>
       <ReviewsSection spot={spot} reviews={reviews} />
+      <h2>Reservations</h2>
       <div className="bookings-container">
         {bookings &&
           bookings.map((booking) => {
@@ -98,6 +99,18 @@ export default function SpotDetails() {
             return (
               <div className="booking-card" key={booking.id}>
                 <div className="first-name">{booking.User?.firstName}:</div>
+                <div>
+                  {booking.userId === sessionUser.id ? (
+                    <OpenModalButton
+                      buttonText="Edit"
+                      modalComponent={
+                        <UpdateBookingModal spot={spot} booking={booking} />
+                      }
+                    />
+                  ) : (
+                    <></>
+                  )}
+                </div>
                 <div>
                   {startMonth + " " + startDay + ", " + startYear} -{" "}
                   {endMonth + " " + endDay + ", " + endYear}

@@ -4,7 +4,6 @@ import { Route, Switch } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import SpotDetailsWrapper from "./components/SpotDetailsWrapper";
 import * as sessionActions from "./store/session";
-import Landing from "./components/Landing";
 import CreateSpot from "./components/CreateSpot";
 import ManageSpots from "./components/ManageSpots";
 import UpdateSpotWrapper from "./components/UpdateSpotWrapper";

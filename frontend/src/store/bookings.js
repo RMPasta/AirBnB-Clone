@@ -1,6 +1,7 @@
 import { csrfFetch } from "./csrf";
 
 export const LOAD_BOOKINGS = "spots/LOAD_BOOKINGS";
+export const UPDATE_BOOKING = "spots/UPDATE_BOOKING";
 export const RECEIVE_BOOKING = "spots/RECEIVE_BOOKING";
 export const REMOVE_BOOKING = "spots/REMOVE_BOOKING";
 
@@ -11,6 +12,11 @@ export const loadBookings = (bookings) => ({
 
 export const receiveBooking = (booking) => ({
   type: RECEIVE_BOOKING,
+  booking,
+});
+
+export const editBooking = (booking) => ({
+  type: UPDATE_BOOKING,
   booking,
 });
 
@@ -44,6 +50,20 @@ export const addBookingThunk = (booking, spotId) => async (dispatch) => {
     }
   } catch (err) {
     return err.json();
+  }
+};
+
+export const updateBookingThunk = (booking, bookingId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/bookings/${bookingId}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(booking),
+  });
+
+  if (response.ok) {
+    const booking = await response.json();
+    dispatch(editBooking(booking));
+    return booking;
   }
 };
 
