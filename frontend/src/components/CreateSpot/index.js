@@ -66,8 +66,10 @@ function CreateSpot() {
     setErrors({});
     if (!lat) setErrors({ ...errors, lat: "Latitude is required" });
     if (!lng) setErrors({ ...errors, lng: "Longitude is required" });
-    if (!Number.isInteger(lat)) setErrors({ ...errors, lat: "Latitude must be a number" });
-    if (!Number.isInteger(lng)) setErrors({ ...errors, lng: "Longitude must be a number" });
+    if (typeof lat !== "number")
+      setErrors({ ...errors, lat: "Latitude must be a number" });
+    if (typeof lng !== "number")
+      setErrors({ ...errors, lng: "Longitude must be a number" });
     if (description.length < 30)
       setErrors({
         ...errors,
@@ -78,7 +80,16 @@ function CreateSpot() {
     if (!preview)
       setErrors({ ...errors, preview: "Preview Image is required" });
 
-    if (!lat || !lng || description.length < 30 || !name || !price || !preview || !Number.isInteger(lat) || !Number.isInteger(lng))
+    if (
+      !lat ||
+      !lng ||
+      description.length < 30 ||
+      !name ||
+      !price ||
+      !preview ||
+      !Number.isInteger(lat) ||
+      !Number.isInteger(lng)
+    )
       return errors;
     const newSpot = await dispatch(
       createSpotThunk({
@@ -174,7 +185,7 @@ function CreateSpot() {
               placeholder="Latitude"
               value={lat}
               className="lat"
-              onChange={(e) => setLat(e.target.value)}
+              onChange={(e) => setLat(parseInt(e.target.value))}
             />
             <div className="error-container">
               {errors.lat && <p>{errors.lat}</p>}
@@ -187,7 +198,7 @@ function CreateSpot() {
               placeholder="Longitude"
               value={lng}
               className="lng"
-              onChange={(e) => setLng(e.target.value)}
+              onChange={(e) => setLng(parseInt(e.target.value))}
             />
             <div className="error-container">
               {errors.lng && <p>{errors.lng}</p>}
@@ -216,8 +227,8 @@ function CreateSpot() {
         <div className="description">
           <h2 className="h2">Create a title for your spot</h2>
           <p>
-            Catch guests' attention with a spot title ethat highlights what
-            makes your place special.
+            Catch guests' attention with a spot title that highlights what makes
+            your place special.
           </p>
         </div>
         <label>

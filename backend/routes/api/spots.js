@@ -526,13 +526,13 @@ router.post("/:spotId/bookings", requireAuth, async (req, res, next) => {
   if (!spot) {
     let err = {};
     err.message = "Spot couldn't be found";
-    res.status(404);
+    // res.status(404);
     return res.json(err);
   }
   if (user.id === spot.ownerId) {
     let err = {};
     err.message = "Forbidden";
-    err.status = 403;
+    // err.status = 403;
     next(err);
   }
   //find this spots bookings
@@ -554,13 +554,13 @@ router.post("/:spotId/bookings", requireAuth, async (req, res, next) => {
     bookingEndDate = booking.endDate;
     let err = {};
     if (startDate >= bookingStartDate && startDate <= bookingEndDate) {
-      res.status(403);
+      // res.status(403);
       err.message =
         "Sorry, this spot is already booked for the specified dates";
       err.errors = {};
       err.errors.startDate = "Start date conflicts with an existing booking";
       if (endDate >= bookingStartDate && endDate <= bookingEndDate) {
-        res.status(403);
+        // res.status(403);
         err.message =
           "Sorry, this spot is already booked for the specified dates";
         err.errors.endDate = "End date conflicts with an existing booking";
@@ -568,7 +568,7 @@ router.post("/:spotId/bookings", requireAuth, async (req, res, next) => {
       return res.json(err);
     }
     if (endDate >= bookingStartDate && endDate <= bookingEndDate) {
-      res.status(403);
+      // res.status(403);
       err.message =
         "Sorry, this spot is already booked for the specified dates";
       err.errors = {};
@@ -578,9 +578,9 @@ router.post("/:spotId/bookings", requireAuth, async (req, res, next) => {
   }
 
   if (endDate <= startDate) {
-    res.status(400);
+    // res.status(400);
     let err = {};
-    err.message = "endDate cannot be on or before startDate";
+    err.message = "End date cannot be on or before start date";
     err.errors = {
       endDate: "endDate cannot be on or before startDate",
     };
@@ -588,7 +588,7 @@ router.post("/:spotId/bookings", requireAuth, async (req, res, next) => {
   }
 
   if (endDate < new Date() || startDate < new Date()) {
-    res.status(400);
+    // res.status(400);
     let err = {};
     err.message = "Booking can not be in the past";
     err.errors = {

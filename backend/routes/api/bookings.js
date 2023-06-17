@@ -52,12 +52,12 @@ router.put("/:bookingId", requireAuth, async (req, res, next) => {
   if (!currBooking) {
     let err = {};
     err.message = "Booking couldn't be found";
-    res.status(404);
+    // res.status(404);
     return res.json(err);
   }
 
   if (endDate < new Date() || startDate < new Date()) {
-    res.status(400);
+    // res.status(400);
     let err = {};
     err.message = "Booking can not be in the past";
     err.errors = {
@@ -67,9 +67,9 @@ router.put("/:bookingId", requireAuth, async (req, res, next) => {
   }
 
   if (endDate <= startDate) {
-    res.status(400);
+    // res.status(400);
     let err = {};
-    err.message = "endDate cannot come before startDate";
+    err.message = "End date cannot come before start date";
     err.errors = {
       endDate: "endDate cannot come before startDate",
     };
@@ -84,7 +84,7 @@ router.put("/:bookingId", requireAuth, async (req, res, next) => {
   currentDate = currentDate.toJSON().split("T")[0];
   let bookingEndDate = currBooking.endDate;
   if (bookingEndDate < currentDate) {
-    res.status(400);
+    // res.status(400);
     let err = {};
     err.message = "Past bookings can't be modified";
     return res.json(err);
@@ -94,6 +94,38 @@ router.put("/:bookingId", requireAuth, async (req, res, next) => {
   const existingBookings = await Booking.findAll({
     where: { spotId: currBooking.spotId },
   });
+
+  let hasConflict = false;
+  for (let i = 0; i < existingBookings.length; i++) {
+    const booking = existingBookings[i];
+
+    // Exclude the current booking being edited from the conflict check
+    if (booking.id !== id) {
+      const bookingStartDate = booking.startDate;
+      const bookingEndDate = booking.endDate;
+
+      // Check if the booking conflicts with any existing bookings
+      if (
+        (startDate >= bookingStartDate && startDate <= bookingEndDate) ||
+        (endDate >= bookingStartDate && endDate <= bookingEndDate)
+      ) {
+        hasConflict = true;
+        break;
+      }
+    }
+  }
+
+  if (hasConflict) {
+    // res.status(403);
+    const err = {
+      message: "Sorry, this spot is already booked for the specified dates",
+      errors: {
+        startDate: "Start date conflicts with an existing booking",
+        endDate: "End date conflicts with an existing booking",
+      },
+    };
+    return res.json(err);
+  }
 
   let bookingsList = [];
   existingBookings.forEach((booking) => {
@@ -111,13 +143,13 @@ router.put("/:bookingId", requireAuth, async (req, res, next) => {
 
     let err = {};
     if (startDate >= bookingStartDate && startDate <= bookingEndDate) {
-      res.status(403);
+      //   res.status(403);
       err.message =
         "Sorry, this spot is already booked for the specified dates";
       err.errors = {};
       err.errors.startDate = "Start date conflicts with an existing booking";
       if (endDate >= bookingStartDate && endDate <= bookingEndDate) {
-        res.status(403);
+        // res.status(403);
         err.message =
           "Sorry, this spot is already booked for the specified dates";
         err.errors.endDate = "End date conflicts with an existing booking";
@@ -125,7 +157,7 @@ router.put("/:bookingId", requireAuth, async (req, res, next) => {
       return res.json(err);
     }
     if (endDate >= bookingStartDate && endDate <= bookingEndDate) {
-      res.status(403);
+      //   res.status(403);
       err.message =
         "Sorry, this spot is already booked for the specified dates";
       err.errors = {};

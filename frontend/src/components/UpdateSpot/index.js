@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory, useParams } from "react-router-dom";
 import { updateSpotThunk } from "../../store/spots";
-import './UpdateSpot.css';
+import "./UpdateSpot.css";
 
 function UpdateSpot({ spot }) {
   const dispatch = useDispatch();
@@ -27,8 +27,10 @@ function UpdateSpot({ spot }) {
     setErrors({});
     if (!lat) setErrors({ ...errors, lat: "Latitude is required" });
     if (!lng) setErrors({ ...errors, lng: "Longitude is required" });
-    if (!Number.isInteger(lat)) setErrors({ ...errors, lat: "Latitude must be a number" });
-    if (!Number.isInteger(lng)) setErrors({ ...errors, lng: "Longitude must be a number" });
+    if (!Number.isInteger(lat))
+      setErrors({ ...errors, lat: "Latitude must be a number" });
+    if (!Number.isInteger(lng))
+      setErrors({ ...errors, lng: "Longitude must be a number" });
     if (description.length < 30)
       setErrors({
         ...errors,
@@ -38,7 +40,15 @@ function UpdateSpot({ spot }) {
     if (!name) setErrors({ ...errors, name: "Name is required" });
     if (!price) setErrors({ ...errors, price: "Price is required" });
     // if (Object.values(errors).length > 0) return errors;
-    if (!lat || !lng || description.length < 30 || !name || !price || !Number.isInteger(lat) || !Number.isInteger(lng))
+    if (
+      !lat ||
+      !lng ||
+      description.length < 30 ||
+      !name ||
+      !price ||
+      !Number.isInteger(lat) ||
+      !Number.isInteger(lng)
+    )
       return errors;
     await dispatch(
       updateSpotThunk(
@@ -170,8 +180,8 @@ function UpdateSpot({ spot }) {
         <div className="description">
           <h2 className="h2">Create a title for your spot</h2>
           <p>
-            Catch guests' attention with a spot title ethat highlights what
-            makes your place special.
+            Catch guests' attention with a spot title that highlights what makes
+            your place special.
           </p>
         </div>
         <label>
@@ -206,7 +216,9 @@ function UpdateSpot({ spot }) {
         <div className="error-container">
           {errors.price && <p>{errors.price}</p>}
         </div>
-        <button className="update-button" type="submit">Update your Spot</button>
+        <button className="update-button" type="submit">
+          Update your Spot
+        </button>
       </form>
     </div>
   );

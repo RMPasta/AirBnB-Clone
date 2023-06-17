@@ -79,7 +79,7 @@ export default function SpotDetails() {
       <ReviewsSection spot={spot} reviews={reviews} />
       <h2>Reservations</h2>
       <div className="bookings-container">
-        {bookings &&
+        {bookings.length &&
           bookings.map((booking) => {
             // Convert start date to month, day, and year
             const startDateObj = new Date(booking.startDate);
