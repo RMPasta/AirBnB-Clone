@@ -96,6 +96,8 @@ export default function SpotDetails() {
             });
             const endDay = endDateObj.getDate() + 1;
             const endYear = endDateObj.getFullYear();
+
+            if (booking.message) return <></>;
             return (
               <div className="booking-card" key={booking.id}>
                 <div className="first-name">{booking.User?.firstName}:</div>
