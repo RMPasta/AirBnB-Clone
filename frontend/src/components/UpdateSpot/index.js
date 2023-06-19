@@ -13,8 +13,6 @@ function UpdateSpot({ spot }) {
   const [address, setAddress] = useState(spot?.address);
   const [city, setCity] = useState(spot?.city);
   const [state, setState] = useState(spot?.state);
-  const [lat, setLat] = useState(spot?.lat);
-  const [lng, setLng] = useState(spot?.lng);
   const [description, setDescription] = useState(spot?.description);
   const [name, setName] = useState(spot?.name);
   const [price, setPrice] = useState(spot?.price);
@@ -25,12 +23,6 @@ function UpdateSpot({ spot }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors({});
-    if (!lat) setErrors({ ...errors, lat: "Latitude is required" });
-    if (!lng) setErrors({ ...errors, lng: "Longitude is required" });
-    if (!Number.isInteger(lat))
-      setErrors({ ...errors, lat: "Latitude must be a number" });
-    if (!Number.isInteger(lng))
-      setErrors({ ...errors, lng: "Longitude must be a number" });
     if (description.length < 30)
       setErrors({
         ...errors,
@@ -41,13 +33,9 @@ function UpdateSpot({ spot }) {
     if (!price) setErrors({ ...errors, price: "Price is required" });
     // if (Object.values(errors).length > 0) return errors;
     if (
-      !lat ||
-      !lng ||
       description.length < 30 ||
       !name ||
-      !price ||
-      !Number.isInteger(lat) ||
-      !Number.isInteger(lng)
+      !price
     )
       return errors;
     await dispatch(
@@ -57,8 +45,6 @@ function UpdateSpot({ spot }) {
           address,
           city,
           state,
-          lat,
-          lng,
           description,
           name,
           price,
@@ -130,32 +116,6 @@ function UpdateSpot({ spot }) {
             />
             <div className="error-container">
               {errors.state && <p>{errors.state}</p>}
-            </div>
-          </label>
-        </div>
-        <div className="form-two-across">
-          <label>
-            Latitude
-            <input
-              type="text"
-              value={lat}
-              className="lat"
-              onChange={(e) => setLat(e.target.value)}
-            />
-            <div className="error-container">
-              {errors.lat && <p>{errors.lat}</p>}
-            </div>
-          </label>
-          <label>
-            Longitude
-            <input
-              type="text"
-              value={lng}
-              className="lng"
-              onChange={(e) => setLng(e.target.value)}
-            />
-            <div className="error-container">
-              {errors.lng && <p>{errors.lng}</p>}
             </div>
           </label>
         </div>

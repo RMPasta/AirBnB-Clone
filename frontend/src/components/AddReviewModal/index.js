@@ -16,11 +16,23 @@ const AddReviewModal = ({ spot }) => {
   const [disabled, setDisabled] = useState(true);
 
   useEffect(() => {
-    if (review && review.length > 10 && rating > 0) setDisabled(false)
+    if (review && review?.length > 10 && rating > 0) setDisabled(false)
   }, [review, rating])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrors({});
+    if (review.length < 30)
+    return setErrors({
+      ...errors,
+      review: "Review needs a minimum of 30 characters",
+    });
+    if (review.length > 600)
+    return setErrors({
+      ...errors,
+      review: "Review needs to be less than 600 characters",
+    });
+
     const addReviewRes = await dispatch(addReviewThunk(review, rating, spot.id))
     .catch(async (res) => {
       const data = await res.json();
@@ -33,6 +45,11 @@ const AddReviewModal = ({ spot }) => {
     closeModal();
   }
   const onChange = (number) => setRating(parseInt(number))
+  const badData = {
+    textArea: {
+      color: "red"
+    }
+  }
   return (
     <div className="form-page">
       <h1>How was your stay?</h1>
@@ -40,6 +57,10 @@ const AddReviewModal = ({ spot }) => {
       <div className="error-container">
         { errors && <p>{errors.message}</p> }
       </div>
+      {errors.review && <div style={{color: "red"}}>{errors.review}</div>}
+      {review?.length < 30 || !review ?
+        <div style={review?.length < 30 ? badData.textArea : {}}>{review?.length || 0} / 30</div> :
+        <div style={review?.length > 600 ? badData.textArea : {}}>{review?.length || 0} / 600</div> }
         <textarea type="text" placeholder="Leave your review here..." className="textarea" onChange={(e) => setReview(e.target.value)}/>
         <div className="new-rating-stars">
             <RatingInput

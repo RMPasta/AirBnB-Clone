@@ -15,8 +15,6 @@ function CreateSpot() {
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
-  const [lat, setLat] = useState("");
-  const [lng, setLng] = useState("");
   const [description, setDescription] = useState("");
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
@@ -35,8 +33,6 @@ function CreateSpot() {
       address &&
       city &&
       state &&
-      lat &&
-      lng &&
       description &&
       name &&
       price &&
@@ -51,8 +47,6 @@ function CreateSpot() {
     address,
     city,
     state,
-    lat,
-    lng,
     description,
     name,
     price,
@@ -64,41 +58,32 @@ function CreateSpot() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors({});
-    if (!lat) setErrors({ ...errors, lat: "Latitude is required" });
-    if (!lng) setErrors({ ...errors, lng: "Longitude is required" });
-    if (typeof lat !== "number")
-      setErrors({ ...errors, lat: "Latitude must be a number" });
-    if (typeof lng !== "number")
-      setErrors({ ...errors, lng: "Longitude must be a number" });
     if (description.length < 30)
-      setErrors({
-        ...errors,
-        description: "Description needs a minimum of 30 characters",
-      });
-    if (!name) setErrors({ ...errors, name: "Name is required" });
-    if (!price) setErrors({ ...errors, price: "Price is required" });
+    return setErrors({
+      ...errors,
+      description: "Description needs a minimum of 30 characters",
+    });
+    if (!name) return setErrors({ ...errors, name: "Name is required" });
+    if (!price) return setErrors({ ...errors, price: "Price is required" });
+    if (isNaN(price)) return setErrors({ ...errors, price: "Price must be a valid number" });
     if (!preview)
-      setErrors({ ...errors, preview: "Preview Image is required" });
+    return setErrors({ ...errors, preview: "Preview Image is required" });
+    // console.log("hello?")
 
-    if (
-      !lat ||
-      !lng ||
-      description.length < 30 ||
-      !name ||
-      !price ||
-      !preview ||
-      !Number.isInteger(lat) ||
-      !Number.isInteger(lng)
-    )
-      return errors;
+    // if (
+    //   description.length < 30 ||
+    //   !name ||
+    //   !price ||
+    //   !preview ||
+    //   typeof price !== "number"
+    //   )
+    //   return errors;
     const newSpot = await dispatch(
       createSpotThunk({
         country,
         address,
         city,
         state,
-        lat,
-        lng,
         description,
         name,
         price,
@@ -174,34 +159,6 @@ function CreateSpot() {
             />
             <div className="error-container">
               {errors.state && <p>{errors.state}</p>}
-            </div>
-          </label>
-        </div>
-        <div className="form-two-across">
-          <label>
-            Latitude
-            <input
-              type="text"
-              placeholder="Latitude"
-              value={lat}
-              className="lat"
-              onChange={(e) => setLat(parseInt(e.target.value))}
-            />
-            <div className="error-container">
-              {errors.lat && <p>{errors.lat}</p>}
-            </div>
-          </label>
-          <label>
-            Longitude
-            <input
-              type="text"
-              placeholder="Longitude"
-              value={lng}
-              className="lng"
-              onChange={(e) => setLng(parseInt(e.target.value))}
-            />
-            <div className="error-container">
-              {errors.lng && <p>{errors.lng}</p>}
             </div>
           </label>
         </div>

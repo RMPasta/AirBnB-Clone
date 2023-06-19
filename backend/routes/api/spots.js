@@ -24,14 +24,6 @@ const validateSpot = [
   check("country")
     .exists({ checkFalsy: true })
     .withMessage("Country is required"),
-  check("lat")
-    .exists({ checkFalsy: true })
-    .isFloat({ checkFalsy: true })
-    .withMessage("Latitude is not valid"),
-  check("lng")
-    .exists({ checkFalsy: true })
-    .isFloat({ checkFalsy: true })
-    .withMessage("Longitude is not valid"),
   check("name")
     .exists({ checkFalsy: true })
     .isLength({ max: 50 })
@@ -58,7 +50,7 @@ const validateReview = [
 ];
 
 router.post("/", [validateSpot, requireAuth], async (req, res, next) => {
-  const { address, city, state, country, lat, lng, name, description, price } =
+  const { address, city, state, country, name, description, price } =
     req.body;
   const { user } = req;
   const spot = await Spot.create({
@@ -67,8 +59,6 @@ router.post("/", [validateSpot, requireAuth], async (req, res, next) => {
     city,
     state,
     country,
-    lat,
-    lng,
     name,
     description,
     price,
