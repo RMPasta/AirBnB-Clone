@@ -7,7 +7,7 @@ import {
   addBookingThunk,
   updateBookingThunk,
 } from "../../store/bookings";
-// import "./AddBookingModal.css";
+import "./UpdateBookingModal.css";
 
 const UpdateBookingModal = ({ spot, booking }) => {
   const dispatch = useDispatch();
@@ -39,11 +39,12 @@ const UpdateBookingModal = ({ spot, booking }) => {
   };
   return (
     <div className="form-page">
-      <h1>When would you like to stay?</h1>
+      <h1 className="booking-h1">When would you like to stay?</h1>
       <form
         onSubmit={(e) => {
           handleSubmit(e);
         }}
+        className="booking-form"
       >
         <div className="error-container">
           {errors && <p>{errors.message}</p>}

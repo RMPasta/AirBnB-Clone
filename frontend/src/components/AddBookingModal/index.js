@@ -36,12 +36,13 @@ const AddBookingModal = ({ spot }) => {
   };
   return (
     <div className="form-page">
-      <h1>When would you like to stay?</h1>
+      <h1 className="booking-h1">When would you like to stay?</h1>
       <form
         onSubmit={(e) => {
           setBooking({ startDate, endDate });
           handleSubmit(e);
         }}
+        className="booking-form"
       >
         <div className="error-container">
           {errors && <p>{errors.message}</p>}

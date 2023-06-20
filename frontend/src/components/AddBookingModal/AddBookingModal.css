@@ -2,3 +2,17 @@
     width: 180px;
     /* backgroun?d-color: blue; */
 }
+
+.booking-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: space-around;
+    /* border: 1px solid red; */
+    gap: 20px;
+}
+
+.booking-h1 {
+    /* margin: 0; */
+    padding: 0;
+}
