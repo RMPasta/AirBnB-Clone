@@ -34,6 +34,10 @@ input {
     border: 2px solid rgb(100, 132, 192);
 }
 
+select {
+    border: 2px solid rgb(100, 132, 192);
+}
+
 textarea {
     border: 2px solid rgb(100, 132, 192);
 }
