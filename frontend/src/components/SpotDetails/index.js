@@ -67,7 +67,7 @@ export default function SpotDetails() {
             </div>
           </div>
           <div>
-            {sessionUser && spot.ownerId !== parseInt(sessionUser.id) && (
+            {sessionUser && spot.ownerId !== parseInt(sessionUser?.id) && (
               <OpenModalButton
                 buttonText="Reserve"
                 modalComponent={<AddBookingModal spot={spot} />}
@@ -102,7 +102,7 @@ export default function SpotDetails() {
               <div className="booking-card" key={booking.id}>
                 <div className="first-name">{booking.User?.firstName}:</div>
                 <div>
-                  {booking.userId === sessionUser.id ? (
+                  {booking.userId === sessionUser?.id ? (
                     <OpenModalButton
                       buttonText="Edit"
                       modalComponent={
