@@ -186,7 +186,6 @@ router.put("/:bookingId", requireAuth, async (req, res, next) => {
 //delete a booking
 router.delete("/:bookingId", requireAuth, async (req, res, next) => {
   const booking = await Booking.findByPk(req.params.bookingId);
-
   if (!booking) {
     let err = {};
     err.message = "Booking couldn't be found";

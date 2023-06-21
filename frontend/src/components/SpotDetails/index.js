@@ -4,9 +4,11 @@ import ReviewsSection from "../ReviewsSection";
 import OpenModalButton from "../OpenModalButton";
 import { nanoid } from "nanoid";
 import { getBookingsThunk } from "../../store/bookings";
+import { removeBookingThunk } from "../../store/bookings";
 import AddBookingModal from "../AddBookingModal";
 import UpdateBookingModal from "../UpdateBookingModal";
 import "./SpotDetails.css";
+import DeleteBookingModal from "../DeleteBookingModal";
 
 export default function SpotDetails() {
   const dispatch = useDispatch();
@@ -104,7 +106,8 @@ export default function SpotDetails() {
                 <div>
                   {booking.userId === sessionUser?.id ? (
                     <OpenModalButton
-                      buttonText="Edit"
+                      className="fas fa-edit"
+                      buttonText=""
                       modalComponent={
                         <UpdateBookingModal spot={spot} booking={booking} />
                       }
@@ -117,6 +120,15 @@ export default function SpotDetails() {
                   {startMonth + " " + startDay + ", " + startYear} -{" "}
                   {endMonth + " " + endDay + ", " + endYear}
                 </div>
+                {booking.userId === sessionUser.id ? <OpenModalButton
+                className="fas fa-trash"
+                buttonText=""
+                modalComponent={<DeleteBookingModal booking={booking} />} /> : <></>}
+                {/* {booking.userId === sessionUser.id ? <i className="fas fa-trash" onClick={async () => {
+                  await dispatch(removeBookingThunk(booking.id));
+
+                  console.log("???")
+                }}></i> : <></>} */}
               </div>
             );
           })}

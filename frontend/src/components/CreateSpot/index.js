@@ -60,7 +60,6 @@ function CreateSpot() {
       return setErrors({ ...errors, price: "Price must be a valid number" });
     if (!preview)
       return setErrors({ ...errors, preview: "Preview Image is required" });
-    // console.log("hello?")
 
     // if (
     //   description.length < 30 ||

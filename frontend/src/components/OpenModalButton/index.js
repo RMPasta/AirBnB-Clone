@@ -34,6 +34,12 @@ function OpenModalButton({
         {buttonText}
       </button>
     );
+  if (buttonText === "")
+    return (
+      <i className={className} onClick={onClick}>
+        {buttonText}
+      </i>
+    );
   return (
     <button className="modal-buttons" onClick={onClick}>
       {buttonText}
