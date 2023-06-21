@@ -43,32 +43,36 @@ export default function UserBookings() {
 
             if (booking.message) return <div key={nanoid(5)}></div>;
             if (!booking.Spot) return <div key={nanoid(5)}></div>;
-            return (
-              <div className="booking-card" key={nanoid(5)}>
-                <div className="booking-spot-link" onClick={() => history.push(`/spots/${booking.Spot.id}`)}>{booking.Spot.name}</div>
-                <div>
-                  {booking.userId === sessionUser?.id ? (
-                    <OpenModalButton
-                      className="fas fa-edit"
+            if (bookings.length > 0) {
+                return (
+                    <div className="booking-card" key={nanoid(5)}>
+                      <div className="booking-spot-link" onClick={() => history.push(`/spots/${booking.Spot.id}`)}>{booking.Spot.name}</div>
+                      <div>
+                        {booking.userId === sessionUser?.id ? (
+                          <OpenModalButton
+                            className="fas fa-edit"
+                            buttonText=""
+                            modalComponent={
+                              <UpdateBookingModal spot={booking.Spot} booking={booking} />
+                            }
+                          />
+                        ) : (
+                          <></>
+                        )}
+                      </div>
+                      <div>
+                        {startMonth + " " + startDay + ", " + startYear} -{" "}
+                        {endMonth + " " + endDay + ", " + endYear}
+                      </div>
+                      {booking.userId === sessionUser?.id ? <OpenModalButton
+                      className="fas fa-trash"
                       buttonText=""
-                      modalComponent={
-                        <UpdateBookingModal spot={booking.Spot} booking={booking} />
-                      }
-                    />
-                  ) : (
-                    <></>
-                  )}
-                </div>
-                <div>
-                  {startMonth + " " + startDay + ", " + startYear} -{" "}
-                  {endMonth + " " + endDay + ", " + endYear}
-                </div>
-                {booking.userId === sessionUser?.id ? <OpenModalButton
-                className="fas fa-trash"
-                buttonText=""
-                modalComponent={<DeleteBookingModal booking={booking} />} /> : <></>}
-              </div>
-            );
+                      modalComponent={<DeleteBookingModal booking={booking} />} /> : <></>}
+                    </div>
+                  );
+            } else {
+                return <h2>Make some bookings!</h2>
+            }
           })}
       </div>
   )

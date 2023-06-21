@@ -22,6 +22,10 @@ const UpdateBookingModal = ({ spot, booking }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    let currentDate = new Date();
+    currentDate = currentDate.toJSON().split("T")[0];
+    let bookingStartDate = booking.startDate;
+    if (bookingStartDate <= currentDate) return setErrors({ message: "Bookings that have been started can't be updated"})
     if (!endDate || !startDate) {
       setErrors({ message: "Must select start and end dates" });
       return;
