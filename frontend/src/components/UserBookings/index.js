@@ -22,6 +22,7 @@ export default function UserBookings() {
 
     if (!bookingsState) return <></>;
     if (!bookings) return <></>;
+    if (bookings.length === 0) return <div className="no-bookings" onClick={() => history.push('/')}>Make some bookings!</div>;
   return (
     <div className="bookings-container">
         {bookings.map((booking) => {
@@ -43,14 +44,13 @@ export default function UserBookings() {
 
             if (booking.message) return <div key={nanoid(5)}></div>;
             if (!booking.Spot) return <div key={nanoid(5)}></div>;
-            if (bookings.length > 0) {
                 return (
                     <div className="booking-card" key={nanoid(5)}>
                       <div className="booking-spot-link" onClick={() => history.push(`/spots/${booking.Spot.id}`)}>{booking.Spot.name}</div>
                       <div>
                         {booking.userId === sessionUser?.id ? (
                           <OpenModalButton
-                            className="fas fa-edit"
+                            className="fas fa-edit booking-icon"
                             buttonText=""
                             modalComponent={
                               <UpdateBookingModal spot={booking.Spot} booking={booking} />
@@ -65,15 +65,12 @@ export default function UserBookings() {
                         {endMonth + " " + endDay + ", " + endYear}
                       </div>
                       {booking.userId === sessionUser?.id ? <OpenModalButton
-                      className="fas fa-trash"
+                      className="fas fa-trash booking-icon"
                       buttonText=""
                       modalComponent={<DeleteBookingModal booking={booking} />} /> : <></>}
                     </div>
                   );
-            } else {
-                return <h2>Make some bookings!</h2>
-            }
-          })}
+            })}
       </div>
   )
 }

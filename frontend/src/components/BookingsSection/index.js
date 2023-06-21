@@ -37,7 +37,7 @@ export default function BookingsSection() {
                 <div>
                   {booking.userId === sessionUser?.id ? (
                     <OpenModalButton
-                      className="fas fa-edit"
+                      className="fas fa-edit booking-icon"
                       buttonText=""
                       modalComponent={
                         <UpdateBookingModal spot={spot} booking={booking} />
@@ -52,7 +52,7 @@ export default function BookingsSection() {
                   {endMonth + " " + endDay + ", " + endYear}
                 </div>
                 {booking.userId === sessionUser.id ? <OpenModalButton
-                className="fas fa-trash"
+                className="fas fa-trash booking-icon"
                 buttonText=""
                 modalComponent={<DeleteBookingModal booking={booking} />} /> : <></>}
               </div>

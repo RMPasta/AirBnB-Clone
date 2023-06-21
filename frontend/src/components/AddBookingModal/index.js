@@ -35,7 +35,7 @@ const AddBookingModal = ({ spot }) => {
     setComplete(true);
     setTimeout(() => {
       closeModal();
-    }, 2000)
+    }, 1000)
   };
   return (
     <div className="form-page">
