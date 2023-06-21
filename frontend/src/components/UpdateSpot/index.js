@@ -24,15 +24,14 @@ function UpdateSpot({ spot }) {
     e.preventDefault();
     setErrors({});
     if (description.length < 30)
-      setErrors({
+      return setErrors({
         ...errors,
         description: "Description needs a minimum of 30 characters",
       });
-    // const errorPlaceHolder = "description error";
-    if (!name) setErrors({ ...errors, name: "Name is required" });
-    if (!price) setErrors({ ...errors, price: "Price is required" });
-    // if (Object.values(errors).length > 0) return errors;
-    if (description.length < 30 || !name || !price) return errors;
+    if (!name) return setErrors({ ...errors, name: "Name is required" });
+    if (!price) return setErrors({ ...errors, price: "Price is required" });
+    if (isNaN(price))
+      return setErrors({ ...errors, price: "Price must be a valid number" });
     await dispatch(
       updateSpotThunk(
         {

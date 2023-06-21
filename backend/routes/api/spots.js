@@ -50,8 +50,7 @@ const validateReview = [
 ];
 
 router.post("/", [validateSpot, requireAuth], async (req, res, next) => {
-  const { address, city, state, country, name, description, price } =
-    req.body;
+  const { address, city, state, country, name, description, price } = req.body;
   const { user } = req;
   const spot = await Spot.create({
     address,
@@ -81,7 +80,7 @@ router.get("/", async (req, res, next) => {
   if (size) {
     size = parseInt(size);
   } else {
-    size = 20;
+    size = 100;
   }
   let limit;
   let offset;
