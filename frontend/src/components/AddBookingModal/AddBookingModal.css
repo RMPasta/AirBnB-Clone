@@ -16,3 +16,12 @@
     /* margin: 0; */
     padding: 0;
 }
+
+.booking-complete {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    font-size: 92px;
+    color: green;
+}

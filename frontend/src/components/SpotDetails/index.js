@@ -124,11 +124,6 @@ export default function SpotDetails() {
                 className="fas fa-trash"
                 buttonText=""
                 modalComponent={<DeleteBookingModal booking={booking} />} /> : <></>}
-                {/* {booking.userId === sessionUser.id ? <i className="fas fa-trash" onClick={async () => {
-                  await dispatch(removeBookingThunk(booking.id));
-
-                  console.log("???")
-                }}></i> : <></>} */}
               </div>
             );
           })}

@@ -13,7 +13,7 @@ const AddBookingModal = ({ spot }) => {
   const [endDate, setEndDate] = useState(null);
   const [rating, setRating] = useState(0);
   const [errors, setErrors] = useState({});
-  const [disabled, setDisabled] = useState(true);
+  const [complete, setComplete] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,11 +32,15 @@ const AddBookingModal = ({ spot }) => {
     await dispatch(getBookingsThunk(spot.id));
     // dispatch(getSpotsThunk())
     await dispatch(getOneSpotThunk(spot.id));
-    closeModal();
+    setComplete(true);
+    setTimeout(() => {
+      closeModal();
+    }, 2000)
   };
   return (
     <div className="form-page">
-      <h1 className="booking-h1">When would you like to stay?</h1>
+      {(!complete ? <>
+        <h1 className="booking-h1">When would you like to stay?</h1>
       <form
         onSubmit={(e) => {
           setBooking({ startDate, endDate });
@@ -61,6 +65,7 @@ const AddBookingModal = ({ spot }) => {
         />
         <button className="booking-submit">Submit Your Booking</button>
       </form>
+      </> : <i className="fas fa-check booking-complete"></i>)}
     </div>
   );
 };

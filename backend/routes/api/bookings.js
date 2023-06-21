@@ -100,7 +100,7 @@ router.put("/:bookingId", requireAuth, async (req, res, next) => {
     const booking = existingBookings[i];
 
     // Exclude the current booking being edited from the conflict check
-    if (booking.id !== id) {
+    if (parseInt(booking.id) !== parseInt(id)) {
       const bookingStartDate = booking.startDate;
       const bookingEndDate = booking.endDate;
 
@@ -118,7 +118,7 @@ router.put("/:bookingId", requireAuth, async (req, res, next) => {
   if (hasConflict) {
     // res.status(403);
     const err = {
-      message: "Sorry, this spot is already booked for the specified dates",
+      // message: "Sorry, this spot is already booked for the specified dates",
       errors: {
         startDate: "Start date conflicts with an existing booking",
         endDate: "End date conflicts with an existing booking",
@@ -127,44 +127,45 @@ router.put("/:bookingId", requireAuth, async (req, res, next) => {
     return res.json(err);
   }
 
-  let bookingsList = [];
-  existingBookings.forEach((booking) => {
-    bookingsList.push(booking.toJSON());
-  });
+  // let bookingsList = [];
+  // existingBookings.forEach((booking) => {
+  //   bookingsList.push(booking.toJSON());
+  // });
 
-  for (let i = 0; i < bookingsList.length; i++) {
-    //for every booking on this spot, check the dates for conflicts with new booking
-    let booking = bookingsList[i];
-    //exclude this booking id from search
-    if (booking.id == id) break;
+  // for (let i = 0; i < bookingsList.length; i++) {
+  //   //for every booking on this spot, check the dates for conflicts with new booking
+  //   let booking = bookingsList[i];
+  //   //exclude this booking id from search
+  //   if (booking.id == id) break;
+  //   if (user.id == booking.userId) break;
 
-    let bookingStartDate = booking.startDate;
-    let bookingEndDate = booking.endDate;
+  //   let bookingStartDate = booking.startDate;
+  //   let bookingEndDate = booking.endDate;
 
-    let err = {};
-    if (startDate >= bookingStartDate && startDate <= bookingEndDate) {
-      //   res.status(403);
-      err.message =
-        "Sorry, this spot is already booked for the specified dates";
-      err.errors = {};
-      err.errors.startDate = "Start date conflicts with an existing booking";
-      if (endDate >= bookingStartDate && endDate <= bookingEndDate) {
-        // res.status(403);
-        err.message =
-          "Sorry, this spot is already booked for the specified dates";
-        err.errors.endDate = "End date conflicts with an existing booking";
-      }
-      return res.json(err);
-    }
-    if (endDate >= bookingStartDate && endDate <= bookingEndDate) {
-      //   res.status(403);
-      err.message =
-        "Sorry, this spot is already booked for the specified dates";
-      err.errors = {};
-      err.errors.endDate = "End date conflicts with an existing booking";
-      return res.json(err);
-    }
-  }
+  //   let err = {};
+  //   if (startDate >= bookingStartDate && startDate <= bookingEndDate) {
+  //     //   res.status(403);
+  //     err.message =
+  //       "Sorry, this spot is already booked for the specified dates";
+  //     err.errors = {};
+  //     err.errors.startDate = "Start date conflicts with an existing booking";
+  //     if (endDate >= bookingStartDate && endDate <= bookingEndDate) {
+  //       // res.status(403);
+  //       err.message =
+  //         "Sorry, this spot is already booked for the specified dates";
+  //       err.errors.endDate = "End date conflicts with an existing booking";
+  //     }
+  //     return res.json(err);
+  //   }
+  //   if (endDate >= bookingStartDate && endDate <= bookingEndDate) {
+  //     //   res.status(403);
+  //     err.message =
+  //       "Sorry, this spot is already booked for the specified dates";
+  //     err.errors = {};
+  //     err.errors.endDate = "End date conflicts with an existing booking";
+  //     return res.json(err);
+  //   }
+  // }
 
   // if user owns the booking, update it, else forbidden
   if (user.id === currBooking.userId) {
