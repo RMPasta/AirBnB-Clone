@@ -9,6 +9,7 @@ import AddBookingModal from "../AddBookingModal";
 import UpdateBookingModal from "../UpdateBookingModal";
 import "./SpotDetails.css";
 import DeleteBookingModal from "../DeleteBookingModal";
+import BookingsSection from "../BookingsSection";
 
 export default function SpotDetails() {
   const dispatch = useDispatch();
@@ -80,54 +81,7 @@ export default function SpotDetails() {
       </div>
       <ReviewsSection spot={spot} reviews={reviews} />
       <h2>Reservations</h2>
-      <div className="bookings-container">
-        {bookings.length &&
-          bookings.map((booking) => {
-            // Convert start date to month, day, and year
-            const startDateObj = new Date(booking.startDate);
-            const startMonth = startDateObj.toLocaleString("en-US", {
-              month: "long",
-            });
-            const startDay = startDateObj.getDate() + 1;
-            const startYear = startDateObj.getFullYear();
-
-            // Convert end date to month, day, and year
-            const endDateObj = new Date(booking.endDate);
-            const endMonth = endDateObj.toLocaleString("en-US", {
-              month: "long",
-            });
-            const endDay = endDateObj.getDate() + 1;
-            const endYear = endDateObj.getFullYear();
-
-            if (booking.message) return <></>;
-            return (
-              <div className="booking-card" key={booking.id}>
-                <div className="first-name">{booking.User?.firstName}:</div>
-                <div>
-                  {booking.userId === sessionUser?.id ? (
-                    <OpenModalButton
-                      className="fas fa-edit"
-                      buttonText=""
-                      modalComponent={
-                        <UpdateBookingModal spot={spot} booking={booking} />
-                      }
-                    />
-                  ) : (
-                    <></>
-                  )}
-                </div>
-                <div>
-                  {startMonth + " " + startDay + ", " + startYear} -{" "}
-                  {endMonth + " " + endDay + ", " + endYear}
-                </div>
-                {booking.userId === sessionUser.id ? <OpenModalButton
-                className="fas fa-trash"
-                buttonText=""
-                modalComponent={<DeleteBookingModal booking={booking} />} /> : <></>}
-              </div>
-            );
-          })}
-      </div>
+      <BookingsSection />
     </div>
   );
 }

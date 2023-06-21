@@ -36,10 +36,6 @@ button:hover {
 }
 
 .spot-card-manage {
-
-}
-
-.spot-card-manage {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -54,4 +50,9 @@ button:hover {
 
 .spot-card-manage:hover {
     box-shadow: 2px 2px 6px 2px rgb(204, 202, 202);
+}
+
+.bookings-h2 {
+    border-top: 1px solid grey;
+    padding: 30px 0;
 }

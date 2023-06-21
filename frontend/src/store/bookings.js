@@ -25,6 +25,16 @@ export const removeBooking = (id) => ({
   id,
 });
 
+export const getUserBookingsThunk = () => async (dispatch) => {
+  const response = await csrfFetch(`/api/bookings/current`);
+
+  if (response.ok) {
+    const bookings = await response.json();
+    dispatch(loadBookings(bookings));
+    return bookings;
+  }
+};
+
 export const getBookingsThunk = (spotId) => async (dispatch) => {
   const response = await csrfFetch(`/api/spots/${spotId}/bookings`);
 

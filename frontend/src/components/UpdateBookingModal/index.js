@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { NavLink, useHistory } from 'react-router-dom';
 import { getOneSpotThunk } from "../../store/spots";
 import { useModal } from "../../context/Modal";
 import {
@@ -11,6 +12,7 @@ import "./UpdateBookingModal.css";
 
 const UpdateBookingModal = ({ spot, booking }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { closeModal } = useModal();
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
@@ -35,6 +37,7 @@ const UpdateBookingModal = ({ spot, booking }) => {
     await dispatch(getBookingsThunk(spot.id));
     // dispatch(getSpotsThunk())
     await dispatch(getOneSpotThunk(spot.id));
+    history.push(`/spots/${spot.id}`)
     closeModal();
   };
   return (

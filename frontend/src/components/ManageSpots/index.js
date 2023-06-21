@@ -6,6 +6,7 @@ import { getSpotsThunk } from '../../store/spots';
 import { nanoid } from 'nanoid';
 import './ManageSpots.css';
 import DeleteSpotModal from '../DeleteSpotModal';
+import UserBookings from '../UserBookings';
 
 export default function ManageSpots() {
     const dispatch = useDispatch();
@@ -31,7 +32,7 @@ export default function ManageSpots() {
 
   return (
       <div className="manage-page">
-        <h1>Manage Your Spots</h1>
+        <h2>Manage Your Spots</h2>
         { !ownedSpots.length && <NavLink to="/spots/new"><button className='manage-spots-create'>Create a New Spot</button></NavLink> }
         <div className='page'>
           {ownedSpots && ownedSpots.map((spot) => (
@@ -60,6 +61,9 @@ export default function ManageSpots() {
          </li>
         )).reverse()}
         </div>
+        <h2 className='bookings-h2'>Manage Your Bookings</h2>
+        <UserBookings />
+        {/* <div>Hello</div> */}
     </div>
   )
 }
