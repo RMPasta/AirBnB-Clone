@@ -21,7 +21,7 @@ export default function SpotDetails() {
   useEffect(() => {
     dispatch(getBookingsThunk(spot.id));
   }, [dispatch]);
-
+  //TESTING SSH KEYS
   if (!spot) return <div>...Loading</div>;
   return (
     <div className="spot-details-page">
